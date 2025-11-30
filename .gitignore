@@ -9,3 +9,6 @@
 *.pdb
 *.user
 .vs/
+
+# Ignorar carpetas de proyectos de prueba
+src/Sandbox
