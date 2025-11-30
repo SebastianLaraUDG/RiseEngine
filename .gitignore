@@ -1,0 +1,11 @@
+# Carpetas generadas y binarios
+/build/
+*.exe
+*.dll
+*.lib
+
+# Archivos de depuración y Visual Studio
+*.obj
+*.pdb
+*.user
+.vs/
