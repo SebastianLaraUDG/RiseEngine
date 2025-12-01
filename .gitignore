@@ -12,3 +12,7 @@
 
 # Ignorar carpetas de proyectos de prueba
 src/Sandbox
+
+# Excluir los .dll y .lib de OpenGL
+!src/vendor/OpenGL/**/*.dll
+!src/vendor/OpenGL/**/*.lib
