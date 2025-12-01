@@ -12,3 +12,7 @@
 #error RiseEngine only supports Windows!
 #define RISE_ENGINE_API 
 #endif
+
+/*
+Right clic Project, properties, C/C++, Preprocessor, preprocessor definitions: RE_BUILD_DLL;_DEBUG
+*/
