@@ -1,16 +1,19 @@
 #pragma once
 
-// Usa _WIN64 que es definido por Visual Studio en configuraciones de 64 bits.
-#ifdef _WIN64 
+// Solo soporta Windows 64 bits
+#ifdef _WIN64
+
+// Si estamos compilando el motor (RiseEngine.dll)
 #ifdef RISE_ENGINE_BUILD_DLL
 #define RISE_ENGINE_API __declspec(dllexport)
 #else
+// Para cualquier proyecto que use el motor (SandboxApp)
 #define RISE_ENGINE_API __declspec(dllimport)
 #endif
+
 #else
-    // Si no es _WIN64 (p. ej., Linux, macOS, o si no se define), lanzamos el error.
-#error RiseEngine only supports Windows!
-#define RISE_ENGINE_API 
+#error RiseEngine only supports Windows 64-bit!
+#define RISE_ENGINE_API
 #endif
 
 /*
