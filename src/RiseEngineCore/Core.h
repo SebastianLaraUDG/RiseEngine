@@ -1,5 +1,6 @@
 #pragma once
 
+
 // Solo soporta Windows 64 bits
 #ifdef _WIN64
 
@@ -19,3 +20,21 @@
 /*
 Right clic Project, properties, C/C++, Preprocessor, preprocessor definitions: RE_BUILD_DLL;_DEBUG
 */
+
+
+// Data types
+#include <RiseEngineCore/Types.h>
+
+using uint8 = RiseEngineTypes::uint8;
+using uint16 = RiseEngineTypes::uint16;
+using uint32 = RiseEngineTypes::uint32;
+using uint64 = RiseEngineTypes::uint64;
+
+using int8 = RiseEngineTypes::int8;
+using int16 = RiseEngineTypes::int16;
+using int32 = RiseEngineTypes::int32;
+using int64 = RiseEngineTypes::int64;
+
+using uint = RiseEngineTypes::uint;
+using ushort = RiseEngineTypes::ushort;
+using uchar = RiseEngineTypes::uchar;
