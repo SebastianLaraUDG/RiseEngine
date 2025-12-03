@@ -13,18 +13,58 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Error Handling">
+      <UniqueIdentifier>{4dfdeddf-0861-446e-9278-b334f8d455d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{e8593c02-f27d-42b9-b8f8-c4ef5fb51a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DebugIncludes">
+      <UniqueIdentifier>{424dceaf-6fea-4214-979b-87c7c0ad615b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ErrorHandling\ErrorHandler.h">
+      <Filter>Header Files\Error Handling</Filter>
+    </ClInclude>
     <ClInclude Include="Core.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Rendering\include\Renderer.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorHandling\Types.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Shader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugIncludes\DebugIncludes.h">
+      <Filter>Header Files\DebugIncludes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Rendering\src\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\src\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorHandling\ErrorHandler.cpp">
+      <Filter>Header Files\Error Handling</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl" />
+    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl" />
   </ItemGroup>
 </Project>
