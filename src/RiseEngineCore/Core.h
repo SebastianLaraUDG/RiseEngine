@@ -1,5 +1,5 @@
 #pragma once
-
+#include <RiseEngineCore/Types.h>
 
 // Solo soporta Windows 64 bits
 #ifdef _WIN64
@@ -23,8 +23,6 @@ Right clic Project, properties, C/C++, Preprocessor, preprocessor definitions: R
 
 
 // Data types
-#include <RiseEngineCore/Types.h>
-
 using uint8 = RiseEngineTypes::uint8;
 using uint16 = RiseEngineTypes::uint16;
 using uint32 = RiseEngineTypes::uint32;

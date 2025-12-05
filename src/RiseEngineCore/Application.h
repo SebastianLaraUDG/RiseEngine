@@ -3,7 +3,6 @@
 #include <Rendering/include/Renderer.h>
 #include <../src/vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 
-using namespace RiseEngineTypes;
 
 class RISE_ENGINE_API Application
 {

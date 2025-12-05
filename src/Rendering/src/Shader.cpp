@@ -35,34 +35,56 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char* fShaderCode = fragmentCode.c_str();
-	// 2. compile shaders
-	// TODO: make more readable through function pointers.
-	uint vertex, fragment;
-	// vertex shader
+	// 2. Compile shaders.
+	// Vertex shader
+	uint32 vertex = createShader(GL_VERTEX_SHADER, vShaderCode);
+	glCheckError();
+	/* TODO: delete this code. I'm just keeping it for reference and avoid conflicts.
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &vShaderCode, NULL);
 	glCompileShader(vertex);
 	checkCompileErrors(vertex, "VERTEX");
-	// fragment Shader
+	*/
+	// Fragment Shader.
+	/*
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, NULL);
 	glCompileShader(fragment);
 	checkCompileErrors(fragment, "FRAGMENT");
+	*/
+	uint32 fragment = createShader(GL_FRAGMENT_SHADER, fShaderCode);
+	glCheckError();
 	// shader Program
-	id_ = glCreateProgram();
-	glAttachShader(id_, vertex);
-	glAttachShader(id_, fragment);
-	glLinkProgram(id_);
-	checkCompileErrors(id_, "PROGRAM");
+	rendererId_ = createProgram(vertex, fragment);
+	glCheckError();
+	/* TODO: deprecated.Remove.
+	rendererId_ = glCreateProgram();
+	glAttachShader(rendererId_, vertex);
+	glAttachShader(rendererId_, fragment);
+	glLinkProgram(rendererId_);
+	checkCompileErrors(rendererId_, "PROGRAM");
+	*/
 	// delete the shaders as they're linked into our program now and no longer necessary
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
+	use();
 }
 
-void Shader::use()
+Shader::~Shader()
 {
-	glUseProgram(id_);
+	glDeleteProgram(rendererId_);
 }
+
+void Shader::use() const
+{
+	glUseProgram(rendererId_);
+}
+
+void Shader::unbind() const
+{
+	glUseProgram(0);
+}
+
 
 void Shader::checkCompileErrors(uint shader, std::string type)
 {
@@ -86,4 +108,89 @@ void Shader::checkCompileErrors(uint shader, std::string type)
 			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- \n";
 		}
 	}
+}
+
+bool Shader::CheckStatus(uint32 program, PFNGLGETSHADERIVPROC getIVFunction, uint32 statusToCheck, PFNGLGETPROGRAMINFOLOGPROC getInfoLogFunc)
+{
+	int32 status;
+	getIVFunction(program, statusToCheck, &status);
+
+	if (status != GL_TRUE)
+	{
+		int32 infoLength;
+		getIVFunction(program, GL_INFO_LOG_LENGTH, &infoLength);
+		char* buffer = new char[infoLength];
+		int32 bufferSize;
+
+		getInfoLogFunc(program, infoLength, &bufferSize, buffer);
+
+		// Log error.
+		std::cout << " ERROR ON STATUS CHECK: " << buffer << std::endl;
+
+		delete[] buffer;
+		return false; // Failure.
+	}
+	// Success.
+	return true;
+}
+
+bool Shader::CheckCompilationStatus(const uint32& shaderProgram)
+{
+	return CheckStatus(shaderProgram, glGetShaderiv, GL_COMPILE_STATUS, glGetShaderInfoLog);
+}
+
+bool Shader::CheckLinkingStatus(const uint32& program)
+{
+	return CheckStatus(program, glGetProgramiv, GL_LINK_STATUS, glGetProgramInfoLog);
+}
+
+
+uint32 Shader::createShader(uint32 shaderType, const char* shaderCode)
+{
+	// Create the shader
+	uint32 shaderProgram = glCreateShader(shaderType);
+	glShaderSource(shaderProgram, 1, &shaderCode, NULL);
+	glCompileShader(shaderProgram);
+
+	// Log error if compilation failed and  abort.
+	if (!CheckCompilationStatus(shaderProgram))
+	{
+		std::cout << "FAILED TO COMPILE SHADERS" << std::endl;
+	}
+	return shaderProgram;
+
+	/*
+	uint32 program = glCreateProgram();
+	glAttachShader(program, vertexShader);
+	glAttachShader(program, fragmentShader);
+	glLinkProgram(program);
+	
+
+	// TODO: DEPRECATED
+	uint32 shader = glCreateShader(shaderType);
+	glShaderSource(shader, 1, &shaderCode, NULL);
+	glCompileShader(shader);
+	checkCompileErrors(shader, type);
+	return shader;
+	*/
+}
+
+uint32 Shader::createProgram(uint32 vertexShader, uint32 fragmentShader)
+{
+	uint32 program = glCreateProgram();
+	glAttachShader(program, vertexShader);
+	glAttachShader(program, fragmentShader);
+	glLinkProgram(program);
+	if (!CheckLinkingStatus(program))
+	{
+		std::cout << "FAILED TO LINK PROGRAM" << std::endl;
+	}
+	glValidateProgram(program);
+
+	// Delete the shaders as they're linked into
+	// our program now and no longer necessary.
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
+	return program;
 }

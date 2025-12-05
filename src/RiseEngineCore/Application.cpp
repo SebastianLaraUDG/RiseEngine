@@ -1,6 +1,12 @@
 #include "Application.h"
 #include <Rendering/include/Shader.h>
 #include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
+/*
+TODO:
+* Move the entire rendering pipleline to Renderer class.
+* Set ESCAPE key to close window.
+* Set TAB key to switch between wireframe and fill mode.
+*/
 
 Application::Application(int width, int height, const char* title)
 {
@@ -70,9 +76,9 @@ void Application::Run()
 	const float VERTICES_DATA[] =
 	{
 		// XYZ				|| Vertex color (RGBA)
-		-1.0f,+0.0f,+0.0f,	0.0f,1.0f,1.0f,1.0f,
-		+0.0f,+1.0f,+0.0f,	1.0f,0.0f,1.0f,1.0f,
-		+1.0f,+0.0f,+0.0f,	1.0f,0.0f,0.0f,1.0f
+		-1.0f,+0.0f,+0.0f,	1.0f,0.0f,0.0f,1.0f,
+		+0.0f,+1.0f,+0.0f,	0.0f,1.0f,0.0f,1.0f,
+		+1.0f,+0.0f,+0.0f,	0.0f,0.0f,1.0f,1.0f
 	};
 	// 3 For position + 4 for color.
 	const int DATA_ROW_SIZE = 7;
