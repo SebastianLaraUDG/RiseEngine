@@ -15,9 +15,7 @@ public:
 	// TODO: uniform utility (bool, int, float mainly)
 
 private:
-	// TODO: DEPRECATED, Remove.
-	static void checkCompileErrors(uint shader, std::string type);
-	
+		
 	/// <summary>
 	/// Check status of provided program and functions (e.g. a shader and compilation status or a program and linking status).
 	/// </summary>

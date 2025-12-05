@@ -47,7 +47,7 @@ Application::Application(int width, int height, const char* title)
 	glfwSetWindowUserPointer(window_, this);
 
 	// Viewport.
-	glViewport(0, 0, width, height);	// TODO: get frame size and update every frame to adjust drawn shapes.
+	glViewport(0, 0, width, height);
 
 	// Print GL info
 #if _DEBUG
