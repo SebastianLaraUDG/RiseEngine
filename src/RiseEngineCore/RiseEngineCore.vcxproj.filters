@@ -22,6 +22,15 @@
     <Filter Include="Header Files\DebugIncludes">
       <UniqueIdentifier>{424dceaf-6fea-4214-979b-87c7c0ad615b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{6f88476b-7a65-43d6-9f9f-012f715be6b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{1d8d8403-11df-41ed-9580-df2d16b0402c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{03b848fc-9d1a-4690-b13c-f910e30d457f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorHandling\ErrorHandler.h">
@@ -39,11 +48,20 @@
     <ClInclude Include="ErrorHandling\Types.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Rendering\include\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DebugIncludes\DebugIncludes.h">
       <Filter>Header Files\DebugIncludes</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\RiseMath.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Shader.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +80,19 @@
     <ClCompile Include="ErrorHandling\ErrorHandler.cpp">
       <Filter>Header Files\Error Handling</Filter>
     </ClCompile>
+    <ClCompile Include="Math\RiseMath.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl" />
-    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl" />
+    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Math\Vector\Vector.inl">
+      <Filter>Header Files\Math</Filter>
+    </None>
   </ItemGroup>
 </Project>
