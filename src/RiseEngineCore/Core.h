@@ -1,5 +1,5 @@
 #pragma once
-#include <RiseEngineCore/Types.h>
+#include "Types.h"
 
 // Solo soporta Windows 64 bits
 #ifdef _WIN64
@@ -40,7 +40,10 @@ typedef RiseEngineTypes::uchar	uchar;
 
 // Forward declaration of concrete types.
 // TODO: move this to its own file.
-#include <RiseEngineCore/Math/RiseMath.h>
+//#include "Math/RiseMath.h"
+
+#include "../Math/RiseMath.h"
+
 namespace RiseEngine::Math
 {
 	template<typename T> struct TVector;
