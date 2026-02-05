@@ -160,6 +160,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Math\Matrix\Matrix.h" />
+    <ClInclude Include="..\Math\RiseMath.h" />
+    <ClInclude Include="..\Math\Vector\Vector.h" />
     <ClInclude Include="..\Rendering\include\Renderer.h" />
     <ClInclude Include="..\Rendering\include\Shader.h" />
     <ClInclude Include="Application.h" />
@@ -167,8 +170,6 @@
     <ClInclude Include="DebugIncludes\DebugIncludes.h" />
     <ClInclude Include="ErrorHandling\ErrorHandler.h" />
     <ClInclude Include="ErrorHandling\Types.h" />
-    <ClInclude Include="Math\RiseMath.h" />
-    <ClInclude Include="Math\Vector\Vector.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,12 +178,10 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ErrorHandling\ErrorHandler.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Math\RiseMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl" />
     <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl" />
-    <None Include="Math\Vector\Vector.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
