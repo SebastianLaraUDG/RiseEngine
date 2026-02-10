@@ -77,4 +77,35 @@ namespace RiseEngine::Math
 		}
 	}
 
+	// Calculated using Laplace Expansion by means of the Cayley-Hamilton Theorem.
+	template<typename T>
+	T TMatrix<T>::Determinant() const
+	{
+		// Calculate the determinants of the 2x2 sub-matrices of the first two rows.
+		// Then combine them with the determinants of the last two rows.
+		const T top_01 = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+		const T top_02 = M[0][0] * M[1][2] - M[0][2] * M[1][0];
+		const T top_03 = M[0][0] * M[1][3] - M[0][3] * M[1][0];
+		const T top_12 = M[0][1] * M[1][2] - M[0][2] * M[1][1];
+		const T top_13 = M[0][1] * M[1][3] - M[0][3] * M[1][1];
+		const T top_23 = M[0][2] * M[1][3] - M[0][3] * M[1][2];
+
+		// Calculate the determinants of the 2x2 sub-matrices of the last two rows.
+		const T bottom_01 = M[2][0] * M[3][1] - M[2][1] * M[3][0];
+		const T bottom_02 = M[2][0] * M[3][2] - M[2][2] * M[3][0];
+		const T bottom_03 = M[2][0] * M[3][3] - M[2][3] * M[3][0];
+		const T bottom_12 = M[2][1] * M[3][2] - M[2][2] * M[3][1];
+		const T bottom_13 = M[2][1] * M[3][3] - M[2][3] * M[3][1];
+		const T bottom_23 = M[2][2] * M[3][3] - M[2][3] * M[3][2];
+
+		// The determinant of the 4x4 matrix is obteined by alternating sum
+		// of the products of the determinants of the opposite 2x2 blocks.
+		return
+			(top_01 * bottom_23 -
+			top_02 * bottom_13 +
+			top_03 * bottom_12 +
+			top_12 * bottom_03 -
+			top_13 * bottom_02 +
+			top_23 * bottom_01);
+	};
 } // namespace RiseEngine

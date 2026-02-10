@@ -27,10 +27,18 @@ namespace RiseEngine::Math
 		// Version that takes 4 vectors.
 		__forceinline TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW);
 		
-		/// Operators.
+		// Operators.
 		[[nodiscard]] TMatrix<T> operator *(const TMatrix<T>& OtherMatrix) const;
+
 		
 // TODO: do only with Vector4[[nodiscard]] TVector<T> operator *(const TVector<T>& InVec) const;
+
+		/**
+		* @internal The determinant is equal to the hypervolume of the n-dimensional parallelotope formed by those vectors, 
+			and it can be positive or negative depending on the orientation of the vectors.
+			A matrix has an inverse if and only if its determinant is not zero.
+		*/
+		[[nodiscard]] T Determinant() const;
 
 		// Construct an identity matrix.
 		static TMatrix<T> MakeIdentity();
