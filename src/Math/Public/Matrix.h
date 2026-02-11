@@ -26,6 +26,9 @@ namespace RiseEngine::Math
 		
 		// Version that takes 4 vectors.
 		__forceinline TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW);
+
+		// Version that takes 4 vectors and 4 values for the fourth column.
+		__forceinline TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW, T m03, T m13, T m23, T m33);
 		
 		// Operators.
 		[[nodiscard]] TMatrix<T> operator *(const TMatrix<T>& OtherMatrix) const;
@@ -40,8 +43,17 @@ namespace RiseEngine::Math
 		*/
 		[[nodiscard]] T Determinant() const;
 
+		// Matrix adjugate (TODO: confirm comment is correct).
+		// Please note that to get the inverse of a matrix, mathematically speaking,
+		// the determinant must be non-zero.
+		// This function returns a Zero matrix if the determinant equals zero.
+		[[nodiscard]] TMatrix<T> Inverse() const;
+
 		// Construct an identity matrix.
 		static TMatrix<T> MakeIdentity();
+		
+		// Construct a matrix whose elements are all zeros.
+		static TMatrix<T> Zero();
 
 		/// <summary>
 		/// Print the whole matrix.

@@ -4,6 +4,7 @@
 
 namespace RiseEngine::Math
 {
+	// Each vector corresponds to a row (VecX = row 0).
 	template<typename T>
 	__forceinline TMatrix<T>::TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW)
 	{
@@ -13,7 +14,17 @@ namespace RiseEngine::Math
 		M[3][0] = VecW.X; M[3][1] = VecW.Y; M[3][2] = VecW.Z; M[3][3] = 1.f;
 	}
 
-	/// Operators.
+	// Each vector corresponds to a row (VecX = row 0).
+	template<typename T>
+	inline TMatrix<T>::TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW, T m03, T m13, T m23, T m33)
+	{
+		M[0][0] = VecX.X; M[0][1] = VecX.Y; M[0][2] = VecX.Z; M[0][3] = m03;
+		M[1][0] = VecY.X; M[1][1] = VecY.Y; M[1][2] = VecY.Z; M[1][3] = m13;
+		M[2][0] = VecZ.X; M[2][1] = VecZ.Y; M[2][2] = VecZ.Z; M[2][3] = m23;
+		M[3][0] = VecW.X; M[3][1] = VecW.Y; M[3][2] = VecW.Z; M[3][3] = m33;
+	}
+
+	// Operators.
 
 	template<typename T>
 	TMatrix<T> Math::TMatrix<T>::operator*(const TMatrix<T>& InM) const
@@ -24,7 +35,7 @@ namespace RiseEngine::Math
 		* and B is an p X m matrix the product AB is an
 		* n X m matrix.
 		*/
-		
+
 		constexpr int32 p = Dimension;
 		for (auto index_i = 0; index_i < Dimension; ++index_i)
 		{
@@ -52,13 +63,21 @@ namespace RiseEngine::Math
 
 
 	template<typename T>
-	TMatrix<T> Math::TMatrix<T>::MakeIdentity()
+	TMatrix<T> TMatrix<T>::MakeIdentity()
 	{
 		TVector<T> VecX = { T(1), T(0) , T(0) };
 		TVector<T> VecY = { T(0), T(1) , T(0) };
 		TVector<T> VecZ = { T(0), T(0) , T(1) };
 		TVector<T> VecW = { T(0), T(0) , T(0) };
 		return TMatrix(VecX, VecY, VecZ, VecW);
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::Zero()
+	{
+		const TVector<T> VecZero = TVector<T>::ZeroVector();
+		constexpr T zero = static_cast<T>(0);
+		return TMatrix(VecZero, VecZero, VecZero, VecZero, zero, zero, zero, zero); // TODO: could be written in a cleaner way.
 	}
 
 	template<typename T>
@@ -102,10 +121,69 @@ namespace RiseEngine::Math
 		// of the products of the determinants of the opposite 2x2 blocks.
 		return
 			(top_01 * bottom_23 -
-			top_02 * bottom_13 +
-			top_03 * bottom_12 +
-			top_12 * bottom_03 -
-			top_13 * bottom_02 +
-			top_23 * bottom_01);
+				top_02 * bottom_13 +
+				top_03 * bottom_12 +
+				top_12 * bottom_03 -
+				top_13 * bottom_02 +
+				top_23 * bottom_01);
 	};
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::Inverse() const
+	{
+		// 2x2 sub-determinants para las primeras dos filas
+		const T s0 = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+		const T s1 = M[0][0] * M[1][2] - M[0][2] * M[1][0];
+		const T s2 = M[0][0] * M[1][3] - M[0][3] * M[1][0];
+		const T s3 = M[0][1] * M[1][2] - M[0][2] * M[1][1];
+		const T s4 = M[0][1] * M[1][3] - M[0][3] * M[1][1];
+		const T s5 = M[0][2] * M[1][3] - M[0][3] * M[1][2];
+
+		// 2x2 sub-determinants para las ultimas dos filas
+		const T c0 = M[2][0] * M[3][1] - M[2][1] * M[3][0];
+		const T c1 = M[2][0] * M[3][2] - M[2][2] * M[3][0];
+		const T c2 = M[2][0] * M[3][3] - M[2][3] * M[3][0];
+		const T c3 = M[2][1] * M[3][2] - M[2][2] * M[3][1];
+		const T c4 = M[2][1] * M[3][3] - M[2][3] * M[3][1];
+		const T c5 = M[2][2] * M[3][3] - M[2][3] * M[3][2];
+
+		const T det = s0 * c5 - s1 * c4 + s2 * c3 + s3 * c2 - s4 * c1 + s5 * c0;
+
+		// Si el determinante es cercano a cero, retornamos matriz nula (Zero Matrix)
+		if (std::abs(det) <= static_cast<T>(1e-6))
+		{
+			const TVector<T> zero = TVector<T>::ZeroVector();
+			return TMatrix<T>(zero, zero, zero, zero);
+		}
+
+		const T invDet = static_cast<T>(1) / det;
+
+		TMatrix<T> res;
+
+		// Row 0
+		res.M[0][0] = (M[1][1] * c5 - M[1][2] * c4 + M[1][3] * c3) * invDet;
+		res.M[0][1] = (-M[0][1] * c5 + M[0][2] * c4 - M[0][3] * c3) * invDet;
+		res.M[0][2] = (M[3][1] * s5 - M[3][2] * s4 + M[3][3] * s3) * invDet;
+		res.M[0][3] = (-M[2][1] * s5 + M[2][2] * s4 - M[2][3] * s3) * invDet;
+
+		// Row 1
+		res.M[1][0] = (-M[1][0] * c5 + M[1][2] * c2 - M[1][3] * c1) * invDet;
+		res.M[1][1] = (M[0][0] * c5 - M[0][2] * c2 + M[0][3] * c1) * invDet;
+		res.M[1][2] = (-M[3][0] * s5 + M[3][2] * s2 - M[3][3] * s1) * invDet;
+		res.M[1][3] = (M[2][0] * s5 - M[2][2] * s2 + M[2][3] * s1) * invDet;
+
+		// Row 2
+		res.M[2][0] = (M[1][0] * c4 - M[1][1] * c2 + M[1][3] * c0) * invDet;
+		res.M[2][1] = (-M[0][0] * c4 + M[0][1] * c2 - M[0][3] * c0) * invDet;
+		res.M[2][2] = (M[3][0] * s4 - M[3][1] * s2 + M[3][3] * s0) * invDet;
+		res.M[2][3] = (-M[2][0] * s4 + M[2][1] * s2 - M[2][3] * s0) * invDet;
+
+		// Fila 3
+		res.M[3][0] = (-M[1][0] * c3 + M[1][1] * c1 - M[1][2] * c0) * invDet;
+		res.M[3][1] = (M[0][0] * c3 - M[0][1] * c1 + M[0][2] * c0) * invDet;
+		res.M[3][2] = (-M[3][0] * s3 + M[3][1] * s1 - M[3][2] * s0) * invDet;
+		res.M[3][3] = (M[2][0] * s3 - M[2][1] * s1 + M[2][2] * s0) * invDet;
+
+		return res;
+	}
 } // namespace RiseEngine
