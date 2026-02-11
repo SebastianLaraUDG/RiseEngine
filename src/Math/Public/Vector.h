@@ -24,7 +24,7 @@ namespace RiseEngine
 			};
 			static constexpr int32 NumComponents = 3;
 			/*
-			* TODO: create statics: ZeroVector, OneVector, XAxis, YAxis, ZAxis. Also Up, Dowm, Forward, Backwards, Right, Left.
+			* TODO: create statics: OneVector, XAxis, YAxis, ZAxis. Also Up, Dowm, Forward, Backwards, Right, Left.
 			* TODO: Define all direction vectors once I define the worlds directions.
 			* TODO: define all previous for both float and double.
 			*/
@@ -116,6 +116,8 @@ namespace RiseEngine
 			* @return A vector that satisfies the A rejection from B math operation.
 			*/
 			[[nodiscard]] __forceinline static TVector<T> Reject(const TVector<T>& A, const TVector<T>& B);
+
+			[[nodiscard]] __forceinline static TVector<T> ZeroVector();
 
 			[[nodiscard]] __forceinline static TVector<T> UnitVectorX();
 			[[nodiscard]] __forceinline static TVector<T> UnitVectorY();
