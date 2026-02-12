@@ -131,8 +131,10 @@ void Application::Render() const
 	// TODO: Draw here
 	
 	triangleShader->use();
-	glBindVertexArray(VAO_);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	// glBindVertexArray(VAO_); TODO: necessary?
+	glDrawArrays(GL_TRIANGLES, 0, 3); // Un-Optimal drawing method, but the appropriate since I am drawing
+									  // one single triangle. To draw multiple triangles that share vertices
+									  // I should use glDrawElements();
 
 	/* Swap front and back buffers */
 	glfwSwapBuffers(window_);
