@@ -37,12 +37,14 @@ namespace RiseEngine::Math
 		*/
 
 		constexpr int32 p = Dimension;
-		for (auto index_i = 0; index_i < Dimension; ++index_i)
+		for (int32 index_i = 0; index_i < Dimension; ++index_i)
 		{
-			for (auto index_j = 0; index_j < Dimension; ++index_j)
+			for (int32 index_j = 0; index_j < Dimension; ++index_j)
 			{
-				for (auto index_k = 0; index_k < p; ++index_k)
+				for (int32 index_k = 0; index_k < p; ++index_k)
+				{
 					result.M[index_i][index_j] += M[index_i][index_k] * InM.M[index_k][index_j];
+				}
 			}
 		}
 		return result;
@@ -85,10 +87,10 @@ namespace RiseEngine::Math
 	{
 		std::cout << name << ":\n";
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < Dimension; ++i)
 		{
 			std::cout << "[ ";
-			for (int j = 0; j < 4; ++j)
+			for (int j = 0; j < Dimension; ++j)
 			{
 				std::cout << std::setw(8) << M[i][j] << " ";
 			}
