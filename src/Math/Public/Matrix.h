@@ -36,6 +36,10 @@ namespace RiseEngine::Math
 		
 // TODO: do only with Vector4[[nodiscard]] TVector<T> operator *(const TVector<T>& InVec) const;
 
+		// Check if all elements of two matrices are the same.
+		bool operator ==(const TMatrix<T>& InMat) const;
+
+
 		/**
 		* @internal The determinant is equal to the hypervolume of the n-dimensional parallelotope formed by those vectors, 
 			and it can be positive or negative depending on the orientation of the vectors.
@@ -51,6 +55,9 @@ namespace RiseEngine::Math
 
 		// Get the transpose version of the current matrix.
 		[[nodiscard]] inline TMatrix<T> Transpose() const;
+
+		// Check if matrix is orthogonal (inverse and transpose are the same).
+		[[nodiscard]] bool IsOrthogonal() const;
 
 		// Construct an identity matrix.
 		static TMatrix<T> MakeIdentity();

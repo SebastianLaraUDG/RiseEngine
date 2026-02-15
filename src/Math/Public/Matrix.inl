@@ -27,7 +27,7 @@ namespace RiseEngine::Math
 	// Operators.
 
 	template<typename T>
-	TMatrix<T> Math::TMatrix<T>::operator*(const TMatrix<T>& InM) const
+	TMatrix<T> TMatrix<T>::operator*(const TMatrix<T>& InM) const
 	{
 		TMatrix result{};
 		/**
@@ -63,6 +63,19 @@ namespace RiseEngine::Math
 	}
 	*/
 
+	template<typename T>
+	bool TMatrix<T>::operator==(const TMatrix<T>& InMat) const
+	{
+		for (size_t i = 0; i < Dimension; ++i)
+		{
+			for (size_t j = 0; j < Dimension; ++j)
+			{
+				if (this->M[i][j] != InMat.M[i][j])
+					return false;
+			}
+		}
+		return true;
+	}
 
 	template<typename T>
 	TMatrix<T> TMatrix<T>::MakeIdentity()
@@ -198,5 +211,14 @@ namespace RiseEngine::Math
 		transpose.M[2][0] = M[0][2]; transpose.M[2][1] = M[1][2]; transpose.M[2][2] = M[2][2]; transpose.M[2][3] = M[3][2];
 		transpose.M[3][0] = M[0][3]; transpose.M[3][1] = M[1][3]; transpose.M[3][2] = M[2][3]; transpose.M[3][3] = M[3][3];
 		return transpose;
+	}
+
+	template<typename T>
+	bool TMatrix<T>::IsOrthogonal() const
+	{
+		const TMatrix<T> Inverse = this->Inverse();
+		const TMatrix<T> Transpose = this->Transpose();
+
+		return Inverse == Transpose;
 	}
 } // namespace RiseEngine
