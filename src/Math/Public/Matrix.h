@@ -49,6 +49,9 @@ namespace RiseEngine::Math
 		// This function returns a Zero matrix if the determinant equals zero.
 		[[nodiscard]] TMatrix<T> Inverse() const;
 
+		// Get the transpose version of the current matrix.
+		[[nodiscard]] inline TMatrix<T> Transpose() const;
+
 		// Construct an identity matrix.
 		static TMatrix<T> MakeIdentity();
 		

@@ -188,4 +188,23 @@ namespace RiseEngine::Math
 
 		return res;
 	}
+
+	template<typename T>
+	inline TMatrix<T> TMatrix<T>::Transpose() const
+	{
+		/*
+		* (const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW)
+		* 
+		M[0][0] = VecX.X; M[0][1] = VecX.Y; M[0][2] = VecX.Z; M[0][3] = 0.f;
+		M[1][0] = VecY.X; M[1][1] = VecY.Y; M[1][2] = VecY.Z; M[1][3] = 0.f;
+		M[2][0] = VecZ.X; M[2][1] = VecZ.Y; M[2][2] = VecZ.Z; M[2][3] = 0.f;
+		M[3][0] = VecW.X; M[3][1] = VecW.Y; M[3][2] = VecW.Z; M[3][3] = 1.f;
+		*/
+		TMatrix transpose{};
+		transpose.M[0][0] = M[0][0]; transpose.M[0][1] = M[1][0]; transpose.M[0][2] = M[2][0]; transpose.M[0][3] = M[3][0];
+		transpose.M[1][0] = M[0][1]; transpose.M[1][1] = M[1][1]; transpose.M[1][2] = M[2][1]; transpose.M[1][3] = M[3][1];
+		transpose.M[2][0] = M[0][2]; transpose.M[2][1] = M[1][2]; transpose.M[2][2] = M[2][2]; transpose.M[2][3] = M[3][2];
+		transpose.M[3][0] = M[0][3]; transpose.M[3][1] = M[1][3]; transpose.M[3][2] = M[2][3]; transpose.M[3][3] = M[3][3];
+		return transpose;
+	}
 } // namespace RiseEngine
