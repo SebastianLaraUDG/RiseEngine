@@ -1,7 +1,7 @@
 #pragma once
 #include <type_traits>
 
-#include "../../RiseEngineCore/Core.h"
+// #include "../../RiseEngineCore/Core.h" TODO: Keep this for DLLs?
 
 namespace RiseEngine
 {
