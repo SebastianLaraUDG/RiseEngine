@@ -1,6 +1,8 @@
 #include "Application.h"
 #include <Rendering/include/Shader.h>
 #include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
+#include "Rendering/include/Renderer.h"
+
 /*
 TODO:
 * Move the entire rendering pipleline to Renderer class.
