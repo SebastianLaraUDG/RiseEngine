@@ -25,10 +25,10 @@ namespace RiseEngine::Math
 		TMatrix() = default;
 		
 		// Version that takes 4 vectors.
-		__forceinline TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW);
+		__forceinline TMatrix(const TVector<T>& Line0, const TVector<T>& Line1, const TVector<T>& Line2, const TVector<T>& Line3);
 
-		// Version that takes 4 vectors and 4 values for the fourth column.
-		__forceinline TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW, T m03, T m13, T m23, T m33);
+		// Version that takes 4 vectors for the rows and 4 values for the last column.
+		__forceinline TMatrix(const TVector<T>& Line0, const TVector<T>& Line1, const TVector<T>& Line2, const TVector<T>& Line3, T m03, T m13, T m23, T m33);
 		
 		// Operators.
 		[[nodiscard]] TMatrix<T> operator *(const TMatrix<T>& OtherMatrix) const;
@@ -39,6 +39,7 @@ namespace RiseEngine::Math
 		// Check if all elements of two matrices are the same.
 		bool operator ==(const TMatrix<T>& InMat) const;
 
+		// TODO: implement temporal ROTATE function until I learn about gimball lock solution.
 
 		/**
 		* @internal The determinant is equal to the hypervolume of the n-dimensional parallelotope formed by those vectors, 
@@ -57,13 +58,37 @@ namespace RiseEngine::Math
 		[[nodiscard]] inline TMatrix<T> Transpose() const;
 
 		// Check if matrix is orthogonal (inverse and transpose are the same).
-		[[nodiscard]] bool IsOrthogonal() const;
+		bool IsOrthogonal() const;
 
 		// Construct an identity matrix.
 		static TMatrix<T> MakeIdentity();
 		
 		// Construct a matrix whose elements are all zeros.
 		static TMatrix<T> Zero();
+
+		/* Rotation functions. */
+		
+		/**
+		* Make a rotation matrix around the X axis.
+		* @param InRadians - The total amount of rotation to apply (in radians).
+		* @return - The rotation matrix around the X axis (NOTE: each result is IN RADIANS).
+		*/
+		[[nodiscard]]static TMatrix<T> MakeRotationX(T InRadians);
+
+		/**
+		* Make a rotation matrix around the Y axis.
+		* @param InRadians - The total amount of rotation to apply (in radians).
+		* @return - The rotation matrix around the Y axis (NOTE: each result is IN RADIANS).
+		*/
+		[[nodiscard]] static TMatrix<T> MakeRotationY(T InRadians);
+
+		/**
+		* Make a rotation matrix around the Z axis.
+		* @param InRadians - The total amount of rotation to apply (in radians).
+		* @return - The rotation matrix around the Z axis (NOTE: each result is IN RADIANS).
+		*/
+		[[nodiscard]] static TMatrix<T> MakeRotationZ(T InRadians);
+
 
 		/// <summary>
 		/// Print the whole matrix.

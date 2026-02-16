@@ -1,27 +1,28 @@
 #include "Matrix.h"
 #include <iomanip> // for setw
 #include <iostream> // For printing/debugging.
+#include <cmath>
 
 namespace RiseEngine::Math
 {
 	// Each vector corresponds to a row (VecX = row 0).
 	template<typename T>
-	__forceinline TMatrix<T>::TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW)
+	__forceinline TMatrix<T>::TMatrix(const TVector<T>& Line0, const TVector<T>& Line1, const TVector<T>& Line2, const TVector<T>& Line3)
 	{
-		M[0][0] = VecX.X; M[0][1] = VecX.Y; M[0][2] = VecX.Z; M[0][3] = 0.f;
-		M[1][0] = VecY.X; M[1][1] = VecY.Y; M[1][2] = VecY.Z; M[1][3] = 0.f;
-		M[2][0] = VecZ.X; M[2][1] = VecZ.Y; M[2][2] = VecZ.Z; M[2][3] = 0.f;
-		M[3][0] = VecW.X; M[3][1] = VecW.Y; M[3][2] = VecW.Z; M[3][3] = 1.f;
+		M[0][0] = Line0.X; M[0][1] = Line0.Y; M[0][2] = Line0.Z; M[0][3] = 0.f;
+		M[1][0] = Line1.X; M[1][1] = Line1.Y; M[1][2] = Line1.Z; M[1][3] = 0.f;
+		M[2][0] = Line2.X; M[2][1] = Line2.Y; M[2][2] = Line2.Z; M[2][3] = 0.f;
+		M[3][0] = Line3.X; M[3][1] = Line3.Y; M[3][2] = Line3.Z; M[3][3] = 1.f;
 	}
 
 	// Each vector corresponds to a row (VecX = row 0).
 	template<typename T>
-	inline TMatrix<T>::TMatrix(const TVector<T>& VecX, const TVector<T>& VecY, const TVector<T>& VecZ, const TVector<T>& VecW, T m03, T m13, T m23, T m33)
+	inline TMatrix<T>::TMatrix(const TVector<T>& Line0, const TVector<T>& Line1, const TVector<T>& Line2, const TVector<T>& Line3, T m03, T m13, T m23, T m33)
 	{
-		M[0][0] = VecX.X; M[0][1] = VecX.Y; M[0][2] = VecX.Z; M[0][3] = m03;
-		M[1][0] = VecY.X; M[1][1] = VecY.Y; M[1][2] = VecY.Z; M[1][3] = m13;
-		M[2][0] = VecZ.X; M[2][1] = VecZ.Y; M[2][2] = VecZ.Z; M[2][3] = m23;
-		M[3][0] = VecW.X; M[3][1] = VecW.Y; M[3][2] = VecW.Z; M[3][3] = m33;
+		M[0][0] = Line0.X; M[0][1] = Line0.Y; M[0][2] = Line0.Z; M[0][3] = m03;
+		M[1][0] = Line1.X; M[1][1] = Line1.Y; M[1][2] = Line1.Z; M[1][3] = m13;
+		M[2][0] = Line2.X; M[2][1] = Line2.Y; M[2][2] = Line2.Z; M[2][3] = m23;
+		M[3][0] = Line3.X; M[3][1] = Line3.Y; M[3][2] = Line3.Z; M[3][3] = m33;
 	}
 
 	// Operators.
@@ -78,6 +79,12 @@ namespace RiseEngine::Math
 	}
 
 	template<typename T>
+	inline void TMatrix<T>::Rotate()
+	{
+		//TMatrix<T> 
+	}
+
+	template<typename T>
 	TMatrix<T> TMatrix<T>::MakeIdentity()
 	{
 		TVector<T> VecX = { T(1), T(0) , T(0) };
@@ -93,6 +100,48 @@ namespace RiseEngine::Math
 		const TVector<T> VecZero = TVector<T>::ZeroVector();
 		constexpr T zero = static_cast<T>(0);
 		return TMatrix(VecZero, VecZero, VecZero, VecZero, zero, zero, zero, zero); // TODO: could be written in a cleaner way.
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::MakeRotationX(T InAngle)
+	{
+		const T c = std::cos(InAngle);
+		const T s = std::sin(InAngle);
+
+		const TVector<T> line0 = { static_cast<T>(1), static_cast<T>(0), static_cast<T>(0) };
+		const TVector<T> line1 = { static_cast<T>(0),		c,			-s };
+		const TVector<T> line2 = { static_cast<T>(0),		s,			 c };
+		const TVector<T> zero = TVector<T>::ZeroVector();
+		// Last column is 0,0,0,1.
+		return TMatrix<T>(line0, line1, line2, zero);
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::MakeRotationY(T InAngle)
+	{
+		const T c = std::cos(InAngle);
+		const T s = std::sin(InAngle);
+
+		const TVector<T> line0 = {		c,			  static_cast<T>(0),		s };
+		const TVector<T> line1 = { static_cast<T>(0), static_cast<T>(1),		static_cast<T>(0) };
+		const TVector<T> line2 = {		-s,			  static_cast<T>(0),		c};
+		const TVector<T> zero = TVector<T>::ZeroVector();
+		// Last column is 0,0,0,1.
+		return TMatrix<T>(line0, line1, line2, zero);
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::MakeRotationZ(T InAngle)
+	{
+		const T c = std::cos(InAngle);
+		const T s = std::sin(InAngle);
+
+		const TVector<T> line0 = { c,					   -s,				static_cast<T>(0) };
+		const TVector<T> line1 = { s,						c,				static_cast<T>(0) };
+		const TVector<T> line2 = { static_cast<T>(0), static_cast<T>(0),	static_cast<T>(1) };
+		const TVector<T> zero = TVector<T>::ZeroVector();
+		// Last column is 0,0,0,1.
+		return TMatrix<T>(line0, line1, line2, zero);
 	}
 
 	template<typename T>
