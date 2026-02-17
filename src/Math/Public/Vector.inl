@@ -124,6 +124,14 @@ namespace RiseEngine
         }
 
         template<typename T>
+        inline T TVector<T>::ScalarTripleProduct(const TVector<T>& A, const TVector<T>& B, const TVector<T>& C)
+        {
+            return static_cast<T>(
+                std::abs( DotProduct(A, CrossProduct(B, C)) )
+                );
+        }
+
+        template<typename T>
         inline TVector<T> TVector<T>::Project(const TVector<T>& A, const TVector<T>& B)
         {
             // The dot product of normalized B equals 1.

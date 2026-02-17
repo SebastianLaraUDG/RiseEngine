@@ -1,7 +1,8 @@
 #pragma once
 #include <type_traits>
 
-// #include "../../RiseEngineCore/Core.h" TODO: Keep this for DLLs?
+#include "../../RiseEngineCore/Core.h"//  TODO: Keep this for DLLs? // TODO: fix types route.
+
 
 namespace RiseEngine
 {
@@ -85,8 +86,6 @@ namespace RiseEngine
 			/// <returns>The cross product between them.</returns>
 			[[nodiscard]] __forceinline static TVector<T> CrossProduct(const TVector<T>& A, const TVector<T>& B);
 
-			
-
 			/**
 			* @brief Calculate the dot product of two vectors.
 			* 
@@ -100,6 +99,18 @@ namespace RiseEngine
 			* @return The dot product between the two vectors.
 			*/
 			[[nodiscard]] __forceinline static T DotProduct(const TVector<T>& A, const TVector<T>& B);
+
+			/**
+			* @brief The absolute value of the scalar
+			triple product represents the volume of
+			the parallelepiped formed by the three vectors.
+			|a DOT (b x c)|
+			@param A
+			@param B
+			@param C
+			@return The absolute value of the scalar triple product.
+			*/
+			[[nodiscard]] __forceinline static T ScalarTripleProduct(const TVector<T>& A, const TVector<T>& B, const TVector<T>& C);
 
 			/**
 			* @brief Make the projection of A onto B.
