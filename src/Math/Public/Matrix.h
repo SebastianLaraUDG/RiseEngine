@@ -36,9 +36,7 @@ namespace RiseEngine::Math
 		
 // TODO: do only with Vector4[[nodiscard]] TVector<T> operator *(const TVector<T>& InVec) const;
 
-		// Check if all elements of two matrices are the same.
-		bool operator ==(const TMatrix<T>& InMat) const;
-
+		
 		// TODO: implement temporal ROTATE function until I learn about gimball lock solution.
 
 		/**
@@ -57,8 +55,11 @@ namespace RiseEngine::Math
 		// Get the transpose version of the current matrix.
 		[[nodiscard]] inline TMatrix<T> Transpose() const;
 
+		// Check if all elements of two matrices are the same with a tolerance value.
+		bool Equals(const TMatrix<T>& Other, const T tolerance = 1e-6) const;
+
 		// Check if matrix is orthogonal (inverse and transpose are the same).
-		bool IsOrthogonal() const;
+		bool IsOrthogonal(const T tolerance = 1e-6) const;
 
 		// Construct an identity matrix.
 		static TMatrix<T> MakeIdentity();

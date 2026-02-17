@@ -65,20 +65,6 @@ namespace RiseEngine::Math
 	*/
 
 	template<typename T>
-	bool TMatrix<T>::operator==(const TMatrix<T>& InMat) const
-	{
-		for (size_t i = 0; i < Dimension; ++i)
-		{
-			for (size_t j = 0; j < Dimension; ++j)
-			{
-				if (this->M[i][j] != InMat.M[i][j])
-					return false;
-			}
-		}
-		return true;
-	}
-
-	template<typename T>
 	TMatrix<T> TMatrix<T>::MakeIdentity()
 	{
 		TVector<T> VecX = { T(1), T(0) , T(0) };
@@ -263,11 +249,26 @@ namespace RiseEngine::Math
 	}
 
 	template<typename T>
-	bool TMatrix<T>::IsOrthogonal() const
+	bool TMatrix<T>::Equals(const TMatrix<T>& Other, const T tolerance) const
+	{
+		for (int32 index_i = 0; index_i < Dimension; ++index_i)
+		{
+			for (int32 index_j = 0; index_j < Dimension; ++index_j)
+			{
+				// Exceeded tolerance.
+				if (std::abs(M[index_i][index_j] - Other.M[index_i][index_j]) > tolerance)
+					return false;
+			}
+		}
+		return true;
+	}
+
+	template<typename T>
+	bool TMatrix<T>::IsOrthogonal(const T tolerance) const
 	{
 		const TMatrix<T> Inverse = this->Inverse();
 		const TMatrix<T> Transpose = this->Transpose();
 
-		return Inverse == Transpose;
+		return Inverse.Equals(Transpose, tolerance);
 	}
 } // namespace RiseEngine
