@@ -83,7 +83,7 @@ namespace RiseEngine::Math
 		* @return A rotation matrix that rotates by the given angle around the specified axis (NOTE: each result is IN RADIANS).
 		*/
 		[[nodiscard]] static TMatrix<T> MakeRotation(const T rotation, const TVector<T>& axis);
-
+		
 		/**
 		* Make a rotation matrix around the X axis.
 		* @param InRadians - The total amount of rotation to apply (in radians).
