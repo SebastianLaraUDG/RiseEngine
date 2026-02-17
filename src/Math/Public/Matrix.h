@@ -67,13 +67,20 @@ namespace RiseEngine::Math
 		static TMatrix<T> Zero();
 
 		/* Rotation functions. */
-		
+
+		/**
+		* @brief Make a rotation matrix in the order X * Y * Z.
+		* @param InRotation - In radians.
+		* @return A rotation matrix in the order X * Y * Z.
+		*/
+		[[nodiscard]] static TMatrix<T> MakeRotation(T InRotationX, T InRotationY, T InRotationZ);
+
 		/**
 		* Make a rotation matrix around the X axis.
 		* @param InRadians - The total amount of rotation to apply (in radians).
 		* @return - The rotation matrix around the X axis (NOTE: each result is IN RADIANS).
 		*/
-		[[nodiscard]]static TMatrix<T> MakeRotationX(T InRadians);
+		[[nodiscard]] static TMatrix<T> MakeRotationX(T InRadians);
 
 		/**
 		* Make a rotation matrix around the Y axis.

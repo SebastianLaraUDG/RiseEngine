@@ -79,12 +79,6 @@ namespace RiseEngine::Math
 	}
 
 	template<typename T>
-	inline void TMatrix<T>::Rotate()
-	{
-		//TMatrix<T> 
-	}
-
-	template<typename T>
 	TMatrix<T> TMatrix<T>::MakeIdentity()
 	{
 		TVector<T> VecX = { T(1), T(0) , T(0) };
@@ -100,6 +94,12 @@ namespace RiseEngine::Math
 		const TVector<T> VecZero = TVector<T>::ZeroVector();
 		constexpr T zero = static_cast<T>(0);
 		return TMatrix(VecZero, VecZero, VecZero, VecZero, zero, zero, zero, zero); // TODO: could be written in a cleaner way.
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::MakeRotation(T InRotationX, T InRotationY, T InRotationZ)
+	{
+		return MakeRotationX(InRotationX) * MakeRotationY(InRotationY) * MakeRotationZ(InRotationZ);
 	}
 
 	template<typename T>
