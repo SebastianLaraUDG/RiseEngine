@@ -77,6 +77,14 @@ namespace RiseEngine::Math
 		[[nodiscard]] static TMatrix<T> MakeRotation(T InRotationX, T InRotationY, T InRotationZ);
 
 		/**
+		* Build a rotation matrix from an angle and an axis of rotation.
+		* @param rotation - The total amount of rotation to apply (in radians).
+		* @param axis - The axis of rotation (must be normalized).
+		* @return A rotation matrix that rotates by the given angle around the specified axis (NOTE: each result is IN RADIANS).
+		*/
+		[[nodiscard]] static TMatrix<T> MakeRotation(const T rotation, const TVector<T>& axis);
+
+		/**
 		* Make a rotation matrix around the X axis.
 		* @param InRadians - The total amount of rotation to apply (in radians).
 		* @return - The rotation matrix around the X axis (NOTE: each result is IN RADIANS).

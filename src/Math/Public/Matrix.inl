@@ -1,4 +1,4 @@
-#include "Matrix.h"
+﻿#include "Matrix.h"
 #include <iomanip> // for setw
 #include <iostream> // For printing/debugging.
 #include <cmath>
@@ -86,6 +86,26 @@ namespace RiseEngine::Math
 	TMatrix<T> TMatrix<T>::MakeRotation(T InRotationX, T InRotationY, T InRotationZ)
 	{
 		return MakeRotationX(InRotationX) * MakeRotationY(InRotationY) * MakeRotationZ(InRotationZ);
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::MakeRotation(const T rotation, const TVector<T>& axis)
+	{
+		const T coseno = cos(rotation);
+		const T seno = sin(rotation);
+		const T d = static_cast<T>(1 - coseno);
+		const T x = axis.X * d;
+		const T y = axis.Y * d;
+		const T z = axis.Z * d;
+		const T axay = x * axis.Y;
+		const T axaz = x * axis.Z;
+		const T ayaz = y * axis.Z;
+
+		const TVector<T> row0 = { coseno + x * axis.X, axay - seno * axis.Z, axaz + seno * axis.Y };
+		const TVector<T> row1 = { axay + seno * axis.Z, coseno + y * axis.Y, ayaz - seno * axis.X };
+		const TVector<T> row2 = { axaz - seno * axis.Y, ayaz + seno * axis.X, coseno + z * axis.Z };
+
+		return TMatrix<T>(row0, row1, row2, TVector<T>::ZeroVector());
 	}
 
 	template<typename T>
