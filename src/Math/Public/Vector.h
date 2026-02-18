@@ -129,6 +129,7 @@ namespace RiseEngine
 			[[nodiscard]] __forceinline static TVector<T> Reject(const TVector<T>& A, const TVector<T>& B);
 
 			[[nodiscard]] __forceinline static TVector<T> ZeroVector();
+			[[nodiscard]] __forceinline static TVector<T> OneVector();
 
 			[[nodiscard]] __forceinline static TVector<T> UnitVectorX();
 			[[nodiscard]] __forceinline static TVector<T> UnitVectorY();
