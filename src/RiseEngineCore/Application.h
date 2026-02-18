@@ -1,5 +1,6 @@
 #pragma once
-#include <RiseEngineCore/Core.h>
+#include "RiseEngineCore/Core/CoreCommon.h"
+#include "RiseEngineCore/Core/Core.h"
 #include <Rendering/include/Renderer.h>
 #include <../src/vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <RiseEngineCore/Core.h>
+#include "RiseEngineCore/Core/CoreCommon.h"
 #include <string>
 #include <vendor/OpenGL/GLEW/include/GL/glew.h>
 

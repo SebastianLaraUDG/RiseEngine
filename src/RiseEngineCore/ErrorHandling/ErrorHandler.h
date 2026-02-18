@@ -1,5 +1,5 @@
 #pragma once
-#include <RiseEngineCore/Core.h>
+#include "RiseEngineCore/Core/CoreCommon.h"
 #include "vendor/OpenGL/GLEW/include/GL/glew.h"
 
 #if _DEBUG

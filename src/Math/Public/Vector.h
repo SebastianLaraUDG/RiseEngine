@@ -1,8 +1,8 @@
 #pragma once
 #include <type_traits>
 
-#include "../../RiseEngineCore/Core.h"//  TODO: Keep this for DLLs? // TODO: fix types route.
-
+#include "RiseEngineCore/Core/Core.h"//  TODO: Keep this for DLLs?
+#include "RiseEngineCore/Core/CoreCommon.h"
 
 namespace RiseEngine
 {
