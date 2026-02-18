@@ -123,6 +123,12 @@ void Application::Update()
 {
 	// TODO: Input class.
 	// TODO: process input.
+
+	/*
+	* TODO: the update() list approach is used for now, but since the elements at the
+	* beginning of the list will be updated before the ones at the end, I 
+	* should implement a different approach like the Double Buffer pattern.
+	*/
 }
 
 void Application::Render() const
