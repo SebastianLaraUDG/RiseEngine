@@ -1,4 +1,5 @@
 #include <RiseEngineCore/ErrorHandling/ErrorHandler.h>
+#include "vendor/OpenGL/GLEW/include/GL/glew.h"
 
 uint glCheckError_(const char* file, int line)
 {
