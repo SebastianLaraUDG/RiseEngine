@@ -36,9 +36,6 @@
     <ClInclude Include="ErrorHandling\ErrorHandler.h">
       <Filter>Header Files\Error Handling</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -54,17 +51,38 @@
     <ClInclude Include="..\Rendering\include\Shader.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Math\RiseMath.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\Math\Vector\Vector.h">
-      <Filter>Source Files\Math</Filter>
+    <ClInclude Include="Core\Core.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Math\Matrix\Matrix.h">
-      <Filter>Source Files\Math</Filter>
+    <ClInclude Include="Core\CoreCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CoreTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\SpaceComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\EntityComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\PrimitiveComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\MeshComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\StaticMeshComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +101,24 @@
     <ClCompile Include="ErrorHandling\ErrorHandler.cpp">
       <Filter>Header Files\Error Handling</Filter>
     </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\EntityComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\SpaceComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\PrimitiveComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\MeshComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\StaticMeshComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl">
@@ -91,5 +127,13 @@
     <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="Core\Types.inl">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RiseEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

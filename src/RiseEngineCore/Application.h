@@ -25,9 +25,11 @@ private:
 	Renderer* renderer_;
 	
 	// Window
-	GLFWwindow* window_;
+	GLFWwindow* window_; // TODO: chage to unique_ptr
 
 	// Callback for framebuffer size.
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+	class Entity* entity_; // REMOVE
 };
 

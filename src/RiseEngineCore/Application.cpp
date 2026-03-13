@@ -3,6 +3,7 @@
 #include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
 #include "Rendering/include/Renderer.h"
 
+#include "Runtime/MainFramework/Public/Entity.h" // REMOVE
 /*
 TODO:
 * Move the entire rendering pipleline to Renderer class.
@@ -62,6 +63,9 @@ Application::Application(int width, int height, const char* title)
 	// TODO: glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Fill mode
 
 	glEnable(GL_DEPTH_TEST);
+
+	entity_ = new Entity(); // TODO: remove
+	entity_->PrintTransform(); // TODO: remove
 }
 
 Application::~Application()
@@ -70,6 +74,8 @@ Application::~Application()
 	delete triangleShader;
 	glfwDestroyWindow(window_);
 	glfwTerminate();
+
+	delete entity_; // TODO: remove
 }
 
 void Application::Run()
@@ -90,7 +96,7 @@ void Application::Run()
 		"../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
 		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl"
 		);
-	
+
 	glGenVertexArrays(1, &VAO_);
 	glGenBuffers(1, &VBO_);
 	// Binding
