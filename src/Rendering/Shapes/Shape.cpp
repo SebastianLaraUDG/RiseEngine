@@ -1,0 +1,28 @@
+#include "Shape.h"
+#include <Rendering/include/Shader.h>
+
+std::vector<float> Shape::VERTICES_DATA = {
+	// XYZ				|| Vertex color (RGBA)
+	-1.0f,+0.0f,+0.0f,	1.0f,0.0f,0.0f,1.0f,
+	+0.0f,+1.0f,+0.0f,	0.0f,1.0f,0.0f,1.0f,
+	+1.0f,+0.0f,+0.0f,	0.0f,0.0f,1.0f,1.0f
+};
+
+Shape::Shape()
+{
+	shader_ = std::make_unique<Shader>(
+		"../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
+		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl"
+	);
+	vao_.Bind();
+	vbo_.Bind(GL_ARRAY_BUFFER);
+	vbo_.SetData<float>(GL_ARRAY_BUFFER, VERTICES_DATA);
+	vao_.SetLayout(7, 0, 3); // Position attribute.
+	vao_.SetLayout(7, 1, 4, GL_FLOAT, GL_FALSE, (void*)(3 * SIZE_IN_BYTES(float))); // Color attribute.
+}
+
+void Shape::render() const
+{
+	vao_.Bind();
+	shader_->use();
+}

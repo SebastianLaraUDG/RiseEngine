@@ -3,7 +3,7 @@
 #include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
 #include "Rendering/include/Renderer.h"
 
-#include "Runtime/MainFramework/Public/Entity.h" // REMOVE
+#include <Rendering/Shapes/Shape.h>
 /*
 TODO:
 * Move the entire rendering pipleline to Renderer class.
@@ -13,9 +13,6 @@ TODO:
 
 Application::Application(int width, int height, const char* title)
 {
-	// Create renderer
-	renderer_ = new Renderer();
-
 	// Initialize GLFW.
 	if (!glfwInit())
 	{
@@ -23,7 +20,7 @@ Application::Application(int width, int height, const char* title)
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	// Configure.
+	// Setup window.
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -64,18 +61,15 @@ Application::Application(int width, int height, const char* title)
 
 	glEnable(GL_DEPTH_TEST);
 
-	entity_ = new Entity(); // TODO: remove
-	entity_->PrintTransform(); // TODO: remove
+	shape = new Shape(); // TODO: remove
+	shape->PrintTransform(); // TODO: remove
 }
 
 Application::~Application()
 {
-	delete renderer_;
-	delete triangleShader;
+	delete shape; // TODO: remove
 	glfwDestroyWindow(window_);
 	glfwTerminate();
-
-	delete entity_; // TODO: remove
 }
 
 void Application::Run()
@@ -90,13 +84,9 @@ void Application::Run()
 	};
 	// 3 For position + 4 for color.
 	const int DATA_ROW_SIZE = 7;
-	
-	
-	triangleShader = new Shader(
-		"../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
-		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl"
-		);
 
+
+/*
 	glGenVertexArrays(1, &VAO_);
 	glGenBuffers(1, &VBO_);
 	// Binding
@@ -112,6 +102,7 @@ void Application::Run()
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
+*/
 
 	// Loop
 	while (!glfwWindowShouldClose(window_))
@@ -121,8 +112,13 @@ void Application::Run()
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
+	
+	
+/*
 	glDeleteVertexArrays(1, &VAO_);
 	glDeleteBuffers(1, &VBO_);
+*/
+
 }
 
 void Application::Update()
@@ -144,7 +140,8 @@ void Application::Render() const
 
 	// TODO: Draw here
 	
-	triangleShader->use();
+	shape->render(); // TODO: remove
+
 	// glBindVertexArray(VAO_); TODO: necessary?
 	glDrawArrays(GL_TRIANGLES, 0, 3); // Un-Optimal drawing method, but the appropriate since I am drawing
 									  // one single triangle. To draw multiple triangles that share vertices

@@ -1,14 +1,9 @@
 #pragma once
-#include <GL/glew.h>
-
-class Renderer
+#include <RiseEngineCore/Core/Core.h>
+class RISE_ENGINE_API Renderer
 {
 public:
-	Renderer() = default;
-	~Renderer() {}
-
-	const char* getString() const { return "Sebas"; }
-
+	Renderer();
+	~Renderer();
 private:
-	unsigned int id;
 };

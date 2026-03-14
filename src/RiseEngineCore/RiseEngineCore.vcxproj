@@ -163,6 +163,9 @@
     <ClInclude Include="..\Math\RiseMath.h" />
     <ClInclude Include="..\Rendering\include\Renderer.h" />
     <ClInclude Include="..\Rendering\include\Shader.h" />
+    <ClInclude Include="..\Rendering\include\VAO.h" />
+    <ClInclude Include="..\Rendering\include\VBO.h" />
+    <ClInclude Include="..\Rendering\Shapes\Shape.h" />
     <ClInclude Include="..\Runtime\MainFramework\Public\Entity.h" />
     <ClInclude Include="..\Runtime\MainFramework\Public\EntityComponent.h" />
     <ClInclude Include="..\Runtime\MainFramework\Public\MeshComponent.h" />
@@ -176,11 +179,13 @@
     <ClInclude Include="DebugIncludes\DebugIncludes.h" />
     <ClInclude Include="ErrorHandling\ErrorHandler.h" />
     <ClInclude Include="ErrorHandling\Types.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Rendering\Shapes\Shape.cpp" />
     <ClCompile Include="..\Rendering\src\Renderer.cpp" />
     <ClCompile Include="..\Rendering\src\Shader.cpp" />
+    <ClCompile Include="..\Rendering\src\VAO.cpp" />
+    <ClCompile Include="..\Rendering\src\VBO.cpp" />
     <ClCompile Include="..\Runtime\MainFramework\Private\Entity.cpp" />
     <ClCompile Include="..\Runtime\MainFramework\Private\EntityComponent.cpp" />
     <ClCompile Include="..\Runtime\MainFramework\Private\MeshComponent.cpp" />
@@ -195,9 +200,6 @@
     <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl" />
     <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl" />
     <None Include="Core\Types.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="RiseEngine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

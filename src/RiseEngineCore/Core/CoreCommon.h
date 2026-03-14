@@ -20,6 +20,8 @@ using Vector3f = RiseEngine::Math::TVector<float>;
 #define LIKELY likely
 #define UNLIKELY unlikely
 
+#define SIZE_IN_BYTES(_x) sizeof(_x) // TODO: keep here or in a specific common rendering file?
+
 // Compliation configuration macros.
 #if defined(_DEBUG)
 # define CORE_DEBUG 1
