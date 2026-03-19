@@ -110,7 +110,7 @@ void Application::Render() const
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Draw here
-	
+	shader_->use();
 	shape->render(); // TODO: remove
 
 	/* Swap front and back buffers */

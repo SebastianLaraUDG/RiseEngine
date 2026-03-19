@@ -2,7 +2,6 @@
 #include <Runtime/MainFramework/Public/Entity.h>
 #include <Rendering/include/VAO.h>
 #include <Rendering/include/VBO.h>
-class Shader;
 
 /*
 TODO: for simplicity this Shape class will be a cube until 3D rendering is tested, then
@@ -21,6 +20,5 @@ public:
 protected:
 	VAO vao_;
 	VBO vbo_;
-	std::unique_ptr<Shader> shader_;
 };
 

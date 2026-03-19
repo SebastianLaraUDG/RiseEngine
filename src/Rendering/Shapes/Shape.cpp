@@ -10,10 +10,6 @@ std::vector<float> Shape::VERTICES_DATA = {
 
 Shape::Shape()
 {
-	shader_ = std::make_unique<Shader>(
-		"../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
-		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl"
-	);
 	vao_.Bind();
 	vbo_.Bind(GL_ARRAY_BUFFER);
 	vbo_.SetData<float>(GL_ARRAY_BUFFER, VERTICES_DATA);
@@ -24,7 +20,6 @@ Shape::Shape()
 void Shape::render() const
 {
 	vao_.Bind();
-	shader_->use();
 	// TODO: for now I will use the non-optimal drawing method.
 	glDrawArrays(GL_TRIANGLES, 0, 3); // To draw multiple triangles that share vertices
 									  // I should use glDrawElements();
