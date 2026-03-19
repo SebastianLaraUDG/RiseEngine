@@ -21,6 +21,10 @@ public:
 	~SpaceComponent() {}
 	virtual void Update(float deltaTime) override;
 
+	// Setter
+	void SetLocation(const Vector3& InLocation);
+	void SetRotation(const Vector3& InRotation);
+
 	// Getters for aboslute transforms.
 	FORCEINLINE Transform GetTransform() const { return transform_; }
 	FORCEINLINE Vector3 GetLocation() const { return transform_.location; }

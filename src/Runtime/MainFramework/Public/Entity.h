@@ -19,7 +19,7 @@ public:
 
 	// ~ End Entity interface.
 protected:
-
+	SpaceComponent* spaceComponent_ = nullptr; // TODO: for now I will have the space component as a separate member
 private:
 	/*
 	* TODO: the update() list approach is used for now, but since the elements at the
@@ -31,5 +31,4 @@ private:
 	// look for another structure that better fits according to the needs.
 // TODO: also use smart pointers?
 
-	SpaceComponent* spaceComponent_ = nullptr; // TODO: for now I will have the space component as a separate member
 };

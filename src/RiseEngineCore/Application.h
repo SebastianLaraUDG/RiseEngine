@@ -6,6 +6,7 @@
 #include <memory>
 
 class Shader;
+class Camera;
 
 class RISE_ENGINE_API Application
 {
@@ -29,6 +30,7 @@ private:
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 	std::unique_ptr<Shader> shader_; // The unique global shader of the program.
+	std::unique_ptr<Camera> camera_; // The only camera this application will use.
 	class Shape* shape; // REMOVE
 };
 

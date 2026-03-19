@@ -4,6 +4,7 @@
 #include "Rendering/include/Renderer.h"
 
 #include <Rendering/Shapes/Shape.h>
+#include <Runtime/MainFramework/Public/Camera.h>
 
 
 /*
@@ -37,7 +38,7 @@ Application::Application(int width, int height, const char* title)
 
 	// Set callback for the frambebuffer size.
 	glfwSetFramebufferSizeCallback(window_, framebuffer_size_callback);
-
+	
 	// Init GLEW.
 	if (glewInit() != GLEW_OK)
 	{
@@ -71,6 +72,8 @@ Application::Application(int width, int height, const char* title)
 
 	shader_ = std::make_unique<Shader>("../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
 		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl");
+	camera_ = std::make_unique<Camera>("../../../../../Downloads/CameraAttributes.json");
+	camera_->PrintTransform();
 }
 
 Application::~Application()
