@@ -5,6 +5,8 @@
 #include <../src/vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 #include <memory>
 
+class Shader;
+
 class RISE_ENGINE_API Application
 {
 public:
@@ -26,6 +28,7 @@ private:
 	// Callback for framebuffer size.
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+	std::unique_ptr<Shader> shader_; // The unique global shader of the program.
 	class Shape* shape; // REMOVE
 };
 

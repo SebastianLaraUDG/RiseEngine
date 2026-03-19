@@ -8,6 +8,7 @@ public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 	~Shader();
 
+	void loadShader(const char* vertexPath, const char* fragmentPath);
 	void use() const;
 	void unbind() const;
 

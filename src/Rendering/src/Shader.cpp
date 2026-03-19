@@ -3,8 +3,23 @@
 #include <sstream>
 #include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+Shader::Shader(const char* vertexPath, const char* fragmentPath) : rendererId_(0)
 {
+	loadShader(vertexPath, fragmentPath);
+}
+
+Shader::~Shader()
+{
+	glDeleteProgram(rendererId_);
+}
+
+void Shader::loadShader(const char* vertexPath, const char* fragmentPath)
+{
+	// If there was a loaded shader, delete it safely.
+	if (rendererId_ != 0)
+	{
+		glDeleteProgram(rendererId_);
+	}
 	// 1. retrieve the vertex/fragment source code from filePath
 	std::string vertexCode;
 	std::string fragmentCode;
@@ -46,16 +61,6 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	// Shader Program.
 	rendererId_ = createProgram(vertex, fragment);
 	glCheckError();
-
-	// Delete the shaders as they're linked into our program now and no longer necessary
-	glDeleteShader(vertex);
-	glDeleteShader(fragment);
-	use();
-}
-
-Shader::~Shader()
-{
-	glDeleteProgram(rendererId_);
 }
 
 void Shader::use() const
@@ -75,7 +80,7 @@ bool Shader::CheckStatus(uint32 program, PFNGLGETSHADERIVPROC getIVFunction, uin
 
 	if (status != GL_TRUE)
 	{
-		int32 infoLength;
+		int32 infoLength; // TODO: this could be set to zero and cause undefined behavior.
 		getIVFunction(program, GL_INFO_LOG_LENGTH, &infoLength);
 		char* buffer = new char[infoLength];
 		int32 bufferSize;

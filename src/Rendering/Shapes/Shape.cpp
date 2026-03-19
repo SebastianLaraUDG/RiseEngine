@@ -25,4 +25,9 @@ void Shape::render() const
 {
 	vao_.Bind();
 	shader_->use();
+	// TODO: for now I will use the non-optimal drawing method.
+	glDrawArrays(GL_TRIANGLES, 0, 3); // To draw multiple triangles that share vertices
+									  // I should use glDrawElements();
+	
+	vao_.Unbind(); // TODO: This is here temporarily to get used to opengl workflow. Remove later.
 }

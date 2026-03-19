@@ -4,6 +4,8 @@
 #include "Rendering/include/Renderer.h"
 
 #include <Rendering/Shapes/Shape.h>
+
+
 /*
 TODO:
 * Move the entire rendering pipleline to Renderer class.
@@ -60,9 +62,15 @@ Application::Application(int width, int height, const char* title)
 	// TODO: glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Fill mode
 
 	glEnable(GL_DEPTH_TEST);
+	// TODO :in the future... glEnable(GL_LIGHTING);
 
 	shape = new Shape(); // TODO: remove
 	shape->PrintTransform(); // TODO: remove
+
+
+
+	shader_ = std::make_unique<Shader>("../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
+		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl");
 }
 
 Application::~Application()
@@ -74,51 +82,14 @@ Application::~Application()
 
 void Application::Run()
 {
-	// TODO: for now I will have a simple triangle here in the run method
-	const float VERTICES_DATA[] =
-	{
-		// XYZ				|| Vertex color (RGBA)
-		-1.0f,+0.0f,+0.0f,	1.0f,0.0f,0.0f,1.0f,
-		+0.0f,+1.0f,+0.0f,	0.0f,1.0f,0.0f,1.0f,
-		+1.0f,+0.0f,+0.0f,	0.0f,0.0f,1.0f,1.0f
-	};
-	// 3 For position + 4 for color.
-	const int DATA_ROW_SIZE = 7;
-
-
-/*
-	glGenVertexArrays(1, &VAO_);
-	glGenBuffers(1, &VBO_);
-	// Binding
-	glBindVertexArray(VAO_);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VERTICES_DATA), VERTICES_DATA, GL_STATIC_DRAW);
-
-	// Position attribute
-	int32 stride = sizeof(float) * DATA_ROW_SIZE;
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
-	glEnableVertexAttribArray(0);
-	// Color attribute
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-*/
-
 	// Loop
 	while (!glfwWindowShouldClose(window_))
 	{
 		Update();
 		Render();
 	}
-	// optional: de-allocate all resources once they've outlived their purpose:
+	// de-allocate all resources once they've outlived their purpose here
 	// ------------------------------------------------------------------------
-	
-	
-/*
-	glDeleteVertexArrays(1, &VAO_);
-	glDeleteBuffers(1, &VBO_);
-*/
-
 }
 
 void Application::Update()
@@ -138,14 +109,9 @@ void Application::Render() const
 	// Clear color and depth.
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// TODO: Draw here
+	// Draw here
 	
 	shape->render(); // TODO: remove
-
-	// glBindVertexArray(VAO_); TODO: necessary?
-	glDrawArrays(GL_TRIANGLES, 0, 3); // Un-Optimal drawing method, but the appropriate since I am drawing
-									  // one single triangle. To draw multiple triangles that share vertices
-									  // I should use glDrawElements();
 
 	/* Swap front and back buffers */
 	glfwSwapBuffers(window_);
