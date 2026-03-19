@@ -2,6 +2,9 @@
 #include "Entity.h"
 #include <filesystem>
 
+/*
+* A first person camera.
+*/
 class Camera final : public Entity
 {
 public:

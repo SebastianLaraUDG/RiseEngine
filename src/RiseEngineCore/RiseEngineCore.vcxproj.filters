@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{03b848fc-9d1a-4690-b13c-f910e30d457f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{627fd23c-e224-4381-94ee-42aeeb1d2920}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{af1ebd6d-ff05-4278-86c0-ad56f214174b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorHandling\ErrorHandler.h">
@@ -90,6 +96,12 @@
     <ClInclude Include="..\Rendering\include\VBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Runtime\MainFramework\Public\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Runtime\Input\InputManager.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Rendering\src\Renderer.cpp">
@@ -133,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="..\Rendering\src\VBO.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\MainFramework\Private\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Runtime\Input\InputManager.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

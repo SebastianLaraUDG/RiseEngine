@@ -166,6 +166,7 @@
     <ClInclude Include="..\Rendering\include\VAO.h" />
     <ClInclude Include="..\Rendering\include\VBO.h" />
     <ClInclude Include="..\Rendering\Shapes\Shape.h" />
+    <ClInclude Include="..\Runtime\Input\InputManager.h" />
     <ClInclude Include="..\Runtime\MainFramework\Public\Camera.h" />
     <ClInclude Include="..\Runtime\MainFramework\Public\Entity.h" />
     <ClInclude Include="..\Runtime\MainFramework\Public\EntityComponent.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="..\Rendering\src\Shader.cpp" />
     <ClCompile Include="..\Rendering\src\VAO.cpp" />
     <ClCompile Include="..\Rendering\src\VBO.cpp" />
+    <ClCompile Include="..\Runtime\Input\InputManager.cpp" />
     <ClCompile Include="..\Runtime\MainFramework\Private\Camera.cpp" />
     <ClCompile Include="..\Runtime\MainFramework\Private\Entity.cpp" />
     <ClCompile Include="..\Runtime\MainFramework\Private\EntityComponent.cpp" />

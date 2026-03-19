@@ -65,6 +65,8 @@ Application::Application(int width, int height, const char* title)
 	glEnable(GL_DEPTH_TEST);
 	// TODO :in the future... glEnable(GL_LIGHTING);
 
+	inputManager_ = InputManager(window_);
+
 	shape = new Shape(); // TODO: remove
 	shape->PrintTransform(); // TODO: remove
 
