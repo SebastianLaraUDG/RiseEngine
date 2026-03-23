@@ -68,6 +68,12 @@ namespace RiseEngine
         }
 
         template <typename T>
+        inline T TVector<T>::SquaredMagnitude() const
+        {
+            return X * X + Y * Y + Z * Z;
+        }
+
+        template <typename T>
         inline T TVector<T>::Size() const
         {
             return Magnitude();
@@ -79,17 +85,20 @@ namespace RiseEngine
            return Magnitude();
         }
         
-        template <typename T>
-        inline TVector<T> TVector<T>::GetNormal() const
-        {
-            return *this / Magnitude();
-        }
+		template <typename T>
+		inline TVector<T> TVector<T>::GetNormal() const
+		{
+			const T mag = Magnitude();
+			if (mag == static_cast<T>(0)) // Prevent divide-by-zero crash.
+				return TVector<T>::ZeroVector();
+			return *this / mag;
+		}
 
         template<typename T>
         inline bool TVector<T>::IsNormalized(T tolerance) const
         {
-			const T magnitudeSquared = X * X + Y * Y + Z * Z;
-            const T one = (T)1;
+            const T magnitudeSquared = SquaredMagnitude();
+            const T one = static_cast<T>(1);
             return (magnitudeSquared > one - tolerance) && (magnitudeSquared < one + tolerance);
         }
 
@@ -97,7 +106,7 @@ namespace RiseEngine
 		TVector<T>& TVector<T>::Normalize()
 		{
 			const T mag = Magnitude();
-			if (mag != T(0))
+			if (mag != static_cast<T>(0))
 			{
 				*this /= mag;
 			}
@@ -163,23 +172,40 @@ namespace RiseEngine
             return TVector(static_cast<T>(1), static_cast<T>(1), static_cast<T>(1));
         }
 
+        template<typename T>
+        inline TVector<T> TVector<T>::ForwardVector()
+        {
+            return UnitVectorZ();
+        }
+
+        template<typename T>
+        inline TVector<T> TVector<T>::UpVector()
+        {
+            return UnitVectorY();
+        }
+
+        template<typename T>
+        inline TVector<T> TVector<T>::RightVector()
+        {
+            return UnitVectorX();
+        }
 
         template<typename T>
         inline TVector<T> TVector<T>::UnitVectorX()
         {
-            return TVector((T)1, (T)0, (T)0);
+            return TVector(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0));
         }
 
         template<typename T>
         inline TVector<T> TVector<T>::UnitVectorY()
         {
-            return TVector((T)0, (T)1, (T)0);
+            return TVector(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0));
         }
 
         template<typename T>
         inline TVector<T> TVector<T>::UnitVectorZ()
         {
-			return TVector((T)0, (T)0, (T)1);
+			return TVector(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1));
         }
     }
 }

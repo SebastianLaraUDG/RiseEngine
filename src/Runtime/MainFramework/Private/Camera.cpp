@@ -2,7 +2,7 @@
 #include <vendor/nlohmann/Json/json.hpp>
 #include <fstream>
 
-Camera::Camera(const std::filesystem::path& jsonPath)
+Camera::Camera(const std::filesystem::path& jsonPath) : cameraTarget_(Vector3::ZeroVector()/*TODO: TEMPORAL. This is to look at the origin.*/)
 {
 	using json = nlohmann::json;
 
@@ -12,12 +12,14 @@ Camera::Camera(const std::filesystem::path& jsonPath)
 		json j;
 		file >> j;
 
-		Vector3 startingLocation;
+		// Load starting location.
+		Vector3 startingLocation{};
 		startingLocation.X = j["startingLocation"]["x"];
 		startingLocation.Y = j["startingLocation"]["y"];
 		startingLocation.Z = j["startingLocation"]["z"];
 
-		Vector3 startingRotation;
+		// Load starting rotation.
+		Vector3 startingRotation{};
 		startingRotation.X = j["startingRotation"]["roll"];
 		startingRotation.Y = j["startingRotation"]["pitch"];
 		startingRotation.Z = j["startingRotation"]["yaw"];
@@ -25,16 +27,35 @@ Camera::Camera(const std::filesystem::path& jsonPath)
 		spaceComponent_->SetLocation(startingLocation);
 		spaceComponent_->SetRotation(startingRotation);
 	}
-	/*
-	* Ok here is my idea.
-	This constructor will read from a file to get the:
-	*starting location
-	* and the starting rotaion.
-	The file approach will be taken to avoid relying on
-	compilation times and improve iteration speed.
-	*/
-}
+	else
+	{
+		std::cout << "LOG | ERROR. FILE COULD NOT BE FOUND: " << jsonPath << "\n";
+	}
 
+	/*
+	*  For the view matrix's coordinate system we want its z-axis to be
+	* positive and because by convention (in OpenGL) the camera points
+	* towards the negative z-axis we want to negate the direction vector.
+	* If we switch the subtraction order around we now get a vector pointing towards
+	* the camera's positive z-axis:
+	*/
+	cameraDirection_ = (spaceComponent_->GetLocation() - cameraTarget_).GetNormal();
+
+	const Vector3 auxCheckRight = Vector3::CrossProduct(Vector3::UpVector(), cameraDirection_).GetNormal();
+	std::cout << "AUX VALUES: " << auxCheckRight.X << "\t" << auxCheckRight.Y << "\t" << auxCheckRight.Z << std::endl;
+	std::cout << "Right values: " << Vector3::RightVector().X << "\t" << Vector3::RightVector().Y << "\t" << Vector3::RightVector().Z << std::endl;
+
+	Matrix4f view{};
+	// view =
+		/*
+		* Ok here is my idea.
+		This constructor will read from a file to get the:
+		*starting location
+		* and the starting rotaion.
+		The file approach will be taken to avoid relying on
+		compilation times and improve iteration speed.
+		*/
+};
 // Controls
 
 // WASD

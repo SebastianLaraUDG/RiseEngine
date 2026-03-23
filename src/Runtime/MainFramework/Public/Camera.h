@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include <filesystem>
-
+#include <RiseEngineCore/Core/CoreCommon.h>
 /*
 * A first person camera.
 */
@@ -11,13 +11,13 @@ public:
 	Camera(const std::filesystem::path& jsonPath);
 	~Camera() = default;
 
-	void ProcessInput(); // To be called in the update loop.
-
 private:
 	void ProcessKeyboardInput();
 	void ProcessMouseInput();
 
 	float movementSpeed_ = 1.f;
 	float rotationSpeed_ = 1.f;
+	Vector3 cameraTarget_;
+	Vector3 cameraDirection_;
 };
 

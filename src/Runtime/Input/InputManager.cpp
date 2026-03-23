@@ -5,6 +5,7 @@ InputManager::InputManager(GLFWwindow* window, const int mode, const int value)
 {
 	glfwSetInputMode(window, mode, value);
 	
+	glfwSetWindowUserPointer(window, this);
 	glfwSetCursorPosCallback(window, cursorPosCallback);
 
 	// Set cursor default position in the middle of the window.
@@ -16,12 +17,13 @@ InputManager::InputManager(GLFWwindow* window, const int mode, const int value)
 
 void InputManager::cursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 {
-	auto* instance = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
+	auto instance = static_cast<InputManager*>(glfwGetWindowUserPointer(window)); // TODO: cache in some way?
+	instance->HandleMouseMovement(xpos, ypos, window);
 }
 
 #include <iostream> // TODO: remove
 
-void InputManager::HandleMouseMovement(double xPos, double yPos)
+void InputManager::HandleMouseMovement(double xPos, double yPos, GLFWwindow* window)
 {
 	double xoffset = xPos - mouseX_;
 	double yoffset = mouseY_ - yPos; // reversed since y-coordinates range from bottom to top
@@ -29,6 +31,11 @@ void InputManager::HandleMouseMovement(double xPos, double yPos)
 	mouseX_ = xPos;
 	mouseY_ = yPos;
 
-	std::cout << "Position x current:" << mouseX_ << std::endl;
-	std::cout << "Position y current:" << mouseY_ << std::endl;
+	// Creamos un string con el formato deseado
+	char title[128]{};
+	// sprintf_s(title, "RiseEngine | Mouse: %.1f, %.1f", mouseX_, mouseY_); // Print current mouse values.
+	// sprintf_s(title, "RiseEngine | Mouse Offset: %.1f, %.1f", xoffset, yoffset); // Print offset values.
+
+	// Actualizamos el titulo de la ventana
+	// glfwSetWindowTitle(window, title);
 }

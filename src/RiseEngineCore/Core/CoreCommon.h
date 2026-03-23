@@ -14,9 +14,18 @@ namespace RiseEngine::Math
 using Vector3 = RiseEngine::Math::TVector<double>;
 using Vector3f = RiseEngine::Math::TVector<float>;
 
+using Matrix4 = RiseEngine::Math::TMatrix<double>;
+using Matrix4f = RiseEngine::Math::TMatrix<float>;
 
 // Macros
+#if defined(_MSC_VER)
 #define FORCEINLINE __forceinline
+#elif defined(__GNUC__) || defined(__clang__)
+#define FORCEINLINE inline __attribute__((always_inline))
+#else
+#define FORCEINLINE inline
+#endif
+
 #define LIKELY likely
 #define UNLIKELY unlikely
 

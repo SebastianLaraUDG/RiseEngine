@@ -105,6 +105,7 @@ namespace RiseEngine::Math
 		*/
 		[[nodiscard]] static TMatrix<T> MakeRotationZ(T InRadians);
 
+		[[nodiscard]] static TMatrix<T> LookAt(const TVector<T>& position, const TVector<T>& target, const TVector<T>& up);
 
 		/// <summary>
 		/// Print the whole matrix.

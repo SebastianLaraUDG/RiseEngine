@@ -1,6 +1,7 @@
 #pragma once
 #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 
+// TODO: make this class a singleton?
 class InputManager
 {
 public:
@@ -11,7 +12,7 @@ public:
 	~InputManager() = default;
 private:
 	static void cursorPosCallback(GLFWwindow* window, double xPos, double yPos);
-	void HandleMouseMovement(double xPos, double yPos);
+	void HandleMouseMovement(double xPos, double yPos, GLFWwindow* window);
 
 	double mouseX_ = 0.0, mouseY_ = 0.0;
 };

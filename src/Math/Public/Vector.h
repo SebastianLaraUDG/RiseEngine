@@ -25,7 +25,7 @@ namespace RiseEngine
 			};
 			static constexpr int32 NumComponents = 3;
 			/*
-			* TODO: create statics: OneVector, XAxis, YAxis, ZAxis. Also Up, Dowm, Forward, Backwards, Right, Left.
+			* TODO: create statics: XAxis, YAxis, ZAxis. Also Up, Dowm, Forward, Backwards, Right, Left.
 			* TODO: Define all direction vectors once I define the worlds directions.
 			* TODO: define all previous for both float and double.
 			*/
@@ -61,6 +61,10 @@ namespace RiseEngine
 
 
 			[[nodiscard]] __forceinline T Magnitude() const;
+			/*
+			* @brief An optimized alternative to Magnitude if you do not need to perform the square root.
+			*/
+			[[nodiscard]] inline T SquaredMagnitude() const;
 			
 			/// @brief Returns the same as Magnitude();
 			/// @return Length of a Vector.
@@ -70,6 +74,7 @@ namespace RiseEngine
 			/// @return Length of a Vector.
 			[[nodiscard]] __forceinline T Length() const;
 
+			// @return Will return ZeroVector if magnitud equals zero.
 			[[nodiscard]] __forceinline TVector<T> GetNormal() const;
 
 			__forceinline bool IsNormalized(T tolerance = (T)0.0001) const;
@@ -130,6 +135,9 @@ namespace RiseEngine
 
 			[[nodiscard]] __forceinline static TVector<T> ZeroVector();
 			[[nodiscard]] __forceinline static TVector<T> OneVector();
+			[[nodiscard]] inline static TVector<T> ForwardVector();
+			[[nodiscard]] inline static TVector<T> UpVector();
+			[[nodiscard]] inline static TVector<T> RightVector();
 
 			[[nodiscard]] __forceinline static TVector<T> UnitVectorX();
 			[[nodiscard]] __forceinline static TVector<T> UnitVectorY();

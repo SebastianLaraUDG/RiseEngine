@@ -4,8 +4,8 @@
 #include <GL/glew.h>
 #include <../src/vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 #include <memory>
-#include <Runtime/Input/InputManager.h>
 
+class InputManager;
 class Shader;
 class Camera;
 
@@ -30,10 +30,12 @@ private:
 	// Callback for framebuffer size.
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-	InputManager inputManager_;
+	std::unique_ptr<InputManager> inputManager_;
 
 	std::unique_ptr<Shader> shader_; // The unique global shader of the program.
 	std::unique_ptr<Camera> camera_; // The only camera this application will use.
 	class Shape* shape; // REMOVE
+
+	double deltaTime_; // Time between current frame and last frame.
 };
 

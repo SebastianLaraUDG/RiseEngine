@@ -5,7 +5,7 @@
 
 #include <Rendering/Shapes/Shape.h>
 #include <Runtime/MainFramework/Public/Camera.h>
-
+#include <Runtime/Input/InputManager.h>
 
 /*
 TODO:
@@ -14,7 +14,7 @@ TODO:
 * Set TAB key to switch between wireframe and fill mode.
 */
 
-Application::Application(int width, int height, const char* title)
+Application::Application(int width, int height, const char* title) : deltaTime_(0.0)
 {
 	// Initialize GLFW.
 	if (!glfwInit())
@@ -47,7 +47,6 @@ Application::Application(int width, int height, const char* title)
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	glfwSetWindowUserPointer(window_, this);
 
 	// Viewport.
 	glViewport(0, 0, width, height);
@@ -65,12 +64,10 @@ Application::Application(int width, int height, const char* title)
 	glEnable(GL_DEPTH_TEST);
 	// TODO :in the future... glEnable(GL_LIGHTING);
 
-	inputManager_ = InputManager(window_);
+	inputManager_ = std::make_unique<InputManager>(window_,GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	shape = new Shape(); // TODO: remove
 	shape->PrintTransform(); // TODO: remove
-
-
 
 	shader_ = std::make_unique<Shader>("../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
 		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl");
