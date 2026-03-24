@@ -41,12 +41,8 @@ Camera::Camera(const std::filesystem::path& jsonPath) : cameraTarget_(Vector3::Z
 	*/
 	cameraDirection_ = (spaceComponent_->GetLocation() - cameraTarget_).GetNormal();
 
-	const Vector3 auxCheckRight = Vector3::CrossProduct(Vector3::UpVector(), cameraDirection_).GetNormal();
-	std::cout << "AUX VALUES: " << auxCheckRight.X << "\t" << auxCheckRight.Y << "\t" << auxCheckRight.Z << std::endl;
-	std::cout << "Right values: " << Vector3::RightVector().X << "\t" << Vector3::RightVector().Y << "\t" << Vector3::RightVector().Z << std::endl;
-
+	// TODO: unit tests for cross products to equal world unit direction vector.
 	Matrix4f view{};
-	// view =
 		/*
 		* Ok here is my idea.
 		This constructor will read from a file to get the:

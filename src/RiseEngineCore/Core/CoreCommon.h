@@ -5,12 +5,12 @@
 // Forward declaration of concrete types.
 // TODO: move this to its own file.
 #include "Math/RiseMath.h"
-
+/*
 namespace RiseEngine::Math
 {
 	template<typename T> struct TVector;
 }
-
+*/
 using Vector3 = RiseEngine::Math::TVector<double>;
 using Vector3f = RiseEngine::Math::TVector<float>;
 

@@ -153,9 +153,7 @@ namespace RiseEngine::Math
 	template<typename T>
 	TMatrix<T> TMatrix<T>::LookAt(const TVector<T>& position, const TVector<T>& target, const TVector<T>& up)
 	{
-		const TVector<T> Forward = (position - target).GetNormal(); // OpenGL is right handed.
-		const TVector<T> Right = TVector<T>::CrossProduct(up, Forward).GetNormal();
-		const TVector<T> CameraUp = TVector<T>::CrossProduct(Forward, Right);
+		// TODO
 	}
 
 	template<typename T>

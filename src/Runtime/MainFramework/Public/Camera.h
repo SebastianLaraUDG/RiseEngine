@@ -11,9 +11,7 @@ public:
 	Camera(const std::filesystem::path& jsonPath);
 	~Camera() = default;
 
-private:
-	void ProcessKeyboardInput();
-	void ProcessMouseInput();
+private:	
 
 	float movementSpeed_ = 1.f;
 	float rotationSpeed_ = 1.f;
