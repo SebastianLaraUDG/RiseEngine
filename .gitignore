@@ -16,3 +16,11 @@ src/Sandbox
 # Excluir los .dll y .lib de OpenGL
 !src/vendor/OpenGL/**/*.dll
 !src/vendor/OpenGL/**/*.lib
+
+# TESTS
+# Ignorar projecto de Unit Tests
+/GTests
+# Y los paquetes incluidos
+/packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8
+# Y algunos archivos generados por los tests.
+/x64/Debug
