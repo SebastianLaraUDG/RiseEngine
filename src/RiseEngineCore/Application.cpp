@@ -1,16 +1,29 @@
+<<<<<<< Updated upstream
 #include "Application.h"
 #include <Rendering/include/Shader.h>
 #include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
 #include "Rendering/include/Renderer.h"
+=======
+#include "Application.hpp"
+#include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
+#include "Rendering/include/Renderer.hpp"
+#include <Rendering/include/Shader.hpp>
+#include "Core/FileSystem.hpp"
+#include <iostream>
+>>>>>>> Stashed changes
 
 /*
 TODO:
-* Move the entire rendering pipleline to Renderer class.
 * Set ESCAPE key to close window.
 * Set TAB key to switch between wireframe and fill mode.
 */
+using Application = RiseEngine::Application;
 
+<<<<<<< Updated upstream
 Application::Application(int width, int height, const char* title)
+=======
+Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0)
+>>>>>>> Stashed changes
 {
 	// Create renderer
 	renderer_ = new Renderer();
@@ -18,10 +31,11 @@ Application::Application(int width, int height, const char* title)
 	// Initialize GLFW.
 	if (!glfwInit())
 	{
-		cout << "GLFW Failed to initialize!\n";
+		std::cout << "GLFW Failed to initialize!\n";
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
+<<<<<<< Updated upstream
 	// Configure.
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -37,43 +51,62 @@ Application::Application(int width, int height, const char* title)
 
 	// Set callback for the frambebuffer size.
 	glfwSetFramebufferSizeCallback(window_, framebuffer_size_callback);
+=======
+	
+	window_ = std::make_unique<Window>(windowWidth, windowHeight, title);
+>>>>>>> Stashed changes
 
 	// Init GLEW.
 	if (glewInit() != GLEW_OK)
 	{
-		cout << "Failed to initialize GLEW! \n";
-		glfwDestroyWindow(window_);
+		std::cout << "Failed to initialize GLEW! \n";
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 	glfwSetWindowUserPointer(window_, this);
 
-	// Viewport.
-	glViewport(0, 0, width, height);
+	renderer_ = std::make_unique<Renderer>();
 
-	// Print GL info
-#if _DEBUG
-	PrintOpenGLVersionInfo();
-#endif
+	InitFileSystem();
 
-	// Window background color. Optional
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// TODO: glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Wireframe mode!
-	// TODO: glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Fill mode
+	shader_ = std::make_unique<Shader>(
+		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/VertexShader.glsl").string(),
+		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
+	);
 
+<<<<<<< Updated upstream
 	glEnable(GL_DEPTH_TEST);
+=======
+	vao = std::make_unique<VAO>();
+	vbo = std::make_unique<VBO>();
+	
+	const std::vector<f32> vertices =
+	{
+		-0.5f, 0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f, 1.0f,
+		0.0f,0.5f,0.0f,				0.0f, 1.0f, 0.0f, 1.0f,
+		0.5f, 0.0f, 0.0f,				0.0f, 0.0f, 1.0f, 1.0f
+	};
+	vbo->SetData<f32>(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+	vao->SetLayout(7, 0, 3, GL_FLOAT, GL_FALSE);
+	vao->SetLayout(7, 1, 4, GL_FLOAT, GL_FALSE, (void*)(3 * sizeof(f32)));
+>>>>>>> Stashed changes
 }
 
 Application::~Application()
 {
+<<<<<<< Updated upstream
 	delete renderer_;
 	delete triangleShader;
 	glfwDestroyWindow(window_);
+=======
+>>>>>>> Stashed changes
 	glfwTerminate();
 }
 
+
 void Application::Run()
 {
+<<<<<<< Updated upstream
 	// TODO: for now I will have a simple triangle here in the run method
 	const float VERTICES_DATA[] =
 	{
@@ -107,11 +140,15 @@ void Application::Run()
 	glEnableVertexAttribArray(1);
 
 
+=======
+	static float increaseFactor = 0.05f;
+>>>>>>> Stashed changes
 	// Loop
-	while (!glfwWindowShouldClose(window_))
+	while (!glfwWindowShouldClose(window_.get()->GetGLFWWindow()))
 	{
 		Update();
 		Render();
+		ProcessInput();
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
@@ -121,15 +158,23 @@ void Application::Run()
 
 void Application::Update()
 {
+<<<<<<< Updated upstream
 	// TODO: Input class.
 	// TODO: process input.
+=======
+	/*
+	* TODO: the update() list approach is used for now, but since the elements at the
+	* beginning of the list will be updated before the ones at the end, I 
+	* should implement a different approach like the Double Buffer pattern.
+	*/
+>>>>>>> Stashed changes
 }
 
 void Application::Render() const
 {
-	// Clear color and depth.
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	renderer_->Clear();
 
+<<<<<<< Updated upstream
 	// TODO: Draw here
 	
 	triangleShader->use();
@@ -142,24 +187,25 @@ void Application::Render() const
 	glfwSwapBuffers(window_);
 	/* Poll for and process events */
 	glfwPollEvents();
+=======
+	// Draw here
+	shader_->Bind();
+	renderer_->Draw(*vao, *vbo, *shader_);
+>>>>>>> Stashed changes
 }
 
-void Application::PrintOpenGLVersionInfo()
+void Application::ProcessInput()
 {
-	// Print GL version
-	std::cout << "Version: " << glGetString(GL_VERSION) << "\n";
-	// Print vendor
-	std::cout << "Vendor: " << glGetString(GL_VENDOR) << "\n";
-	// Print renderer
-	std::cout << "Renderer: " << glGetString(GL_RENDERER) << "\n";
-	// Print shading language
-	std::cout << "Shading language: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << "\n";
+	window_->SwapBuffers();
+	window_->PollEvents();	
 }
 
-void Application::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void RiseEngine::Application::InitFileSystem()
 {
-	int windowWidth, windowHeight;
-	// Update viewport
-	glfwGetWindowSize(window, &windowWidth, &windowHeight);
-	glViewport(0, 0, windowWidth, windowHeight);
+	FileSystem::SetEngineRoot(
+		std::filesystem::path(__FILE__).parent_path().parent_path() // // It is currently being assumed to RiseEngine folder.
+	);
+	FileSystem::SetGameRoot(
+		std::filesystem::current_path()
+	);
 }
