@@ -1,16 +1,10 @@
-<<<<<<< Updated upstream
-#include "Application.h"
-#include <Rendering/include/Shader.h>
-#include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
-#include "Rendering/include/Renderer.h"
-=======
 #include "Application.hpp"
 #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 #include "Rendering/include/Renderer.hpp"
 #include <Rendering/include/Shader.hpp>
 #include "Core/FileSystem.hpp"
 #include <iostream>
->>>>>>> Stashed changes
+
 
 /*
 TODO:
@@ -19,11 +13,7 @@ TODO:
 */
 using Application = RiseEngine::Application;
 
-<<<<<<< Updated upstream
-Application::Application(int width, int height, const char* title)
-=======
 Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0)
->>>>>>> Stashed changes
 {
 	// Create renderer
 	renderer_ = new Renderer();
@@ -35,7 +25,7 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-<<<<<<< Updated upstream
+
 	// Configure.
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -51,10 +41,10 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 
 	// Set callback for the frambebuffer size.
 	glfwSetFramebufferSizeCallback(window_, framebuffer_size_callback);
-=======
+
 	
 	window_ = std::make_unique<Window>(windowWidth, windowHeight, title);
->>>>>>> Stashed changes
+
 
 	// Init GLEW.
 	if (glewInit() != GLEW_OK)
@@ -74,9 +64,9 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
 	);
 
-<<<<<<< Updated upstream
+
 	glEnable(GL_DEPTH_TEST);
-=======
+
 	vao = std::make_unique<VAO>();
 	vbo = std::make_unique<VBO>();
 	
@@ -89,36 +79,17 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 	vbo->SetData<f32>(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
 	vao->SetLayout(7, 0, 3, GL_FLOAT, GL_FALSE);
 	vao->SetLayout(7, 1, 4, GL_FLOAT, GL_FALSE, (void*)(3 * sizeof(f32)));
->>>>>>> Stashed changes
+
 }
 
 Application::~Application()
 {
-<<<<<<< Updated upstream
-	delete renderer_;
-	delete triangleShader;
-	glfwDestroyWindow(window_);
-=======
->>>>>>> Stashed changes
 	glfwTerminate();
 }
 
 
 void Application::Run()
-{
-<<<<<<< Updated upstream
-	// TODO: for now I will have a simple triangle here in the run method
-	const float VERTICES_DATA[] =
-	{
-		// XYZ				|| Vertex color (RGBA)
-		-1.0f,+0.0f,+0.0f,	1.0f,0.0f,0.0f,1.0f,
-		+0.0f,+1.0f,+0.0f,	0.0f,1.0f,0.0f,1.0f,
-		+1.0f,+0.0f,+0.0f,	0.0f,0.0f,1.0f,1.0f
-	};
-	// 3 For position + 4 for color.
-	const int DATA_ROW_SIZE = 7;
-	
-	
+{	
 	triangleShader = new Shader(
 		"../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
 		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl"
@@ -139,10 +110,6 @@ void Application::Run()
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-
-=======
-	static float increaseFactor = 0.05f;
->>>>>>> Stashed changes
 	// Loop
 	while (!glfwWindowShouldClose(window_.get()->GetGLFWWindow()))
 	{
@@ -158,40 +125,20 @@ void Application::Run()
 
 void Application::Update()
 {
-<<<<<<< Updated upstream
-	// TODO: Input class.
-	// TODO: process input.
-=======
 	/*
 	* TODO: the update() list approach is used for now, but since the elements at the
 	* beginning of the list will be updated before the ones at the end, I 
 	* should implement a different approach like the Double Buffer pattern.
 	*/
->>>>>>> Stashed changes
 }
 
 void Application::Render() const
 {
 	renderer_->Clear();
 
-<<<<<<< Updated upstream
-	// TODO: Draw here
-	
-	triangleShader->use();
-	// glBindVertexArray(VAO_); TODO: necessary?
-	glDrawArrays(GL_TRIANGLES, 0, 3); // Un-Optimal drawing method, but the appropriate since I am drawing
-									  // one single triangle. To draw multiple triangles that share vertices
-									  // I should use glDrawElements();
-
-	/* Swap front and back buffers */
-	glfwSwapBuffers(window_);
-	/* Poll for and process events */
-	glfwPollEvents();
-=======
 	// Draw here
 	shader_->Bind();
 	renderer_->Draw(*vao, *vbo, *shader_);
->>>>>>> Stashed changes
 }
 
 void Application::ProcessInput()
