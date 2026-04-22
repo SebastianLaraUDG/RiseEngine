@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Error Handling">
-      <UniqueIdentifier>{4dfdeddf-0861-446e-9278-b334f8d455d2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{e8593c02-f27d-42b9-b8f8-c4ef5fb51a9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\DebugIncludes">
-      <UniqueIdentifier>{424dceaf-6fea-4214-979b-87c7c0ad615b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Math">
       <UniqueIdentifier>{6f88476b-7a65-43d6-9f9f-012f715be6b6}</UniqueIdentifier>
@@ -31,6 +25,7 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{03b848fc-9d1a-4690-b13c-f910e30d457f}</UniqueIdentifier>
     </Filter>
+<<<<<<< Updated upstream
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorHandling\ErrorHandler.h">
@@ -40,20 +35,80 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
+=======
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{62f7709f-23f0-490a-ae7f-9cd226cf2ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{4d0e2ce4-43b9-414d-8f34-2f3b9e8a28e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\ErrorHandling">
+      <UniqueIdentifier>{f721beca-2229-46da-982f-bffe4149e379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSystem">
+      <UniqueIdentifier>{e7e10527-95a3-4da6-854f-160cc32c3548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\FileSystem">
+      <UniqueIdentifier>{317226bd-ac61-4fef-9731-44692c64221a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Window">
+      <UniqueIdentifier>{9a7dd22c-2c21-4996-bbbb-1b6d886559f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Window\Input">
+      <UniqueIdentifier>{70ac70b4-9a13-4c06-a90b-1c30beebcfc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{7209276f-4c3f-409d-b818-b6db172bb030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Window">
+      <UniqueIdentifier>{f582dd5a-aeac-4bf8-b50f-fe0ec980b93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Window\Input">
+      <UniqueIdentifier>{af1ebd6d-ff05-4278-86c0-ad56f214174b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.hpp">
+>>>>>>> Stashed changes
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Rendering\include\Renderer.h">
+    <ClInclude Include="..\Rendering\include\GLErrorLibrary.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Renderer.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Shader.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\VAO.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\VBO.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.hpp">
+      <Filter>Header Files\Core\Window\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Math\RiseMath.hpp">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFlags.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CoreCommon.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorHandling\Types.h">
+    <ClInclude Include="Core\CoreTypes.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="DebugIncludes\DebugIncludes.h">
-      <Filter>Header Files\DebugIncludes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Shader.h">
+    <ClInclude Include="RiseEngine.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -65,23 +120,47 @@
     </ClInclude>
     <ClInclude Include="..\Math\Matrix\Matrix.h">
       <Filter>Source Files\Math</Filter>
+=======
+    <ClInclude Include="Core\FileSystem.hpp">
+      <Filter>Header Files\Core\FileSystem</Filter>
+>>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Rendering\src\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="..\Rendering\src\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ErrorHandling\ErrorHandler.cpp">
       <Filter>Header Files\Error Handling</Filter>
+=======
+    <ClCompile Include="..\Rendering\src\VBO.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\src\VAO.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Core\Window\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Core\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\src\GLErrorLibrary.cpp">
+      <Filter>Source Files\Renderer\ErrorHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\src\Renderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\src\Shader.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\FileSystem.cpp">
+      <Filter>Source Files\FileSystem</Filter>
+>>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
