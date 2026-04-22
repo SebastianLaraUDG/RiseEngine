@@ -4,6 +4,10 @@
 *.dll
 *.lib
 
+# Y la custom tambien
+/bin-intermediates/
+/bin
+
 # Archivos de depuración y Visual Studio
 *.obj
 *.pdb
@@ -24,3 +28,6 @@ src/Sandbox
 /packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.8
 # Y algunos archivos generados por los tests.
 /x64/Debug
+
+# Proyecto Sandbox para testeo
+/Sandbox/
