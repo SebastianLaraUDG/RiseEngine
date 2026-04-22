@@ -95,6 +95,7 @@
     <ClInclude Include="..\Rendering\include\Shader.hpp" />
     <ClInclude Include="..\Rendering\include\VAO.hpp" />
     <ClInclude Include="..\Rendering\include\VBO.hpp" />
+    <ClInclude Include="..\Rise.hpp" />
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Core\CoreCommon.hpp" />
     <ClInclude Include="Core\CoreTypes.hpp" />
