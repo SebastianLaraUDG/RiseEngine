@@ -1,15 +1,49 @@
-#include "Rendering/include/Shader.h"
+#include "Rendering/include/Shader.hpp"
+#include <Rendering/include/GLErrorLibrary.hpp>
 #include <fstream>
 #include <sstream>
-#include <RiseEngineCore/DebugIncludes/DebugIncludes.h>
+#include <iostream>
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) : rendererId_(0)
 {
+	LoadShader(vertexPath, fragmentPath);
+}
+
+Shader::~Shader()
+{
+	glDeleteProgram(rendererId_);
+}
+
+void Shader::LoadShader(const std::string& vertexPath, const std::string& fragmentPath)
+{
+	// If there was a loaded shader, delete it safely.
+	if (rendererId_ != 0)
+	{
+		glDeleteProgram(rendererId_);
+	}
 	// 1. retrieve the vertex/fragment source code from filePath
 	std::string vertexCode;
 	std::string fragmentCode;
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
+
+	/* MODERN LAMBDA. TODO: test
+	auto readFile = [](const std::string& path) ->std::string
+		{
+			std::ifstream file(path, std::ios::in);
+			if (!file.is_open())
+			{
+				throw std::runtime_error("Cannot open file: " + path + ". Message from: " + __FILE__);
+			}
+			return std::string(
+				std::istreambuf_iterator<char>(file),
+				std::istreambuf_iterator<char>()
+			);
+		};
+	vertexCode = readFile(vertexPath);
+	fragmentCode = readFile(fragmentPath);
+	*/
+
 	// ensure ifstream objects can throw exceptions:
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -31,7 +65,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	}
 	catch (std::ifstream::failure& e)
 	{
-		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << "\n";
+		std::cout << "ERROR::SHADER::FILE_READ_FAILED: " << e.what() << "\n";
 	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char* fShaderCode = fragmentCode.c_str();
@@ -58,14 +92,31 @@ Shader::~Shader()
 	glDeleteProgram(rendererId_);
 }
 
-void Shader::use() const
+void Shader::Bind() const
 {
 	glUseProgram(rendererId_);
 }
 
-void Shader::unbind() const
+void Shader::Unbind() const
 {
 	glUseProgram(0);
+}
+
+int32 Shader::GetUniformLocation(const std::string& name) const
+{
+	// Location was previously cached.
+	if (uniformLocationCache_.find(name) != uniformLocationCache_.end())
+	{
+		return uniformLocationCache_[name];
+	}
+
+	int32 location = glGetUniformLocation(rendererId_, name.c_str());
+	if (location == -1)
+	{
+		std::cout << "ERROR: Uniform " << name << " does not exist\n";
+	}
+	uniformLocationCache_[name] = location;
+	return location;
 }
 
 bool Shader::CheckStatus(uint32 program, PFNGLGETSHADERIVPROC getIVFunction, uint32 statusToCheck, PFNGLGETPROGRAMINFOLOGPROC getInfoLogFunc)
@@ -103,11 +154,12 @@ bool Shader::CheckLinkingStatus(const uint32& program)
 }
 
 
-uint32 Shader::createShader(uint32 shaderType, const char* shaderCode)
+uint32 Shader::createShader(uint32 shaderType, const std::string& shaderCode)
 {
 	// Create the shader
 	uint32 shaderProgram = glCreateShader(shaderType);
-	glShaderSource(shaderProgram, 1, &shaderCode, NULL);
+	const char* src = shaderCode.c_str();
+	glShaderSource(shaderProgram, 1, &src, NULL);
 	glCompileShader(shaderProgram);
 
 	// Log error if compilation failed and  abort.
