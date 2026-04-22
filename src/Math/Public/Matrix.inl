@@ -82,6 +82,24 @@ namespace RiseEngine::Math
 		return TMatrix(VecZero, VecZero, VecZero, VecZero, zero, zero, zero, zero); // TODO: could be written in a cleaner way.
 	}
 
+	template <typename T>
+	TMatrix<T> TMatrix<T>::MakeTranslation(const TMatrix<T>& m, const TVector<T>& v)
+	{
+		TMatrix<T> result = TMatrix<T>::MakeIdentity();
+		result.M[3][0] = v.X;
+		result.M[3][1] = v.Y;
+		result.M[3][2] = v.Z;
+		return result;
+		/*
+		* When testing, you should multiply a vector4 (the vertex location, or whatever)
+		* by this matrix.
+		* Assuming you have a matrix4 R and a Vector4 T the result of the multiplication should be:
+		*
+		* [(rx + tx)	(ry + ty)		(rz + tz)		1]
+		*
+		*/
+	}
+
 	template<typename T>
 	TMatrix<T> TMatrix<T>::MakeRotation(T InRotationX, T InRotationY, T InRotationZ)
 	{
@@ -115,8 +133,8 @@ namespace RiseEngine::Math
 		const T s = std::sin(InAngle);
 
 		const TVector<T> line0 = { static_cast<T>(1), static_cast<T>(0), static_cast<T>(0) };
-		const TVector<T> line1 = { static_cast<T>(0),		c,			-s };
-		const TVector<T> line2 = { static_cast<T>(0),		s,			 c };
+		const TVector<T> line1 = { static_cast<T>(0),		c,			-s /* positive? GEA book*/};
+		const TVector<T> line2 = { static_cast<T>(0),		s/* negative? GEA book*/,			 c };
 		const TVector<T> zero = TVector<T>::ZeroVector();
 		// Last column is 0,0,0,1.
 		return TMatrix<T>(line0, line1, line2, zero);
@@ -128,9 +146,9 @@ namespace RiseEngine::Math
 		const T c = std::cos(InAngle);
 		const T s = std::sin(InAngle);
 
-		const TVector<T> line0 = {		c,			  static_cast<T>(0),		s };
+		const TVector<T> line0 = {		c,			  static_cast<T>(0),		s /* negative? GEA book*/ };
 		const TVector<T> line1 = { static_cast<T>(0), static_cast<T>(1),		static_cast<T>(0) };
-		const TVector<T> line2 = {		-s,			  static_cast<T>(0),		c};
+		const TVector<T> line2 = {		-s/* positive? GEA book*/,			  static_cast<T>(0),		c};
 		const TVector<T> zero = TVector<T>::ZeroVector();
 		// Last column is 0,0,0,1.
 		return TMatrix<T>(line0, line1, line2, zero);
@@ -142,12 +160,37 @@ namespace RiseEngine::Math
 		const T c = std::cos(InAngle);
 		const T s = std::sin(InAngle);
 
-		const TVector<T> line0 = { c,					   -s,				static_cast<T>(0) };
-		const TVector<T> line1 = { s,						c,				static_cast<T>(0) };
+		const TVector<T> line0 = { c,					   /* positive? GEA book*/-s,				static_cast<T>(0) };
+		const TVector<T> line1 = { /* negative? GEA book*/s,						c,				static_cast<T>(0) };
 		const TVector<T> line2 = { static_cast<T>(0), static_cast<T>(0),	static_cast<T>(1) };
 		const TVector<T> zero = TVector<T>::ZeroVector();
 		// Last column is 0,0,0,1.
 		return TMatrix<T>(line0, line1, line2, zero);
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::MakeScale(const TMatrix<T>& InMatrix, const TVector<T>& InScaling)
+	{
+		TMatrix<T> result = TMatrix<T>::MakeIdentity();
+		result.M[0][0] = InMatrix.X;
+		result.M[1][1] = InMatrix.Y;
+		result.M[2][2] = InMatrix.Z;
+		return result;
+
+		/*
+		* When testing, you should multiply a vector4 (the vertex location, or whatever)
+		* by this matrix.
+		* Assuming you have a matrix4 R and a Vector4 T the result of the multiplication should be:
+		*
+		* [(rx * tx)	(ry * ty)		(rz * tz)		1]
+		* 
+		*/
+	}
+
+	template<typename T>
+	TMatrix<T> TMatrix<T>::LookAt(const TVector<T>& position, const TVector<T>& target, const TVector<T>& up)
+	{
+		// TODO
 	}
 
 	template<typename T>

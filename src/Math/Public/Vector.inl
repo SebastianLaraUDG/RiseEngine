@@ -38,7 +38,7 @@ namespace RiseEngine
         template<typename T>
         TVector<T> TVector<T>::operator/(T s) const
         {
-            s = 1.f / s;
+            s = static_cast<T>(1) / s;
             return TVector<T>(X * s, Y * s, Z * s);
         }
 
@@ -54,11 +54,46 @@ namespace RiseEngine
         template <typename T>
         TVector<T> &TVector<T>::operator/=(T s)
         {
-            s = 1.f / s;
+            s = static_cast<T>(1) / s;
             X *= s;
             Y *= s;
             Z *= s;
             return (*this);
+        }
+
+        template <typename T>
+        TVector<T> TVector<T>::operator-() const
+        {
+            return TVector<T>(-X, -Y, -Z);
+        }
+
+        template <typename T>
+        bool TVector<T>::operator==(const TVector<T>& Other) const
+        {
+            return Equals(Other, DefaultTolerance /* You can change this value if you need to*/
+            );
+        }
+
+        template <typename T>
+        bool TVector<T>::operator!=(const TVector<T>& Other) const
+        {
+            return !Equals(Other, DefaultTolerance /* You can change this value if you need to*/
+            );
+        }
+
+        template <typename T>
+        bool TVector<T>::Equals(const TVector<T>& Other, const T Tolerance) const
+        {
+            return std::abs(X - Other.X) <= Tolerance &&
+                std::abs(Y - Other.Y) <= Tolerance &&
+                std::abs(Z - Other.Z) <= Tolerance;
+        }
+
+        template<typename T>
+        std::ostream& operator<<(std::ostream& os, const TVector<T>& v)
+		{
+            os << "[" << v.x << ", " << v.y << ", " << v.z << "]";
+            return os;
         }
 
         template <typename T>
@@ -118,7 +153,7 @@ namespace RiseEngine
 
 
         template<typename T>
-        inline T TVector<T>::DotProduct(const TVector<T>& A, const TVector<T>& B)
+        inline constexpr T TVector<T>::DotProduct(const TVector<T>& A, const TVector<T>& B)
         {
 			return A.X * B.X + A.Y * B.Y + A.Z * B.Z;
         }
@@ -151,6 +186,27 @@ namespace RiseEngine
             return A - Project(A, B);
         }
 
+        template <typename T>
+        constexpr T TVector<T>::Distance(const TVector<T>& A, const TVector<T>& B)
+        {
+            return sqrt(DistanceSquared(A, B));
+        }
+
+        template <typename T>
+        constexpr T TVector<T>::DistanceSquared(const TVector<T>& A, const TVector<T>& B)
+        {
+            return ( (B.X - A.X) * (B.X - A.X) ) + ( (B.Y - A.Y) * (B.Y - A.Y) ) + ( (B.Z - A.Z) * (B.Z - A.Z) );
+        }
+
+        template<typename T>
+        constexpr T TVector<T>::FindAngle(const TVector<T>& A, const TVector<T>& B)
+        {
+            return (
+                (A.SquaredMagnitude() + B.SquaredMagnitude() - (A - B).SquaredMagnitude()) /
+                (2 * A.Magnitude() * B.Magnitude())
+                );
+        }
+
         template<typename T>
         inline TVector<T> TVector<T>::ZeroVector()
         {
@@ -160,19 +216,19 @@ namespace RiseEngine
         template<typename T>
         inline TVector<T> TVector<T>::UnitVectorX()
         {
-            return TVector((T)1, (T)0, (T)0);
+            return TVector(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0));
         }
 
         template<typename T>
         inline TVector<T> TVector<T>::UnitVectorY()
         {
-            return TVector((T)0, (T)1, (T)0);
+            return TVector(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0));
         }
 
         template<typename T>
         inline TVector<T> TVector<T>::UnitVectorZ()
         {
-			return TVector((T)0, (T)0, (T)1);
+			return TVector(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1));
         }
     }
 }

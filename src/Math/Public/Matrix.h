@@ -1,11 +1,10 @@
 #pragma once
-
 #include <type_traits>
 #include "Vector.h"
 
 namespace RiseEngine::Math
 {
-
+	template<typename T> struct TVector;
 	/// @brief 4X4 Matrix. Row-major.
 	template<typename T>
 	struct alignas(16) TMatrix
@@ -19,6 +18,16 @@ namespace RiseEngine::Math
 
 		/// @brief Represents the length of each dimension (row and column).
 		static constexpr int32 Dimension = 4;
+
+	private:
+		/*
+		T* pm = &M[0][0];
+		assert(&pm[0] == &M[0][0]);
+		assert(&pm[1] == &M[0][1]);
+		assert(&pm[2] == &M[0][2]);
+		assert(&pm[3] == &M[0][3]);
+		*/
+	public:
 
 		// Constructors.
 
@@ -67,6 +76,17 @@ namespace RiseEngine::Math
 		// Construct a matrix whose elements are all zeros.
 		static TMatrix<T> Zero();
 
+		// Translation matrix.
+
+		/*
+		* Build a matrix translated by the vector v.
+		* NOTE: this does NOT apply the translation to the supplied matrix, only builds the translation matrix.
+		* @param m - The matrix to apply transformation to.
+		* @param v - The translation vector.
+		* @return The supplied matrix translated by the vector v.
+		*/
+		[[nodiscard]] static TMatrix<T> MakeTranslation(const TMatrix<T>& m, const TVector<T>& v);
+
 		/* Rotation functions. */
 
 		/**
@@ -105,6 +125,18 @@ namespace RiseEngine::Math
 		*/
 		[[nodiscard]] static TMatrix<T> MakeRotationZ(T InRadians);
 
+		// Scale functions
+
+		/*
+		* Build a matrix scaled by the vector v.
+		* NOTE: this does NOT apply scaling to the original matrix.
+		* @param m - The matrix to apply scaling to.
+		* @param v - A vector representin the scaling in each axis.
+		* @return The supplied matrix scaled by the vector v.
+		*/
+		[[nodiscard]] static TMatrix<T> MakeScale(const TMatrix<T>& InMatrix, const TVector<T>& InScaling);
+
+		[[nodiscard]] static TMatrix<T> LookAt(const TVector<T>& position, const TVector<T>& target, const TVector<T>& up);
 
 		/// <summary>
 		/// Print the whole matrix.
