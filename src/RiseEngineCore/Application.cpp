@@ -15,9 +15,6 @@ using Application = RiseEngine::Application;
 
 Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0)
 {
-	// Create renderer
-	renderer_ = new Renderer();
-
 	// Initialize GLFW.
 	if (!glfwInit())
 	{
@@ -25,23 +22,6 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-
-	// Configure.
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	// Create window
-	window_ = glfwCreateWindow(width, height, title, NULL, NULL);
-
-	// OPTIONAL Get window frame size: glfwGetFramebufferSize(window,)
-
-	// Set context.
-	glfwMakeContextCurrent(window_);
-
-	// Set callback for the frambebuffer size.
-	glfwSetFramebufferSizeCallback(window_, framebuffer_size_callback);
-
 	
 	window_ = std::make_unique<Window>(windowWidth, windowHeight, title);
 
@@ -53,7 +33,6 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	glfwSetWindowUserPointer(window_, this);
 
 	renderer_ = std::make_unique<Renderer>();
 
@@ -65,7 +44,7 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 	);
 
 
-	glEnable(GL_DEPTH_TEST);
+	// glEnable(GL_DEPTH_TEST);
 
 	vao = std::make_unique<VAO>();
 	vbo = std::make_unique<VBO>();
@@ -89,27 +68,7 @@ Application::~Application()
 
 
 void Application::Run()
-{	
-	triangleShader = new Shader(
-		"../Rendering/Assets/Shaders/Basic2DTriangle/VertexShader.glsl",
-		"../Rendering/Assets/Shaders/Basic2DTriangle/FragmentShader.glsl"
-		);
-	
-	glGenVertexArrays(1, &VAO_);
-	glGenBuffers(1, &VBO_);
-	// Binding
-	glBindVertexArray(VAO_);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VERTICES_DATA), VERTICES_DATA, GL_STATIC_DRAW);
-
-	// Position attribute
-	int32 stride = sizeof(float) * DATA_ROW_SIZE;
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
-	glEnableVertexAttribArray(0);
-	// Color attribute
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
+{
 	// Loop
 	while (!glfwWindowShouldClose(window_.get()->GetGLFWWindow()))
 	{
@@ -119,8 +78,6 @@ void Application::Run()
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
-	glDeleteVertexArrays(1, &VAO_);
-	glDeleteBuffers(1, &VBO_);
 }
 
 void Application::Update()

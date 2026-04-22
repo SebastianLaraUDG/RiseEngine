@@ -84,12 +84,6 @@ void Shader::LoadShader(const std::string& vertexPath, const std::string& fragme
 	// Delete the shaders as they're linked into our program now and no longer necessary
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
-	use();
-}
-
-Shader::~Shader()
-{
-	glDeleteProgram(rendererId_);
 }
 
 void Shader::Bind() const
