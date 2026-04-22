@@ -99,6 +99,9 @@
     <ClInclude Include="Core\FileSystem.hpp">
       <Filter>Header Files\Core\FileSystem</Filter>
     </ClInclude>
+    <ClInclude Include="..\Rise.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
