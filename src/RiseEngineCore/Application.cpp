@@ -13,6 +13,10 @@ TODO:
 */
 using Application = RiseEngine::Application;
 
+Application::Application() : Application(800, 600, "Rise Engine")
+{
+}
+
 Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0)
 {
 	// Initialize GLFW.
