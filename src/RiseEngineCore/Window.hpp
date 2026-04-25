@@ -1,9 +1,7 @@
 #pragma once
+#pragma warning(disable : 4251) // Remove warning C4251: class 'std::unique_ptr<...>' needs to have dll-interface to be used by clients of class '...'. This is because the unique_ptr is not exported from the DLL, but it is used in the public interface of the Window class. To fix this, we can either export the unique_ptr or we can use a raw pointer instead.
 #include <memory>
-// #include <vendor/OpenGL/GLEW/include/GL/glew.h> // Included here to prevent glew.h(85,1): error C1189: #error:  gl.h included before glew.h
-// #include <vendor/OpenGL/glad/include/glad/glad.h>
-// #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
-// #include <RiseEngineCore/InputManager.hpp>
+#include <RiseEngineCore/Core/CoreTypes.hpp>
 #include "RiseEngine.hpp"
 
 struct GLFWwindow;
