@@ -6,8 +6,8 @@
 */
 
 // Collection of all math-related libraries.
-#include "Public/Vector.h"
-#include "Public/Matrix.h"
+#include "Public/Vector.hpp"
+#include "Public/Matrix.hpp"
 
 // Forward declaration of concrete types.
 namespace RiseEngine::Math

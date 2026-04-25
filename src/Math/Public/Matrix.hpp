@@ -1,6 +1,5 @@
 #pragma once
 #include <type_traits>
-#include "Vector.h"
 
 namespace RiseEngine::Math
 {
