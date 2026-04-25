@@ -35,8 +35,6 @@ public:
 	*/
 	void SetRenderingMode(uint32 mode, uint32 face);
 
-	// Wrapper because I am going to switch from glew to glad and I dont know if it is gonna be different.
-	// TODO: remove if unnecessary.
 	void SetClearColor(f32 r, f32 g, f32 b, f32 a);
 private:
 };

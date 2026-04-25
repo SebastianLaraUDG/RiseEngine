@@ -1,10 +1,10 @@
 #include "Application.hpp"
+#include <glad/glad.h>
 #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 #include "Rendering/include/Renderer.hpp"
 #include <Rendering/include/Shader.hpp>
 #include "Core/FileSystem.hpp"
 #include <iostream>
-
 /*
 TODO:
 * Set ESCAPE key to close window.
@@ -21,18 +21,9 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	
+
+	// This initializes GLAD context and loads all OpenGL function pointers. Note that GLAD should be initialized after creating a window and making its context current.
 	window_ = std::make_unique<Window>(windowWidth, windowHeight, title);
-
-
-	// Init GLEW.
-	// if (glewInit() != GLEW_OK)
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLEW! \n";
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
 
 	renderer_ = std::make_unique<Renderer>();
 

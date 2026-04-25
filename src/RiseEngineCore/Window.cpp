@@ -3,6 +3,7 @@
 #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 #include <RiseEngineCore/InputManager.hpp>
 #include <iostream>
+#include <Rendering/include/GLErrorLibrary.hpp>
 
 Window::Window()
 {
@@ -22,14 +23,14 @@ Window::~Window()
 
 void Window::SwapBuffers()
 {
-	/* Swap front and back buffers */
+	// Swap front and back buffers
 	// glfwSwapBuffers(glfwWindow_.get());
 	glfwSwapBuffers(glfwWindow_);
 }
 
 void Window::PollEvents()
 {
-	/* Poll for and process events */
+	// Poll for and process events
 	glfwPollEvents();
 }
 
@@ -73,9 +74,16 @@ void Window::SetupWindow(int32 width, int32 height, const char* title)
 	glfwMakeContextCurrent(glfwWindow_);
 	glfwSetFramebufferSizeCallback(glfwWindow_, ResizeCallback);
 
-	// Viewport.
-	glViewport(0, 0, width, height);
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD! \n";
+		// glfwTerminate(); I am not sure if this is necessary, since the destructor of the Application class will call glfwTerminate() when the window object goes out of scope. However, it is generally a good practice to clean up resources as soon as they are no longer needed, so I will leave it here for now.
+		exit(EXIT_FAILURE);
+	}
 
+	// Viewport.
+	glViewport(0, 0, width, height); // Crash HERE
+	
 #if _DEBUG
 	// Print OpenGL info.
 	PrintOpenGLVersion();

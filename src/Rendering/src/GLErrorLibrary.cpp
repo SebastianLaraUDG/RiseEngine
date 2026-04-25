@@ -1,5 +1,4 @@
 #include <Rendering/include/GLErrorLibrary.hpp>
-// #include "vendor/OpenGL/GLEW/include/GL/glew.h
 #include <vendor/OpenGL/glad/include/glad/glad.h>
 #include <iostream>
 
