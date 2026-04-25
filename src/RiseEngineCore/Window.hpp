@@ -26,7 +26,7 @@ public:
 	inline GLFWwindow* const GetGLFWWindow() const { return glfwWindow_; }
 
 private:
-	void SetupWindow(int32 width = 600, int32 height = 400, const char* title = "Insert name application");
+	void SetupWindow(int32 width, int32 height, const char* title);
 
 private:
 	// std::unique_ptr<GLFWwindow> glfwWindow_;
