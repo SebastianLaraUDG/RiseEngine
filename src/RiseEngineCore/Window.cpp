@@ -5,9 +5,8 @@
 #include <iostream>
 #include <Rendering/include/GLErrorLibrary.hpp>
 
-Window::Window()
+Window::Window() :Window(720, 600, "Rise Engine")
 {
-	SetupWindow();
 }
 
 Window::Window(int32 width, int32 height, const char* title)
@@ -82,7 +81,7 @@ void Window::SetupWindow(int32 width, int32 height, const char* title)
 	}
 
 	// Viewport.
-	glViewport(0, 0, width, height); // Crash HERE
+	glViewport(0, 0, width, height);
 	
 #if _DEBUG
 	// Print OpenGL info.
