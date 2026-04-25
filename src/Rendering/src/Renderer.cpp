@@ -3,6 +3,7 @@
 #include <Rendering/include/Shader.hpp>
 #include <Rendering/include/VAO.hpp>
 #include <Rendering/include/VBO.hpp>
+#include <glad/glad.h>
 
 Renderer::Renderer()
 {
@@ -33,14 +34,14 @@ void Renderer::Draw(const VAO& vao, const VBO& vbo, const Shader& shader) const
 {
 	shader.Bind();
 	vao.Bind();
-	vbo.Bind();
+	vbo.Bind(GL_ARRAY_BUFFER);
 	glDrawArrays(GL_TRIANGLES, 0, 3); // Simple triangle, temporal.
 	glCheckError();
 }
 
-void Renderer::Clear(RiseEngine::Rendering::ClearFlags clearFlags) const
+void Renderer::Clear(uint32 mask) const
 {
-	glClear(clearFlags);
+	glClear(mask);
 }
 
 void Renderer::SetCapacityEnabled(uint32 capacity, bool bNewEnabled)

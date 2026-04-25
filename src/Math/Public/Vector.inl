@@ -1,4 +1,4 @@
-#include "Vector.h"
+#include "Vector.hpp"
 #include <cmath>
 namespace RiseEngine
 {
@@ -211,6 +211,12 @@ namespace RiseEngine
         inline TVector<T> TVector<T>::ZeroVector()
         {
             return TVector(static_cast<T>(0), static_cast<T>(0), static_cast<T>(0));
+        }
+
+        template<typename T>
+        inline TVector<T> TVector<T>::OneVector()
+        {
+            return TVector(static_cast<T>(1), static_cast<T>(1), static_cast<T>(1));
         }
 
         template<typename T>

@@ -1,6 +1,6 @@
 #pragma once
 #include "RiseEngineCore/Core/CoreCommon.hpp"
-#include <vendor/OpenGL/GLEW/include/GL/glew.h>
+#include <functional>
 #include <unordered_map>
 #include <string>
 
@@ -29,7 +29,7 @@ public:
 	void SetUniform(const std::string& name, T v0, T v1, T v2, T v3);
 	
 private:
-		
+
 	/// <summary>
 	/// Check status of provided program and functions (e.g. a shader and compilation status or a program and linking status).
 	/// </summary>
@@ -38,7 +38,7 @@ private:
 	/// <param name="statusToCheck">GL_COMPILE_STATUS, GL_LINK_STATUS, etc.</param>
 	/// <param name="getInfoLogFunc">glGetShaderInfoLog, glGetProgramInfoLog, etc.</param>
 	/// <returns></returns>
-	static bool CheckStatus(uint32 program, PFNGLGETSHADERIVPROC getIVFunction,uint32 statusToCheck, PFNGLGETPROGRAMINFOLOGPROC getInfoLogFunc);
+	static bool CheckStatus(uint32 program, std::function<void(uint32, uint32, int32*)> getIVFunction, uint32 statusToCheck, std::function<void(uint32, int32, int32*, char*)> getInfoLogFunc);
 	
 	/// <summary>
 	/// Check compilation status of a shader. Logs error if compilation failed.
@@ -84,6 +84,8 @@ private:
 	mutable std::unordered_map<std::string, int32> uniformLocationCache_;
 };
 
+/*
+
 // Generals.
 template<typename T>
 inline void Shader::SetUniform(const std::string& name, T v0)
@@ -106,7 +108,7 @@ inline void Shader::SetUniform(const std::string& name, T v0, T v1, T v2, T v3)
 	//
 }
 
-/* Integer specializations. */
+// Integer specializations.
 template <>
 inline void Shader::SetUniform<int32>(const std::string& name, int32 v0)
 {
@@ -131,7 +133,7 @@ inline void Shader::SetUniform<int32>(const std::string& name, int32 v0, int32 v
 	glUniform4i(GetUniformLocation(name.c_str()), v0, v1, v2, v3);
 }
 
-/* Float specializations. */
+ // Float specializations.
 
 template <>
 inline void Shader::SetUniform<f32>(const std::string& name, f32 v0)
@@ -156,3 +158,4 @@ inline void Shader::SetUniform<f32>(const std::string& name, f32 v0, f32 v1, f32
 {
 	glUniform4f(GetUniformLocation(name.c_str()), v0, v1, v2, v3);
 }
+*/

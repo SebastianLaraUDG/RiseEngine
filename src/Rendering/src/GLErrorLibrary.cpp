@@ -1,9 +1,9 @@
 #include <Rendering/include/GLErrorLibrary.hpp>
-#include "vendor/OpenGL/GLEW/include/GL/glew.h"
+#include <vendor/OpenGL/glad/include/glad/glad.h>
 #include <iostream>
 
 
-uint32 glCheckError_(const char* file, int line)
+uint32 glCheckError_(const char* file, int32 line)
 {
     uint32 errorCode;
     while ((errorCode = glGetError()) != GL_NO_ERROR)

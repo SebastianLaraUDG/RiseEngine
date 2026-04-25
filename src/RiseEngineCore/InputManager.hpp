@@ -10,12 +10,18 @@ enum class MouseDebugMode
 	MousePosition
 };
 
+
+struct GLFWwindow;
+
 // TODO: make this class a singleton?
 class InputManager
 {
 public:
 	/*
 	* @brief Set input mode for the specified window.
+	* @param Window
+	* @param mode - GLFW_CURSOR commonly.
+	* @param value - GLFW_CURSOR_DISABLED or GLFW_CURSOR_NORMAL commonly.
 	*/
 	explicit InputManager(GLFWwindow* window, int32 mode, int32 value);
 	~InputManager();

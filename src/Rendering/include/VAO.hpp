@@ -1,6 +1,5 @@
 #pragma once
 #include "RiseEngineCore/Core/CoreTypes.hpp"
-#include <vendor/OpenGL/GLEW/include/GL/glew.h>
 
 class VAO
 {
@@ -21,7 +20,7 @@ public:
 	* @param normalized Whether fixed-point data values should be normalized (GL_TRUE) or converted directly as fixed-point values (GL_FALSE) when they are accessed.
 	* @param offset Specifies a offset of the first component of the first generic vertex attribute in the array in the data store of the buffer currently bound to the GL_ARRAY_BUFFER target. Remember to multiply by sizeof(data_type).
 	*/
-	void SetLayout(const int32 rowLength, const int32 index, const int32 size, const uint32 type = GL_FLOAT, const uint8 normalized = GL_FALSE, const void* offset = (void*)0) const;
+	void SetLayout(const int32 rowLength, const int32 index, const int32 size, const uint32 type, const uint8 normalized, const void* offset = (void*)0) const;
 
 private:
 	/* @brief Returns the size in bytes of the specified OpenGL data type. This is used to calculate the stride and offset when setting the vertex attribute pointers.

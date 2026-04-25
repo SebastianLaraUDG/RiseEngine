@@ -1,5 +1,5 @@
 #include <Rendering/include/VBO.hpp>
-
+#include <glad/glad.h>
 
 VBO::VBO() : target_(0)
 {
@@ -20,4 +20,10 @@ void VBO::Bind(const uint32 target) const
 void VBO::Unbind() const
 {
 	glBindBuffer(target_, 0);
+}
+
+void VBO::SetDataRaw(const uint32 target, const void* data, uint32 sizeBytes, uint32 usage)
+{
+	Bind(target);
+	glBufferData(target, sizeBytes, data, usage);
 }

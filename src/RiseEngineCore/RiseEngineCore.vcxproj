@@ -56,17 +56,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;RISE_ENGINE_BUILD_DLL;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RISE_ENGINE_BUILD_DLL;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\vendor\OpenGL\GLEW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Gdi32.lib;Shell32.lib;User32.lib;opengl32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\vendor\OpenGL\GLFW\lib-vc2022;$(ProjectDir)..\vendor\OpenGL\GLEW\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Gdi32.lib;Shell32.lib;User32.lib;opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\vendor\OpenGL\GLFW\lib-vc2022;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -75,17 +75,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;RISE_ENGINE_BUILD_DLL;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RISE_ENGINE_BUILD_DLL;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\vendor\OpenGL\GLEW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Gdi32.lib;Shell32.lib;User32.lib;opengl32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\vendor\OpenGL\GLFW\lib-vc2022;$(ProjectDir)..\vendor\OpenGL\GLEW\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Gdi32.lib;Shell32.lib;User32.lib;opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\vendor\OpenGL\GLFW\lib-vc2022;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -96,11 +96,12 @@
     <ClInclude Include="..\Rendering\include\VAO.hpp" />
     <ClInclude Include="..\Rendering\include\VBO.hpp" />
     <ClInclude Include="..\Rise.hpp" />
+    <ClInclude Include="..\vendor\OpenGL\glad\include\glad\glad.h" />
+    <ClInclude Include="..\vendor\OpenGL\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Core\CoreCommon.hpp" />
     <ClInclude Include="Core\CoreTypes.hpp" />
     <ClInclude Include="Core\FileSystem.hpp" />
-    <ClInclude Include="GLFlags.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="RiseEngine.hpp" />
     <ClInclude Include="Window.hpp" />
@@ -111,14 +112,11 @@
     <ClCompile Include="..\Rendering\src\Shader.cpp" />
     <ClCompile Include="..\Rendering\src\VAO.cpp" />
     <ClCompile Include="..\Rendering\src\VBO.cpp" />
+    <ClCompile Include="..\vendor\OpenGL\glad\src\glad.c" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Core\FileSystem.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\FragmentShader.glsl" />
-    <None Include="..\Rendering\Assets\Shaders\Basic2DTriangle\VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <glad/glad.h>
 
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) : rendererId_(0)
 {
@@ -113,7 +114,7 @@ int32 Shader::GetUniformLocation(const std::string& name) const
 	return location;
 }
 
-bool Shader::CheckStatus(uint32 program, PFNGLGETSHADERIVPROC getIVFunction, uint32 statusToCheck, PFNGLGETPROGRAMINFOLOGPROC getInfoLogFunc)
+bool Shader::CheckStatus(uint32 program, std::function<void(uint32, uint32, int32*)> getIVFunction, uint32 statusToCheck, std::function<void(uint32, int32, int32*, char*)> getInfoLogFunc)
 {
 	int32 status;
 	getIVFunction(program, statusToCheck, &status);
