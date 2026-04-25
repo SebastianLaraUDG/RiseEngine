@@ -10,7 +10,7 @@ InputManager::InputManager(GLFWwindow* window, const int32 mode, const int32 val
 	glfwSetCursorPosCallback(window, cursorPosCallback);
 	// TODO: glfwSetScrollCallback(window,)
 
-	// Set cursor default position in the middle of the window.
+	// Set cursor default position in the center of the window.
 	int32 windowWidth, windowHeight;
 	glfwGetWindowSize(window, &windowWidth, &windowHeight);
 	mouseX_ = static_cast<f64>(windowWidth) * 0.5;
@@ -31,13 +31,25 @@ void InputManager::HandleMouseMovement(f64 xPos, f64 yPos, GLFWwindow* window)
 	mouseX_ = xPos;
 	mouseY_ = yPos;
 
-	// TODO: PARAM ALL this:
-
+#if _DEBUG
 	// Creamos un string con el formato deseado
-	//char title[150]{};
-	//sprintf_s(title, "RiseEngine | Mouse: %.1f, %.1f, remove this in %s, %d", mouseX_, mouseY_, __FILE__, __LINE__); // Print current mouse values.
-	//sprintf_s(title, "RiseEngine | Mouse Offset: %.1f, %.1f, remove this in %s, %d", xoffset, yoffset, __FILE__, __LINE__); // Print offset values.
+	char title[150]{};
+	
+	switch (mouseDebugMode)
+	{
+	case MouseDebugMode::None: break;
 
-	// Actualizamos el titulo de la ventana
-	// glfwSetWindowTitle(window, title);
+	case MouseDebugMode::MouseOffset:
+		sprintf_s(title, "RiseEngine | Mouse Offset: %.1f, %.1f, remove this in %s, %d", xoffset, yoffset, __FILE__, __LINE__); // Print offset values.
+		break;
+	case MouseDebugMode::MousePosition:
+		sprintf_s(title, "RiseEngine | Mouse: %.1f, %.1f, remove this in %s, %d", mouseX_, mouseY_, __FILE__, __LINE__); // Print current mouse values.
+		break;
+	}
+
+	if (mouseDebugMode != MouseDebugMode::None)
+	{
+		glfwSetWindowTitle(window, title);
+	}
+#endif
 }
