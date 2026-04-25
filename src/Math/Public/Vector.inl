@@ -214,6 +214,12 @@ namespace RiseEngine
         }
 
         template<typename T>
+        inline TVector<T> TVector<T>::OneVector()
+        {
+            return TVector(static_cast<T>(1), static_cast<T>(1), static_cast<T>(1));
+        }
+
+        template<typename T>
         inline TVector<T> TVector<T>::UnitVectorX()
         {
             return TVector(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0));

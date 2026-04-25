@@ -1,5 +1,6 @@
 #include <Rendering/include/VAO.hpp>
-#include <GL/glew.h>
+// #include <GL/glew.h>
+#include <vendor/OpenGL/glad/include/glad/glad.h>
 
 VAO::VAO()
 {

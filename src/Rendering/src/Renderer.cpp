@@ -38,9 +38,9 @@ void Renderer::Draw(const VAO& vao, const VBO& vbo, const Shader& shader) const
 	glCheckError();
 }
 
-void Renderer::Clear(RiseEngine::Rendering::ClearFlags clearFlags) const
+void Renderer::Clear(uint32 mask) const
 {
-	glClear(clearFlags);
+	glClear(mask);
 }
 
 void Renderer::SetCapacityEnabled(uint32 capacity, bool bNewEnabled)

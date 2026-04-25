@@ -1,6 +1,7 @@
 #pragma once
 #include "RiseEngineCore/Core/CoreTypes.hpp"
-#include <vendor/OpenGL/GLEW/include/GL/glew.h>
+// #include <vendor/OpenGL/GLEW/include/GL/glew.h>
+#include <vendor/OpenGL/glad/include/glad/glad.h>
 
 class VAO
 {

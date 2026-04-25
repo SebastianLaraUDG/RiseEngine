@@ -13,8 +13,9 @@ namespace RiseEngine
 	class RISE_API Application
 	{
 	public:
-		Application(int32 windowWidth, int32 windowHeight, const char* title);
-		~Application();
+		Application();
+		explicit Application(int32 windowWidth, int32 windowHeight, const char* title);
+		virtual ~Application();
 
 		void Run();
 	protected:

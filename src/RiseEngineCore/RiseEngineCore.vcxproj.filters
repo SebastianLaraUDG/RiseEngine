@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Core\Window\Input">
       <UniqueIdentifier>{af1ebd6d-ff05-4278-86c0-ad56f214174b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Vendor">
+      <UniqueIdentifier>{72c94747-b44f-47d8-975e-697df392304f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vendor">
+      <UniqueIdentifier>{f0c11f98-b329-4cb2-b705-674a697b138c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -84,9 +90,6 @@
     <ClInclude Include="..\Math\RiseMath.hpp">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="GLFlags.hpp">
-      <Filter>Header Files\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Core\CoreCommon.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -101,6 +104,12 @@
     </ClInclude>
     <ClInclude Include="..\Rise.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\OpenGL\glad\include\glad\glad.h">
+      <Filter>Header Files\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\OpenGL\glad\include\KHR\khrplatform.h">
+      <Filter>Header Files\Vendor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="Core\FileSystem.cpp">
       <Filter>Source Files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\OpenGL\glad\src\glad.c">
+      <Filter>Source Files\Vendor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,34 +1,17 @@
 #include "Window.hpp"
+#include <glad/glad.h>
+#include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
+#include <RiseEngineCore/InputManager.hpp>
 #include <iostream>
+
+Window::Window()
+{
+	SetupWindow();
+}
 
 Window::Window(int32 width, int32 height, const char* title)
 {
-	// Setup window.
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	// OPTIONAL Get window frame size // glfwGetFramebufferSize(window,)
-
-	// Create the glfw window object.
-	glfwWindow_ = glfwCreateWindow(width, height, title, NULL, NULL);
-
-	// glfwMakeContextCurrent(glfwWindow_.get());
-	// glfwSetFramebufferSizeCallback(glfwWindow_.get(), ResizeCallback);
-	glfwMakeContextCurrent(glfwWindow_);
-	glfwSetFramebufferSizeCallback(glfwWindow_, ResizeCallback);
-
-	// Viewport.
-	glViewport(0, 0, width, height);
-
-#if _DEBUG
-	// Print OpenGL info.
-	PrintOpenGLVersion();
-#endif
-
-	// Create the input manager.
-	inputManager_ = std::make_unique<InputManager>(glfwWindow_,GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	// TODO: setup input manager
+	SetupWindow(width, height, title);
 }
 
 Window::~Window()
@@ -71,4 +54,34 @@ void Window::PrintOpenGLVersion()
 	std::cout << "Renderer: " << glGetString(GL_RENDERER) << "\n";
 	// Print shading language
 	std::cout << "Shading language: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << "\n";
+}
+
+void Window::SetupWindow(int32 width, int32 height, const char* title)
+{
+	// Setup window.
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	// OPTIONAL Get window frame size // glfwGetFramebufferSize(window,)
+
+	// Create the glfw window object.
+	glfwWindow_ = glfwCreateWindow(width, height, title, NULL, NULL);
+
+	// glfwMakeContextCurrent(glfwWindow_.get());
+	// glfwSetFramebufferSizeCallback(glfwWindow_.get(), ResizeCallback);
+	glfwMakeContextCurrent(glfwWindow_);
+	glfwSetFramebufferSizeCallback(glfwWindow_, ResizeCallback);
+
+	// Viewport.
+	glViewport(0, 0, width, height);
+
+#if _DEBUG
+	// Print OpenGL info.
+	PrintOpenGLVersion();
+#endif
+
+	// Create the input manager.
+	inputManager_ = std::make_unique<InputManager>(glfwWindow_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	// TODO: setup input manager
 }

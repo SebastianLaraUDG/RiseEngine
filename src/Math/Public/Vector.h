@@ -160,9 +160,11 @@ namespace RiseEngine
 
 			[[nodiscard]] inline static TVector<T> ZeroVector();
 			[[nodiscard]] inline static TVector<T> OneVector();
+			/*
 			[[nodiscard]] inline static TVector<T> ForwardVector();
 			[[nodiscard]] inline static TVector<T> UpVector();
 			[[nodiscard]] inline static TVector<T> RightVector();
+			*/
 
 			[[nodiscard]] inline static TVector<T> UnitVectorX();
 			[[nodiscard]] inline static TVector<T> UnitVectorY();

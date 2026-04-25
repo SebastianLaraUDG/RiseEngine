@@ -1,6 +1,7 @@
 #pragma once
 #include "RiseEngineCore/Core/CoreCommon.hpp"
-#include <vendor/OpenGL/GLEW/include/GL/glew.h>
+// #include <vendor/OpenGL/GLEW/include/GL/glew.h>
+#include <vendor/OpenGL/glad/include/glad/glad.h>
 #include <vector>
 
 /*

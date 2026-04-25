@@ -1,6 +1,7 @@
 #include <RiseEngineCore/InputManager.hpp>
 #include <stdio.h>
 #include <string>
+#include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 
 InputManager::InputManager(GLFWwindow* window, const int32 mode, const int32 value)
 {
@@ -16,6 +17,8 @@ InputManager::InputManager(GLFWwindow* window, const int32 mode, const int32 val
 	mouseX_ = static_cast<f64>(windowWidth) * 0.5;
 	mouseY_ = static_cast<f64>(windowHeight) * 0.5;
 }
+
+InputManager::~InputManager() {}
 
 void InputManager::cursorPosCallback(GLFWwindow* window, f64 xpos, f64 ypos)
 {

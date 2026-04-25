@@ -60,7 +60,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\vendor\OpenGL\GLEW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;$(ProjectDir)..\vendor\OpenGL\GLEW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,7 +79,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\;$(ProjectDir)..\vendor\OpenGL\GLEW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;$(ProjectDir)..\vendor\OpenGL\GLEW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -96,11 +96,12 @@
     <ClInclude Include="..\Rendering\include\VAO.hpp" />
     <ClInclude Include="..\Rendering\include\VBO.hpp" />
     <ClInclude Include="..\Rise.hpp" />
+    <ClInclude Include="..\vendor\OpenGL\glad\include\glad\glad.h" />
+    <ClInclude Include="..\vendor\OpenGL\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Core\CoreCommon.hpp" />
     <ClInclude Include="Core\CoreTypes.hpp" />
     <ClInclude Include="Core\FileSystem.hpp" />
-    <ClInclude Include="GLFlags.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="RiseEngine.hpp" />
     <ClInclude Include="Window.hpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="..\Rendering\src\Shader.cpp" />
     <ClCompile Include="..\Rendering\src\VAO.cpp" />
     <ClCompile Include="..\Rendering\src\VBO.cpp" />
+    <ClCompile Include="..\vendor\OpenGL\glad\src\glad.c" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Core\FileSystem.cpp" />
     <ClCompile Include="InputManager.cpp" />

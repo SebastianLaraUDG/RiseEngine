@@ -5,7 +5,6 @@
 #include "Core/FileSystem.hpp"
 #include <iostream>
 
-
 /*
 TODO:
 * Set ESCAPE key to close window.
@@ -27,7 +26,8 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 
 
 	// Init GLEW.
-	if (glewInit() != GLEW_OK)
+	// if (glewInit() != GLEW_OK)
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLEW! \n";
 		glfwTerminate();
@@ -91,7 +91,7 @@ void Application::Update()
 
 void Application::Render() const
 {
-	renderer_->Clear();
+	renderer_->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Draw here
 	shader_->Bind();
