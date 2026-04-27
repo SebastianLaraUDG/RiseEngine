@@ -7,8 +7,53 @@
 #include <Rendering/include/Renderer.hpp>
 #include <Rendering/include/VAO.hpp>
 #include <Rendering/include/VBO.hpp>
+#include <chrono>
 
 #include "RiseEngine.hpp"
+
+/* Camera class, initial abstraction.
+class Camera
+{
+public:
+	Camera(Vector3f location)
+	{
+		transform.location = location;
+		transform.rotation = Vector3f(0.f, 0.f, 0.f);
+
+		target = Vector3f(0.f, 0.f, 0.f);
+		CalculateCameraUp();
+		viewAlpha = 45.f;
+		near = 0.1f;
+		far = 100.f;
+	}
+	struct Transform
+	{
+		Vector3f location;
+		Vector3f rotation; // Should be a quaternion but TODO.
+	};
+
+	Transform transform;
+	Vector3f target;
+	Vector3f direction; // From the camera to the target. NOTE: it is actually pointing in the reverse direction of what it is targeting.
+	Vector3f up; // Camera local up vector.
+	inline static const Vector3f worldUp = Vector3f::UpVector();
+	f32 viewAlpha; // Pyramid aperture.
+	f32 near;
+	f32 far;
+
+	void updateCameraDirection()
+	{
+		direction = (transform.location - target).GetNormal();
+	}
+
+	void CalculateCameraUp()
+	{
+		updateCameraDirection();
+		auto cameraRight = Vector3f::CrossProduct(direction, worldUp);
+		up = Vector3f::CrossProduct(cameraRight, target);
+	}
+};
+*/
 
 namespace RiseEngine
 {
@@ -27,6 +72,7 @@ namespace RiseEngine
 		void ProcessInput();
 
 	protected:
+		void Init(int32 width, int32 height, const char* title);
 		void InitFileSystem();
 
 	private:
@@ -40,6 +86,8 @@ namespace RiseEngine
 		std::unique_ptr<VAO> vao;
 		std::unique_ptr<VBO> vbo;
 
+		// Time management.
+		std::chrono::steady_clock::time_point lastFrame;
 		double deltaTime_; // Time between current frame and last frame.
 	};
 

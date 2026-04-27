@@ -16,44 +16,9 @@ Application::Application() : Application(800, 600, "Rise Engine")
 {
 }
 
-Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0)
+Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0), lastFrame(std::chrono::steady_clock::now())
 {
-	// Initialize GLFW.
-	if (!glfwInit())
-	{
-		std::cout << "GLFW Failed to initialize!\n";
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
-
-	// This initializes GLAD context and loads all OpenGL function pointers. Note that GLAD should be initialized after creating a window and making its context current.
-	window_ = std::make_unique<Window>(windowWidth, windowHeight, title);
-
-	renderer_ = std::make_unique<Renderer>();
-
-	InitFileSystem();
-
-	shader_ = std::make_unique<Shader>(
-		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/VertexShader.glsl").string(),
-		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
-	);
-
-
-	// glEnable(GL_DEPTH_TEST);
-
-	vao = std::make_unique<VAO>();
-	vbo = std::make_unique<VBO>();
-	
-	const std::vector<f32> vertices =
-	{
-		-0.5f, 0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f, 1.0f,
-		0.0f,0.5f,0.0f,				0.0f, 1.0f, 0.0f, 1.0f,
-		0.5f, 0.0f, 0.0f,				0.0f, 0.0f, 1.0f, 1.0f
-	};
-	vbo->SetData<f32>(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-	vao->SetLayout(7, 0, 3, GL_FLOAT, GL_FALSE);
-	vao->SetLayout(7, 1, 4, GL_FLOAT, GL_FALSE, (void*)(3 * sizeof(f32)));
-
+	Init(windowWidth, windowHeight, title);
 }
 
 Application::~Application()
@@ -77,6 +42,12 @@ void Application::Run()
 
 void Application::Update()
 {
+	// Calculate delta time.
+	auto currentFrame = std::chrono::steady_clock::now();
+	std::chrono::duration<f64> elapsed = currentFrame - lastFrame;
+	f64 deltaTime = elapsed.count();
+	lastFrame = currentFrame;
+
 	/*
 	* TODO: the update() list approach is used for now, but since the elements at the
 	* beginning of the list will be updated before the ones at the end, I 
@@ -97,6 +68,45 @@ void Application::ProcessInput()
 {
 	window_->SwapBuffers();
 	window_->PollEvents();	
+}
+
+void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
+{
+	// Initialize GLFW.
+	if (!glfwInit())
+	{
+		std::cout << "GLFW Failed to initialize!\n";
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+
+	// This initializes GLAD context and loads all OpenGL function pointers. Note that GLAD should be initialized after creating a window and making its context current.
+	window_ = std::make_unique<Window>(width, height, title);
+
+	renderer_ = std::make_unique<Renderer>();
+	renderer_->SetCapacityEnabled(GL_DEPTH_TEST, true);
+
+	InitFileSystem();
+
+	shader_ = std::make_unique<Shader>(
+		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/VertexShader.glsl").string(),
+		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
+	);
+
+	vao = std::make_unique<VAO>();
+	vbo = std::make_unique<VBO>();
+
+	const std::vector<f32> vertices =
+	{
+		-0.5f, 0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f, 1.0f,
+		0.0f,0.5f,0.0f,				0.0f, 1.0f, 0.0f, 1.0f,
+		0.5f, 0.0f, 0.0f,				0.0f, 0.0f, 1.0f, 1.0f
+	};
+
+	vbo->SetData<f32>(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
+	vao->SetLayout(7, 0, 3, GL_FLOAT, GL_FALSE);
+	vao->SetLayout(7, 1, 4, GL_FLOAT, GL_FALSE, (void*)(3 * sizeof(f32)));
+
 }
 
 void RiseEngine::Application::InitFileSystem()
