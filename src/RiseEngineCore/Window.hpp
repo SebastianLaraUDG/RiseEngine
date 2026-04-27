@@ -7,6 +7,7 @@
 struct GLFWwindow;
 class InputManager;
 
+// Creating a window initializes the glfw context and GLAD.
 class RISE_API Window
 {
 public:
@@ -22,10 +23,10 @@ public:
 	static void PrintOpenGLVersion();
 
 public:
-	// inline GLFWwindow* GetGLFWWindow() const { return glfwWindow_.get(); }
 	inline GLFWwindow* const GetGLFWWindow() const { return glfwWindow_; }
 
 private:
+	// Initialize glfw context and GLAD.
 	void SetupWindow(int32 width, int32 height, const char* title);
 
 private:

@@ -16,14 +16,12 @@ Window::Window(int32 width, int32 height, const char* title)
 
 Window::~Window()
 {
-	// glfwDestroyWindow(glfwWindow_.get());
 	glfwDestroyWindow(glfwWindow_);
 }
 
 void Window::SwapBuffers()
 {
 	// Swap front and back buffers
-	// glfwSwapBuffers(glfwWindow_.get());
 	glfwSwapBuffers(glfwWindow_);
 }
 
@@ -68,8 +66,6 @@ void Window::SetupWindow(int32 width, int32 height, const char* title)
 	// Create the glfw window object.
 	glfwWindow_ = glfwCreateWindow(width, height, title, NULL, NULL);
 
-	// glfwMakeContextCurrent(glfwWindow_.get());
-	// glfwSetFramebufferSizeCallback(glfwWindow_.get(), ResizeCallback);
 	glfwMakeContextCurrent(glfwWindow_);
 	glfwSetFramebufferSizeCallback(glfwWindow_, ResizeCallback);
 
@@ -90,5 +86,4 @@ void Window::SetupWindow(int32 width, int32 height, const char* title)
 
 	// Create the input manager.
 	inputManager_ = std::make_unique<InputManager>(glfwWindow_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	// TODO: setup input manager
 }
