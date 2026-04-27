@@ -1,5 +1,6 @@
 #pragma once
 #include "RiseEngineCore/Core/CoreCommon.hpp"
+#include <Math/Public/Matrix.hpp>
 #include <functional>
 #include <unordered_map>
 #include <string>
@@ -27,6 +28,9 @@ public:
 
 	template <typename T>
 	void SetUniform(const std::string& name, T v0, T v1, T v2, T v3);
+
+	template <typename T>
+	void SetUniformMat4(const std::string& name, const RiseEngine::Math::TMatrix<T>& mat4) {}
 	
 private:
 
