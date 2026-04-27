@@ -64,6 +64,7 @@ namespace RiseEngine::Math
 	}
 	*/
 
+	///
 	template<typename T>
 	TMatrix<T> TMatrix<T>::MakeIdentity()
 	{
@@ -190,7 +191,60 @@ namespace RiseEngine::Math
 	template<typename T>
 	TMatrix<T> TMatrix<T>::LookAt(const TVector<T>& position, const TVector<T>& target, const TVector<T>& up)
 	{
-		// TODO
+		TMatrix<T> rotationM;
+
+		// Direction or 'forward'
+		// The camera looks INTO the negative Z - axis.
+		// So, the direction vector for the world's Z-axis from the camera's perspective
+		// is from the target to the position.
+		const TVector<T> Dir = (position - target).GetNormal();
+
+		const TVector<T> Right = TVector<T>::CrossProduct(up, Dir).GetNormal();
+		// This calculates the camera's local Y-axis, ensuring it's orthogonal to Dir and Right.
+		const TVector<T> Up = TVector<T>::CrossProduct(Dir, Right).GetNormal();
+
+		rotationM.M[0][0] = Right.X;
+		rotationM.M[0][1] = Right.Y;
+		rotationM.M[0][2] = Right.Z;
+		rotationM.M[1][0] = Up.X;
+		rotationM.M[1][1] = Up.Y;
+		rotationM.M[1][2] = Up.Z;
+		rotationM.M[2][0] = Dir.X;
+		rotationM.M[2][1] = Dir.Y;
+		rotationM.M[2][2] = Dir.Z;
+		rotationM.M[3][3] = 1.f;
+
+		TMatrix<T> translationM = TMatrix<T>::MakeIdentity();
+		translationM.M[0][3] = -position.X; // These values are negative since we want to rotate and translate the world in the opposite direction of where we want the camera to move.
+		translationM.M[1][3] = -position.Y;
+		translationM.M[2][3] = -position.Z;
+		
+		return rotationM * translationM;
+	}
+
+	template<typename T>
+	inline TMatrix<T> TMatrix<T>::MakeFrustumProjection(T fovy, T aspectRatio, T near, T far)
+	{
+		/*
+		T g = static_cast<T>(1) / std::tan(fovy * static_cast<T>(0.5));
+		T k = far / (far - near);
+		return TMatrix<T>(
+			TVector<T>(g / aspectRatio, 0, 0),
+			TVector<T>(0, g, 0),
+			TVector<T>(0, 0, k),
+			TVector<T>(0, 0,
+				// -k * near copilot generated
+				-near * k),
+			0, 0, 1, 0
+		);
+		*/
+		TMatrix<T> result{};
+		result.M[0][0] = static_cast<T>(1) / (aspectRatio * std::tan(fovy / 2));
+		result.M[1][1] = static_cast<T>(1) / std::tan(fovy / 2);
+		result.M[2][2] = -((far + near) / (far - near));
+		result.M[2][3] = -(2 * far * near) / (far - near);
+		result.M[3][2] = -1;
+		return result;
 	}
 
 	template<typename T>

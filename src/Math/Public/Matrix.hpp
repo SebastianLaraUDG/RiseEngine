@@ -135,7 +135,14 @@ namespace RiseEngine::Math
 		*/
 		[[nodiscard]] static TMatrix<T> MakeScale(const TMatrix<T>& InMatrix, const TVector<T>& InScaling);
 
+
+		// Perspectve functions ----------------------------------------------------------------------------------------------------------
+
 		[[nodiscard]] static TMatrix<T> LookAt(const TVector<T>& position, const TVector<T>& target, const TVector<T>& up);
+
+		[[nodiscard]] static TMatrix<T> MakeFrustumProjection(T fovy, T aspectRatio, T near, T far); // Build prspective matrix
+
+		// Logging functions ----------------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Print the whole matrix.
