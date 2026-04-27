@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string>
 #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
+#include <iostream>
 
 InputManager::InputManager(GLFWwindow* window, const int32 mode, const int32 value)
 {
@@ -9,6 +10,7 @@ InputManager::InputManager(GLFWwindow* window, const int32 mode, const int32 val
 	
 	glfwSetWindowUserPointer(window, this);
 	glfwSetCursorPosCallback(window, cursorPosCallback);
+	glfwSetKeyCallback(window, keyCallback);
 	// TODO: glfwSetScrollCallback(window,)
 
 	// Set cursor default position in the center of the window.
@@ -24,6 +26,28 @@ void InputManager::cursorPosCallback(GLFWwindow* window, f64 xpos, f64 ypos)
 {
 	auto instance = static_cast<InputManager*>(glfwGetWindowUserPointer(window)); // TODO: cache in some way?
 	instance->HandleMouseMovement(xpos, ypos, window);
+}
+
+void InputManager::keyCallback(GLFWwindow* window, int32 key, int32 scancode, int32 action, int32 mods)
+{
+	//
+	// The event system I am thinking about is something like this:
+	// DispatchEventPress(key).
+	// DispatchEventRelease(key).
+	//
+
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+	{
+		std::cout<<"w pressed"<<std::endl;
+	}
+	if (key == GLFW_KEY_W && action == GLFW_REPEAT)
+	{
+		std::cout << "w repeated" << std::endl;
+	}
+	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
+	{
+		std::cout << "w released" << std::endl;
+	}
 }
 
 void InputManager::HandleMouseMovement(f64 xPos, f64 yPos, GLFWwindow* window)

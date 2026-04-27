@@ -31,6 +31,7 @@ public:
 
 private:
 	static void cursorPosCallback(GLFWwindow* window, f64 xPos, f64 yPos);
+	static void keyCallback(GLFWwindow* window, int32 key, int32 scancode, int32 action, int32 mods);
 	void HandleMouseMovement(f64 xPos, f64 yPos, GLFWwindow* window);
 
 	f64 mouseX_ = 0.0, mouseY_ = 0.0;
