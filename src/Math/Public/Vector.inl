@@ -220,6 +220,24 @@ namespace RiseEngine
         }
 
         template<typename T>
+        inline TVector<T> TVector<T>::ForwardVector()
+        {
+			return UnitVectorZ();
+		}
+
+        template<typename T>
+        inline TVector<T> TVector<T>::UpVector()
+        {
+            return UnitVectorY();
+        }
+
+        template<typename T>
+        inline TVector<T> TVector<T>::RightVector()
+        {
+			return UnitVectorX();
+        }
+
+        template<typename T>
         inline TVector<T> TVector<T>::UnitVectorX()
         {
             return TVector(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0));
