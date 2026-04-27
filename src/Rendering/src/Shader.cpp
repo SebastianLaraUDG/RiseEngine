@@ -28,7 +28,6 @@ void Shader::LoadShader(const std::string& vertexPath, const std::string& fragme
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
 
-	/* MODERN LAMBDA. TODO: test
 	auto readFile = [](const std::string& path) ->std::string
 		{
 			std::ifstream file(path, std::ios::in);
@@ -43,31 +42,7 @@ void Shader::LoadShader(const std::string& vertexPath, const std::string& fragme
 		};
 	vertexCode = readFile(vertexPath);
 	fragmentCode = readFile(fragmentPath);
-	*/
 
-	// ensure ifstream objects can throw exceptions:
-	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	try
-	{
-		// open files
-		vShaderFile.open(vertexPath);
-		fShaderFile.open(fragmentPath);
-		std::stringstream vShaderStream, fShaderStream;
-		// read file's buffer contents into streams
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-		// close file handlers
-		vShaderFile.close();
-		fShaderFile.close();
-		// convert stream into string
-		vertexCode = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
-	}
-	catch (std::ifstream::failure& e)
-	{
-		std::cout << "ERROR::SHADER::FILE_READ_FAILED: " << e.what() << "\n";
-	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char* fShaderCode = fragmentCode.c_str();
 	// 2. Compile shaders.
@@ -112,6 +87,18 @@ int32 Shader::GetUniformLocation(const std::string& name) const
 	}
 	uniformLocationCache_[name] = location;
 	return location;
+}
+
+template<>
+void Shader::SetUniformMat4<f32>(const std::string& name, const RiseEngine::Math::TMatrix<f32>& mat4)
+{
+	glUniformMatrix4fv(GetUniformLocation(name), 1, GL_TRUE, &mat4.M[0][0]);
+}
+
+template<>
+void Shader::SetUniformMat4<f64>(const std::string& name, const RiseEngine::Math::TMatrix<f64>& mat4)
+{
+	glUniformMatrix4dv(GetUniformLocation(name), 1, GL_TRUE, &mat4.M[0][0]);
 }
 
 bool Shader::CheckStatus(uint32 program, std::function<void(uint32, uint32, int32*)> getIVFunction, uint32 statusToCheck, std::function<void(uint32, int32, int32*, char*)> getInfoLogFunc)
