@@ -87,7 +87,7 @@ void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
 	// This initializes GLAD context and loads all OpenGL function pointers. Note that GLAD should be initialized after creating a window and making its context current.
 	window_ = std::make_unique<Window>(width, height, title);
 
-	switch(currentAPI_)
+	switch(currentRenderingAPI_)
 	{
 		case RenderingAPI::OpenGL:
 			rhi_ = std::make_unique<Rendering::OpenGL::OpenGLRHI>(); // TODO: in the future when I learn DirectX11 and 12 setup in a config or somehow.
