@@ -61,7 +61,7 @@ std::unique_ptr<IShader> OpenGLRHI::CreateShader(const std::string& vertPath, co
 
 std::unique_ptr<IVertexArray> RiseEngine::Rendering::OpenGL::OpenGLRHI::CreateVertexArray()
 {
-	return std::unique_ptr<OpenGLVertexArray>();
+	return std::make_unique<OpenGLVertexArray>();
 }
 
 uint32 OpenGLRHI::TranslatePrimitive(EPrimitiveType primitiveType)

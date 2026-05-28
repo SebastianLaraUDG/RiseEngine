@@ -31,7 +31,7 @@ OpenGLShader::OpenGLShader(const std::string& vertexPath, const std::string& fra
 
 	uint32 vert = CompileShader(GL_VERTEX_SHADER, vertexSource);
 	glCheckError();
-	uint32 frag = CompileShader(GL_FRAGMENT_SHADER, vertexSource);
+	uint32 frag = CompileShader(GL_FRAGMENT_SHADER, fragmentSource);
 	glCheckError();
 
 	id_ = LinkProgram(vert, frag);
