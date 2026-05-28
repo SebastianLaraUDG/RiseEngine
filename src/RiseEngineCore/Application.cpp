@@ -1,16 +1,18 @@
 #include "Application.hpp"
-#include <glad/glad.h>
 #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
-#include "Rendering/include/Renderer.hpp"
-#include <Rendering/include/Shader.hpp>
 #include "Core/FileSystem.hpp"
+#include <Rendering/OpenGL/OpenGLRHI.hpp>
+#include <Rendering/include/Primitives/IShader.hpp>
+#include <Rendering/include/Primitives/IVertexArray.hpp>
+#include <Rendering/include/Primitives/IVertexBuffer.hpp>
 #include <iostream>
 /*
 TODO:
 * Set ESCAPE key to close window.
 * Set TAB key to switch between wireframe and fill mode.
 */
-using Application = RiseEngine::Application;
+
+using namespace RiseEngine;
 
 Application::Application() : Application(800, 600, "Rise Engine")
 {
@@ -57,11 +59,13 @@ void Application::Update()
 
 void Application::Render() const
 {
-	renderer_->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	using namespace RiseEngine::Rendering;
+	rhi_->Clear(EClearFlags::Color | EClearFlags::Depth);
 
 	// Draw here
 	shader_->Bind();
-	renderer_->Draw(*vao, *vbo, *shader_);
+	vao_->Bind();
+	rhi_->DrawPrimitive(3);
 }
 
 void Application::ProcessInput()
@@ -83,18 +87,20 @@ void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
 	// This initializes GLAD context and loads all OpenGL function pointers. Note that GLAD should be initialized after creating a window and making its context current.
 	window_ = std::make_unique<Window>(width, height, title);
 
-	renderer_ = std::make_unique<Renderer>();
-	renderer_->SetCapacityEnabled(GL_DEPTH_TEST, true);
+	switch(currentAPI_)
+	{
+		case RenderingAPI::OpenGL:
+			rhi_ = std::make_unique<Rendering::OpenGL::OpenGLRHI>(); // TODO: in the future when I learn DirectX11 and 12 setup in a config or somehow.
+			break;
+	}
+	rhi_->Init();
 
 	InitFileSystem();
 
-	shader_ = std::make_unique<Shader>(
+	shader_ = rhi_->CreateShader(
 		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/VertexShader.glsl").string(),
 		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
 	);
-
-	vao = std::make_unique<VAO>();
-	vbo = std::make_unique<VBO>();
 
 	const std::vector<f32> vertices =
 	{
@@ -103,10 +109,18 @@ void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
 		0.5f, 0.0f, 0.0f,				0.0f, 0.0f, 1.0f, 1.0f
 	};
 
-	vbo->SetData<f32>(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-	vao->SetLayout(7, 0, 3, GL_FLOAT, GL_FALSE);
-	vao->SetLayout(7, 1, 4, GL_FLOAT, GL_FALSE, (void*)(3 * sizeof(f32)));
+	vbo_ = rhi_->CreateVertexBuffer(vertices.data(), vertices.size() * sizeof(f32));
+	
+	Rendering::VertexLayout layout;
+	layout.stride = 7 * sizeof(f32);
+	layout.attributes =
+	{
+		{0, 3, Rendering::EVertexDataType::Float, false, 0}, // pos
+		{1, 4, Rendering::EVertexDataType::Float, false, 3 * sizeof(f32)} // color.
+	};
 
+	vao_ = rhi_->CreateVertexArray();
+	vao_->SetLayout(layout, *vbo_);
 }
 
 void RiseEngine::Application::InitFileSystem()

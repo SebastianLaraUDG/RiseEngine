@@ -4,9 +4,6 @@
 #include <RiseEngineCore/Core/CoreCommon.hpp>
 #pragma warning(disable : 4251) // Remove warning C4251: class 'std::unique_ptr<...>' needs to have dll-interface to be used by clients of class '...'. This is because the unique_ptr is not exported from the DLL, but it is used in the public interface of the Application class. To fix this, we can either export the unique_ptr or we can use a raw pointer instead.
 #include <RiseEngineCore/Window.hpp>
-#include <Rendering/include/Renderer.hpp>
-#include <Rendering/include/VAO.hpp>
-#include <Rendering/include/VBO.hpp>
 #include <chrono>
 
 #include "RiseEngine.hpp"
@@ -57,6 +54,21 @@ public:
 
 namespace RiseEngine
 {
+	namespace Rendering
+	{
+		class IRHI;
+		class IShader;
+		class IVertexBuffer;
+		class IVertexArray;
+	}
+
+	enum class RenderingAPI
+	{
+		OpenGL,
+		DirectX11,
+		DirectX12,
+		Vulkan // I am scared just by seeing this...
+	};
 
 	class RISE_API Application
 	{
@@ -78,17 +90,15 @@ namespace RiseEngine
 	private:
 
 		std::unique_ptr<Window> window_;
-		std::unique_ptr<Renderer> renderer_;
-
-		std::unique_ptr<Shader> shader_; // The unique global shader of the program.
-
-		/* Temporal, remove. */
-		std::unique_ptr<VAO> vao;
-		std::unique_ptr<VBO> vbo;
+		std::unique_ptr<Rendering::IRHI> rhi_;
+		std::unique_ptr<Rendering::IShader> shader_;
+		std::unique_ptr<Rendering::IVertexBuffer> vbo_;
+		std::unique_ptr<Rendering::IVertexArray> vao_;
+		RenderingAPI currentAPI_ = RenderingAPI::OpenGL; // TODO: In the future (when I implement other apis after OpenGL, read this from a file and switch in Init().
 
 		// Time management.
 		std::chrono::steady_clock::time_point lastFrame;
-		double deltaTime_; // Time between current frame and last frame.
+		f64 deltaTime_; // Time between current frame and last frame.
 	};
 
 }
