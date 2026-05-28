@@ -61,31 +61,34 @@
     <Filter Include="Header Files\Vendor\glm">
       <UniqueIdentifier>{04cb0bbd-2947-45b4-a842-596465e162b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\OLDRenderer">
+    <Filter Include="Resource Files\Shaders\OpenGL Shaders">
+      <UniqueIdentifier>{7a4f15a8-f500-4add-ac13-9797dc489c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\OpenGL Shaders\Basic 2D triangle">
+      <UniqueIdentifier>{b4b12259-55e6-4c97-90cc-db79e770ee96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
       <UniqueIdentifier>{62f7709f-23f0-490a-ae7f-9cd226cf2ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\OpenGL">
+      <UniqueIdentifier>{35848ea8-eb7d-4db3-a4eb-9dae30a70ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\Abstraction Layer">
+      <UniqueIdentifier>{057c3488-3783-4128-ac9b-0f4757e54086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\ErrorHandling">
+      <UniqueIdentifier>{dbfe4e18-9bc7-4ef6-acd3-8222f6517bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\OpenGL">
+      <UniqueIdentifier>{9fbd3595-e0a4-4997-b591-58862f730ded}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Rendering\include\GLErrorLibrary.hpp">
-      <Filter>Header Files\OLDRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Renderer.hpp">
-      <Filter>Header Files\OLDRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Shader.hpp">
-      <Filter>Header Files\OLDRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\VAO.hpp">
-      <Filter>Header Files\OLDRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\VBO.hpp">
-      <Filter>Header Files\OLDRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="Window.hpp">
-      <Filter>Header Files\OLDRenderer</Filter>
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.hpp">
       <Filter>Header Files\Core\Window\Input</Filter>
@@ -106,15 +109,6 @@
       <Filter>Header Files\Core\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\Rise.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\IRHI.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\OpenGL\OpenGLRHI.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\vendor\glm\detail\_features.hpp">
@@ -993,41 +987,44 @@
     <ClInclude Include="..\vendor\glm\gtx\wrap.hpp">
       <Filter>Header Files\Vendor\glm</Filter>
     </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IIndexBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IShader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\OpenGL\OpenGLShader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexArray.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexBuffer.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLShader.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexArray.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLRHI.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp">
+      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IIndexBuffer.hpp">
+      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\IRHI.hpp">
+      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IShader.hpp">
+      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp">
+      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp">
+      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\GLErrorLibrary.hpp">
+      <Filter>Header Files\Renderer\ErrorHandling</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\src\VBO.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\src\VAO.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\Core\Window\Input</Filter>
     </ClCompile>
@@ -1036,12 +1033,6 @@
     </ClCompile>
     <ClCompile Include="..\Rendering\src\GLErrorLibrary.cpp">
       <Filter>Source Files\Renderer\ErrorHandling</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\src\Renderer.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\src\Shader.cpp">
-      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Core\FileSystem.cpp">
       <Filter>Source Files\FileSystem</Filter>
@@ -1052,23 +1043,26 @@
     <ClCompile Include="..\vendor\glm\detail\glm.cpp">
       <Filter>Header Files\Vendor\glm</Filter>
     </ClCompile>
-    <ClCompile Include="..\Rendering\OpenGL\OpenGLRHI.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\OpenGL\OpenGLShader.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\glm\glm.cppm">
       <Filter>Header Files\Vendor\glm</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLRHI.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLShader.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1491,6 +1485,12 @@
     </None>
     <None Include="..\vendor\glm\gtx\wrap.inl">
       <Filter>Header Files\Vendor\glm</Filter>
+    </None>
+    <None Include="..\assets\shaders\Basic2DTriangle\VertexShader.glsl">
+      <Filter>Resource Files\Shaders\OpenGL Shaders\Basic 2D triangle</Filter>
+    </None>
+    <None Include="..\assets\shaders\Basic2DTriangle\FragmentShader.glsl">
+      <Filter>Resource Files\Shaders\OpenGL Shaders\Basic 2D triangle</Filter>
     </None>
   </ItemGroup>
 </Project>

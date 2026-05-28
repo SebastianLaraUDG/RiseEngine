@@ -103,11 +103,7 @@
     <ClInclude Include="..\Rendering\include\Primitives\IShader.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp" />
-    <ClInclude Include="..\Rendering\include\Renderer.hpp" />
     <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp" />
-    <ClInclude Include="..\Rendering\include\Shader.hpp" />
-    <ClInclude Include="..\Rendering\include\VAO.hpp" />
-    <ClInclude Include="..\Rendering\include\VBO.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLRHI.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLShader.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexArray.hpp" />
@@ -425,10 +421,6 @@
     <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="..\Rendering\src\GLErrorLibrary.cpp" />
-    <ClCompile Include="..\Rendering\src\Renderer.cpp" />
-    <ClCompile Include="..\Rendering\src\Shader.cpp" />
-    <ClCompile Include="..\Rendering\src\VAO.cpp" />
-    <ClCompile Include="..\Rendering\src\VBO.cpp" />
     <ClCompile Include="..\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="..\vendor\glm\glm.cppm" />
     <ClCompile Include="..\vendor\OpenGL\glad\src\glad.c">
@@ -445,6 +437,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\assets\shaders\Basic2DTriangle\FragmentShader.glsl" />
+    <None Include="..\assets\shaders\Basic2DTriangle\VertexShader.glsl" />
     <None Include="..\vendor\glm\detail\func_common.inl" />
     <None Include="..\vendor\glm\detail\func_common_simd.inl" />
     <None Include="..\vendor\glm\detail\func_exponential.inl" />
