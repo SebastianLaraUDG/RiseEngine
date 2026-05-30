@@ -3,6 +3,7 @@
 #include <Rendering/OpenGL/OpenGLShader.hpp>
 #include <Rendering/OpenGL/OpenGLVertexBuffer.hpp>
 #include <Rendering/OpenGL/OpenGLVertexArray.hpp>
+#include <Rendering/OpenGL/OpenGLIndexBuffer.hpp>
 
 using OpenGLRHI = RiseEngine::Rendering::OpenGL::OpenGLRHI;
 using namespace RiseEngine::Rendering;
@@ -43,6 +44,7 @@ void OpenGLRHI::DrawPrimitive(uint32 vertexCount, EPrimitiveType primitiveType, 
 	glDrawArrays(TranslatePrimitive(primitiveType), startVertex, vertexCount);
 }
 
+// Assumes that the indices are GL_UNSIGNED_INT. In the future, I can add an additional parameter to specify the type of the indices (like GL_UNSIGNED_SHORT, or BYTE).
 void OpenGLRHI::DrawIndexed(uint32 indexCount, EPrimitiveType primitiveType, uint32 startIndex)
 {
 	glDrawElements(TranslatePrimitive(primitiveType), indexCount, GL_UNSIGNED_INT, (void*)(startIndex * sizeof(uint32)));
@@ -52,6 +54,11 @@ std::unique_ptr<IVertexBuffer> OpenGLRHI::CreateVertexBuffer(const void* data, u
 	EBufferFrequency frequency,	EBufferAccess access)
 {
 	return std::make_unique<OpenGLVertexBuffer>(data, size, frequency, access);
+}
+
+std::unique_ptr<IIndexBuffer> OpenGLRHI::CreateIndexBuffer(const uint32* indices, uint32 count, EBufferFrequency frequency, EBufferAccess access)
+{
+	return std::make_unique<OpenGLIndexBuffer>(indices, count, frequency, access);
 }
 
 std::unique_ptr<IShader> OpenGLRHI::CreateShader(const std::string& vertPath, const std::string& fragPath)

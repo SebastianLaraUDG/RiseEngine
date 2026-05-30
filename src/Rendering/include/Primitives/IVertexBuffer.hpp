@@ -10,8 +10,6 @@ namespace RiseEngine::Rendering
 	class IVertexBuffer
 	{
 	public:
-		using EBufferFrequency = RiseEngine::Rendering::EBufferFrequency;
-		using EBufferAccess = RiseEngine::Rendering::EBufferAccess;
 
 		virtual ~IVertexBuffer() = default;
 		virtual void Bind() const = 0;

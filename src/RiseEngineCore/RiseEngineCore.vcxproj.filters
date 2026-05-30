@@ -1023,6 +1023,9 @@
     <ClInclude Include="..\Rendering\include\GLErrorLibrary.hpp">
       <Filter>Header Files\Renderer\ErrorHandling</Filter>
     </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLIndexBuffer.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputManager.cpp">
@@ -1062,6 +1065,9 @@
       <Filter>Source Files\Renderer\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLIndexBuffer.cpp">
       <Filter>Source Files\Renderer\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>

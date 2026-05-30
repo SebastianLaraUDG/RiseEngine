@@ -5,6 +5,7 @@
 #include <Rendering/include/Primitives/IShader.hpp>
 #include <Rendering/include/Primitives/IVertexArray.hpp>
 #include <Rendering/include/Primitives/IVertexBuffer.hpp>
+#include <Rendering/include/Primitives/IIndexBuffer.hpp>
 #include <iostream>
 /*
 TODO:
@@ -65,7 +66,9 @@ void Application::Render() const
 	// Draw here
 	shader_->Bind();
 	vao_->Bind();
-	rhi_->DrawPrimitive(3);
+	ibo_->Bind();
+	// rhi_->DrawPrimitive(3); // USING VAO
+	rhi_->DrawIndexed(ibo_->GetCount());
 }
 
 void Application::ProcessInput()
@@ -102,14 +105,31 @@ void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
 		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
 	);
 
-	const std::vector<f32> vertices =
+	const std::vector<f32> triangleVertices =
 	{
 		-0.5f, 0.0f, 0.0f, /*Color*/ 1.0f, 0.0f, 0.0f, 1.0f,
 		0.0f,0.5f,0.0f,				0.0f, 1.0f, 0.0f, 1.0f,
 		0.5f, 0.0f, 0.0f,				0.0f, 0.0f, 1.0f, 1.0f
 	};
 
-	vbo_ = rhi_->CreateVertexBuffer(vertices.data(), vertices.size() * sizeof(f32));
+	const std::vector<f32> quadVertices =
+	{
+		// pos                  // color
+	-0.5f, -0.5f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,  // bottom left
+	 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f, 1.0f,  // bottom right
+	 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f, 1.0f,  // top right
+	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f, 1.0f,  // top left
+	};
+
+	const std::vector<uint32> quadIndices =
+	{
+		0, 1, 2, // first triangle
+		2, 3, 0  // second triangle
+	};
+
+	// vbo_ = rhi_->CreateVertexBuffer(triangleVertices.data(), triangleVertices.size() * sizeof(f32)); Triangle.
+	vbo_ = rhi_->CreateVertexBuffer(quadVertices.data(), quadVertices.size() * sizeof(f32)); // Quad.
+	ibo_ = rhi_->CreateIndexBuffer(quadIndices.data(), quadIndices.size());
 	
 	Rendering::VertexLayout layout;
 	layout.stride = 7 * sizeof(f32);

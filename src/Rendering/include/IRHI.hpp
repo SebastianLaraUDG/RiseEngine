@@ -8,6 +8,7 @@ namespace RiseEngine::Rendering
 	// Forward declarations.
 	class IVertexArray;
 	class IVertexBuffer;
+	class IIndexBuffer;
 	class IShader;
 
 	class IRHI
@@ -27,10 +28,16 @@ namespace RiseEngine::Rendering
 
 		// Factory methods. RHI creates its own resources.
 		virtual std::unique_ptr<IVertexArray> CreateVertexArray() = 0;
+		
 		// @param size - in bytes.
 		virtual std::unique_ptr<IVertexBuffer> CreateVertexBuffer(const void* data, uint32 size,
 			EBufferFrequency frequency = EBufferFrequency::Static,
 			EBufferAccess access = EBufferAccess::Draw) = 0;
+		
+		virtual std::unique_ptr<IIndexBuffer> CreateIndexBuffer(const uint32* indices, uint32 count,
+			EBufferFrequency frequency = EBufferFrequency::Static,
+			EBufferAccess access = EBufferAccess::Draw) = 0;
+		
 		virtual std::unique_ptr<IShader> CreateShader(const std::string& vertPath, const std::string& fragPath) = 0;
 	};
 }

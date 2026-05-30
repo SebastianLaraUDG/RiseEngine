@@ -104,6 +104,7 @@
     <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp" />
     <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp" />
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLIndexBuffer.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLRHI.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLShader.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexArray.hpp" />
@@ -416,6 +417,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLRHI.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexArray.cpp" />

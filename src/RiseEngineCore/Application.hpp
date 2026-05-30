@@ -17,6 +17,7 @@ namespace RiseEngine
 		class IShader;
 		class IVertexBuffer;
 		class IVertexArray;
+		class IIndexBuffer;
 	}
 
 	enum class RenderingAPI
@@ -51,6 +52,7 @@ namespace RiseEngine
 		std::unique_ptr<Rendering::IShader> shader_;
 		std::unique_ptr<Rendering::IVertexBuffer> vbo_;
 		std::unique_ptr<Rendering::IVertexArray> vao_;
+		std::unique_ptr<Rendering::IIndexBuffer> ibo_;
 		RenderingAPI currentAPI_ = RenderingAPI::OpenGL; // TODO: In the future (when I implement other apis after OpenGL, read this from a file and switch in Init().
 
 		// Time management.
