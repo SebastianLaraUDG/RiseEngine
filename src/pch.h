@@ -14,6 +14,7 @@
 #include "RiseEngineCore/Core/CoreTypes.hpp"
 
 // GLM
+#define GLM_ENABLE_EXPERIMENTAL
 #include <vendor/glm/glm.hpp>
 #include <vendor/glm/gtc/matrix_transform.hpp>
 #include <vendor/glm/gtc/type_ptr.hpp>
