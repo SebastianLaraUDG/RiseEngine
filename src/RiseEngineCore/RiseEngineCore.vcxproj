@@ -95,6 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\CommonFramework\Components\CameraComponent.hpp" />
     <ClInclude Include="..\CommonFramework\Components\EntityComponent.hpp" />
     <ClInclude Include="..\CommonFramework\Components\TransformComponent.hpp" />
     <ClInclude Include="..\CommonFramework\Transform.hpp" />
@@ -415,6 +416,7 @@
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\CommonFramework\Components\CameraComponent.cpp" />
     <ClCompile Include="..\CommonFramework\Components\EntityComponent.cpp" />
     <ClCompile Include="..\CommonFramework\Components\TransformComponent.cpp" />
     <ClCompile Include="..\CommonFramework\WorldObjects\Entity.cpp" />

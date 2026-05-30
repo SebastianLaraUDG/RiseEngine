@@ -1056,6 +1056,9 @@
     <ClInclude Include="..\CommonFramework\Transform.hpp">
       <Filter>Header Files\CommonFramework</Filter>
     </ClInclude>
+    <ClInclude Include="..\CommonFramework\Components\CameraComponent.hpp">
+      <Filter>Header Files\CommonFramework\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputManager.cpp">
@@ -1107,6 +1110,9 @@
       <Filter>Source Files\CommonFramework\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\CommonFramework\Components\TransformComponent.cpp">
+      <Filter>Source Files\CommonFramework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommonFramework\Components\CameraComponent.cpp">
       <Filter>Source Files\CommonFramework\Components</Filter>
     </ClCompile>
   </ItemGroup>
