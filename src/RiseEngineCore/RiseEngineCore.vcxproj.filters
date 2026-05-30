@@ -82,6 +82,24 @@
     <Filter Include="Source Files\Renderer\OpenGL">
       <UniqueIdentifier>{9fbd3595-e0a4-4997-b591-58862f730ded}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\CommonFramework">
+      <UniqueIdentifier>{2336da07-517e-4ba8-a5fb-c3bc691bf042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CommonFramework">
+      <UniqueIdentifier>{433699df-341e-47f7-a255-486c3ce95914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CommonFramework\WorldObjects">
+      <UniqueIdentifier>{1482adb6-2dc3-465f-b782-d624c6460885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CommonFramework\WorldObjects">
+      <UniqueIdentifier>{cb98be10-8903-4de1-8411-08ee8a9a0779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CommonFramework\Components">
+      <UniqueIdentifier>{b634f369-f8aa-4958-81bf-264f0f355ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CommonFramework\Components">
+      <UniqueIdentifier>{96abf2ad-6b22-490d-9179-59c4b302fd05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -1026,6 +1044,18 @@
     <ClInclude Include="..\Rendering\OpenGL\OpenGLIndexBuffer.hpp">
       <Filter>Header Files\Renderer\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="..\CommonFramework\WorldObjects\Entity.hpp">
+      <Filter>Header Files\CommonFramework\WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommonFramework\Components\TransformComponent.hpp">
+      <Filter>Header Files\CommonFramework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommonFramework\Components\EntityComponent.hpp">
+      <Filter>Header Files\CommonFramework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CommonFramework\Transform.hpp">
+      <Filter>Header Files\CommonFramework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputManager.cpp">
@@ -1069,6 +1099,15 @@
     </ClCompile>
     <ClCompile Include="..\Rendering\OpenGL\OpenGLIndexBuffer.cpp">
       <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommonFramework\WorldObjects\Entity.cpp">
+      <Filter>Source Files\CommonFramework\WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommonFramework\Components\EntityComponent.cpp">
+      <Filter>Source Files\CommonFramework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CommonFramework\Components\TransformComponent.cpp">
+      <Filter>Source Files\CommonFramework\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
