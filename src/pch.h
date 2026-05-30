@@ -8,6 +8,10 @@
 #include <functional>
 #include <filesystem>
 #include <chrono>
+#include <algorithm>
+
+// Rise Engine
+#include "RiseEngineCore/Core/CoreTypes.hpp"
 
 // GLM
 #include <vendor/glm/glm.hpp>
