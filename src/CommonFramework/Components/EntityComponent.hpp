@@ -10,6 +10,7 @@ namespace RiseEngine::CommonFramework
 	// Base class for all components that can be attached to an entity.
 	class EntityComponent
 	{
+	public:
 		explicit EntityComponent(const std::string& name);
 		virtual ~EntityComponent() = default;
 		virtual void OnAttach() {}
