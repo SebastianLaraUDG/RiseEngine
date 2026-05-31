@@ -128,8 +128,8 @@ void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
 	};
 
 	// vbo_ = rhi_->CreateVertexBuffer(triangleVertices.data(), triangleVertices.size() * sizeof(f32)); Triangle.
-	vbo_ = rhi_->CreateVertexBuffer(quadVertices.data(), quadVertices.size() * sizeof(f32)); // Quad.
-	ibo_ = rhi_->CreateIndexBuffer(quadIndices.data(), quadIndices.size());
+	vbo_ = rhi_->CreateVertexBuffer(quadVertices.data(), static_cast<uint32>(quadVertices.size() * sizeof(f32))); // Quad.
+	ibo_ = rhi_->CreateIndexBuffer(quadIndices.data(), static_cast<uint32>(quadIndices.size()));
 	
 	Rendering::VertexLayout layout;
 	layout.stride = 7 * sizeof(f32);

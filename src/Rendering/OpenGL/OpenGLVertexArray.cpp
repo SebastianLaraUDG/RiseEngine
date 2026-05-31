@@ -37,9 +37,8 @@ void OpenGLVertexArray::SetLayout(const VertexLayout& layout, const IVertexBuffe
 			TranslateDataType(attr.dataType),
 			attr.normalized ? GL_TRUE : GL_FALSE,
 			layout.stride,
-			(const void*)attr.offset); // reinterpret_cast<const void*>(static_cast<uintptr_t>(attr.offset))
-										// read about this, TODO: test if this works better.
-
+			reinterpret_cast<const void*>(static_cast<uintptr_t>(attr.offset)) // (const void*)attr.offset);
+		);
 	}
 }
 
