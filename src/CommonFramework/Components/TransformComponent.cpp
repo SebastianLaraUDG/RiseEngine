@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "TransformComponent.hpp"
 
 using TransformComponent = RiseEngine::CommonFramework::TransformComponent;
