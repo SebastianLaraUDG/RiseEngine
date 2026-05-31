@@ -1,5 +1,5 @@
 #pragma once
-#include <ComonFramework/Components/EntityComponent.hpp>
+#include <CommonFramework/Components/EntityComponent.hpp>
 #include <CommonFramework/Components/TransformComponent.hpp>
 #include <unordered_set>
 
