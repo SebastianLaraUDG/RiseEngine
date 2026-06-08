@@ -18,10 +18,10 @@ namespace RiseEngine::CommonFramework
 		// World transform (absolute).
 		glm::mat4 GetWorldMatrix() const;
 
-		void SetLocalPosition(const glm::vec3& position);
-		void SetLocalRotation(const glm::quat& rotation);
-		void SetLocalScale(const glm::vec3& scale);
-		void SetLocalTransform(const Transform& transform);
+		inline void SetLocalPosition(const glm::vec3& position) { localTransform_.position = position; }
+		inline void SetLocalRotation(const glm::quat& rotation) { localTransform_.rotation = rotation; }
+		inline void SetLocalScale(const glm::vec3& scale) { localTransform_.scale = scale; }
+		inline void SetLocalTransform(const Transform& transform) { localTransform_ = transform; }
 
 		// Local transform (relative to parent).
 		const glm::vec3& GetLocalPosition() const { return localTransform_.position; }
