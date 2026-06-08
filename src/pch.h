@@ -1,4 +1,6 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
+
 // STL
 #include <iostream>
 #include <vector>
@@ -9,6 +11,7 @@
 #include <filesystem>
 #include <chrono>
 #include <algorithm>
+#include <thread>
 
 // Rise Engine
 #include "RiseEngineCore/Core/CoreTypes.hpp"
@@ -24,8 +27,10 @@
 // #include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>. I don't think I'll ever use it but I lose nothing keeping it here.
 
 // DEAR IMGUI
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include <vendor/imgui/imgui.h>
 #include <vendor/imgui/backends/imgui_impl_glfw.h>
+#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM  // Use GLAD instead of ImGui loader.
 #include <vendor/imgui/backends/imgui_impl_opengl3.h>
 
 /*
@@ -44,7 +49,6 @@ You can uncomment this and setup the preprocessor definitions once you start
 */
 
 // STB IMAGE
-#define STB_IMAGE_IMPLEMENTATION
 #include <vendor/stb/stb_image.h>
 
 // JSON
