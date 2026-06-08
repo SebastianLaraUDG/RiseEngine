@@ -2,6 +2,7 @@
 #include <Rendering/include/RHIDefinitions.hpp>
 #include <memory>
 #include <string>
+#include "Primitives/IFramebuffer.hpp"
 
 namespace RiseEngine::Rendering
 {
@@ -10,6 +11,7 @@ namespace RiseEngine::Rendering
 	class IVertexBuffer;
 	class IIndexBuffer;
 	class IShader;
+	class IFramebuffer;
 
 	class IRHI
 	{
@@ -18,6 +20,11 @@ namespace RiseEngine::Rendering
 
 		virtual void Init() = 0;
 		virtual void Shutdown() = 0;
+
+		virtual void InitImGui() = 0;
+		virtual void ShutdownImGui() = 0;
+		virtual void BeginImGuiFrame() = 0;
+		virtual void EndImGuiFrame() = 0;
 
 		virtual void SetClearColor(f32 r, f32 g, f32 b, f32 a) = 0;
 		virtual void Clear(RiseEngine::Rendering::EClearFlags flags) = 0;
@@ -38,6 +45,13 @@ namespace RiseEngine::Rendering
 			EBufferFrequency frequency = EBufferFrequency::Static,
 			EBufferAccess access = EBufferAccess::Draw) = 0;
 		
+		// Shaders.
+
 		virtual std::unique_ptr<IShader> CreateShader(const std::string& vertPath, const std::string& fragPath) = 0;
+
+		
+		// Framebuffers.
+
+		virtual std::unique_ptr<IFramebuffer> CreateFramebuffer(const FramebufferSpec& spec) = 0;
 	};
 }

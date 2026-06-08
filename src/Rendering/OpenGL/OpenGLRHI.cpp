@@ -4,6 +4,8 @@
 #include <Rendering/OpenGL/OpenGLVertexBuffer.hpp>
 #include <Rendering/OpenGL/OpenGLVertexArray.hpp>
 #include <Rendering/OpenGL/OpenGLIndexBuffer.hpp>
+#include <Rendering/OpenGL/OpenGLFramebuffer.hpp>
+#include <vendor/OpenGL/GLFW/include/GLFW/glfw3.h>
 
 using OpenGLRHI = RiseEngine::Rendering::OpenGL::OpenGLRHI;
 using namespace RiseEngine::Rendering;
@@ -17,6 +19,37 @@ void OpenGLRHI::Init()
 
 void OpenGLRHI::Shutdown()
 {
+}
+//
+void OpenGLRHI::InitImGui()
+{
+	ImGui_ImplOpenGL3_Init("#version 430 core");
+}
+
+void OpenGLRHI::ShutdownImGui()
+{
+	ImGui_ImplOpenGL3_Shutdown();
+}
+
+void OpenGLRHI::BeginImGuiFrame()
+{
+	ImGui_ImplOpenGL3_NewFrame();
+}
+
+void OpenGLRHI::EndImGuiFrame()
+{
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	/*
+	ImGuiIO& io = ImGui::GetIO();
+	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		GLFWwindow* backupContext = glfwGetCurrentContext();
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+		glfwMakeContextCurrent(backupContext);
+	}
+	*/
 }
 
 void OpenGLRHI::SetClearColor(f32 r, f32 g, f32 b, f32 a)
@@ -64,6 +97,11 @@ std::unique_ptr<IIndexBuffer> OpenGLRHI::CreateIndexBuffer(const uint32* indices
 std::unique_ptr<IShader> OpenGLRHI::CreateShader(const std::string& vertPath, const std::string& fragPath)
 {
 	return std::make_unique<OpenGLShader>(vertPath, fragPath);
+}
+
+std::unique_ptr<IFramebuffer> OpenGLRHI::CreateFramebuffer(const FramebufferSpec& spec)
+{
+	return std::make_unique<OpenGLFramebuffer>(spec);
 }
 
 std::unique_ptr<IVertexArray> RiseEngine::Rendering::OpenGL::OpenGLRHI::CreateVertexArray()

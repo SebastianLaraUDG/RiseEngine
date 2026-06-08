@@ -73,9 +73,6 @@
     <Filter Include="Header Files\Renderer\OpenGL">
       <UniqueIdentifier>{35848ea8-eb7d-4db3-a4eb-9dae30a70ec5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Renderer\Abstraction Layer">
-      <UniqueIdentifier>{057c3488-3783-4128-ac9b-0f4757e54086}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Renderer\ErrorHandling">
       <UniqueIdentifier>{dbfe4e18-9bc7-4ef6-acd3-8222f6517bb6}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,24 @@
     </Filter>
     <Filter Include="Header Files\CommonFramework\Components">
       <UniqueIdentifier>{96abf2ad-6b22-490d-9179-59c4b302fd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Editor">
+      <UniqueIdentifier>{d69b69f2-0d8e-4430-aa4f-516a9a86a971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Editor\Panels">
+      <UniqueIdentifier>{11682254-1033-466a-b3a6-679e80f94ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Editor">
+      <UniqueIdentifier>{e643577e-1bbb-4d76-b0b0-e890cf6347be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Editor\Panels">
+      <UniqueIdentifier>{7a1ebc31-bb6a-4ba0-b8b5-0a175665273a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vendor\ImGui">
+      <UniqueIdentifier>{240f0173-07f7-4a73-a2e6-858a6d31c870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\Primitives">
+      <UniqueIdentifier>{b71f65cb-dece-4227-a07c-c22aa5076b74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1020,24 +1035,6 @@
     <ClInclude Include="..\Rendering\OpenGL\OpenGLRHI.hpp">
       <Filter>Header Files\Renderer\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp">
-      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IIndexBuffer.hpp">
-      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\IRHI.hpp">
-      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IShader.hpp">
-      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp">
-      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp">
-      <Filter>Header Files\Renderer\Abstraction Layer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Rendering\include\GLErrorLibrary.hpp">
       <Filter>Header Files\Renderer\ErrorHandling</Filter>
     </ClInclude>
@@ -1058,6 +1055,57 @@
     </ClInclude>
     <ClInclude Include="..\CommonFramework\Components\CameraComponent.hpp">
       <Filter>Header Files\CommonFramework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Panels\IPanel.hpp">
+      <Filter>Header Files\Core\Editor\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\EditorSelection.hpp">
+      <Filter>Header Files\Core\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\EditorContext.hpp">
+      <Filter>Header Files\Core\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IFramebuffer.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLFramebuffer.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IIndexBuffer.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\IRHI.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IShader.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\ITexture.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\ITexture2D.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\include\Primitives\ITextureCubemap.hpp">
+      <Filter>Header Files\Renderer\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLTexture2D.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLTextureCubemap.hpp">
+      <Filter>Header Files\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Panels\ViewportPanel.hpp">
+      <Filter>Header Files\Core\Editor\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1114,6 +1162,42 @@
     </ClCompile>
     <ClCompile Include="..\CommonFramework\Components\CameraComponent.cpp">
       <Filter>Source Files\CommonFramework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\EditorContext.cpp">
+      <Filter>Source Files\Core\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui.cpp">
+      <Filter>Source Files\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_draw.cpp">
+      <Filter>Source Files\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_tables.cpp">
+      <Filter>Source Files\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLTexture2D.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLTextureCubemap.cpp">
+      <Filter>Source Files\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stb_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Panels\ViewportPanel.cpp">
+      <Filter>Source Files\Core\Editor\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

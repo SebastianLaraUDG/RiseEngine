@@ -6,7 +6,16 @@
 #include <Rendering/include/Primitives/IVertexArray.hpp>
 #include <Rendering/include/Primitives/IVertexBuffer.hpp>
 #include <Rendering/include/Primitives/IIndexBuffer.hpp>
+#include <Rendering/include/Primitives/IFramebuffer.hpp>
+#include <RiseEngineCore/Editor/Panels/ViewportPanel.hpp>
 #include <iostream>
+
+#include <CommonFramework/WorldObjects/Entity.hpp>
+#include <CommonFramework/Components/CameraComponent.hpp>
+
+#include <vendor/imgui/imgui.h>
+#include <RiseEngineCore/Editor/EditorContext.hpp>
+
 /*
 TODO:
 * Set ESCAPE key to close window.
@@ -26,6 +35,8 @@ Application::Application(int32 windowWidth, int32 windowHeight, const char* titl
 
 Application::~Application()
 {
+	rhi_->ShutdownImGui(); // First renderer backend.
+	editorContext_->Shutdown(); // Next destroy context.
 	glfwTerminate();
 }
 
@@ -61,14 +72,39 @@ void Application::Update()
 void Application::Render() const
 {
 	using namespace RiseEngine::Rendering;
+	
+	// Resize framebuffer if viewport changed.
+	if (viewportPanel_->WasResized())
+	{
+		glm::vec2 size = viewportPanel_->GetViewportSize();
+		framebuffer_->Resize(static_cast<uint32>(size.x), static_cast<uint32>(size.y));
+	}
+
+	framebuffer_->Bind();
 	rhi_->Clear(EClearFlags::Color | EClearFlags::Depth);
 
+	// Temporary: only one camera.
+	auto camera = cameraEntity_->GetComponent<CommonFramework::CameraComponent>();
+	
 	// Draw here
 	shader_->Bind();
+	shader_->SetMat4("uViewProjection", camera->GetViewProjection());
+
 	vao_->Bind();
 	ibo_->Bind();
 	// rhi_->DrawPrimitive(3); // USING VAO
+	rhi_->SetPolygonMode(EPolygonMode::Wireframe);
 	rhi_->DrawIndexed(ibo_->GetCount());
+
+	framebuffer_->Unbind();
+
+	// ImGui. - render to screen, not the framebuffer.
+	rhi_->BeginImGuiFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+	editorContext_->RenderPanels(); // ViewportPanel displays the framebuffer texture here.
+	ImGui::Render();
+	rhi_->EndImGuiFrame();
 }
 
 void Application::ProcessInput()
@@ -77,7 +113,7 @@ void Application::ProcessInput()
 	window_->PollEvents();	
 }
 
-void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
+void Application::Init(int32 width, int32 height, const char* title)
 {
 	// Initialize GLFW.
 	if (!glfwInit())
@@ -141,6 +177,23 @@ void RiseEngine::Application::Init(int32 width, int32 height, const char* title)
 
 	vao_ = rhi_->CreateVertexArray();
 	vao_->SetLayout(layout, *vbo_);
+
+	cameraEntity_ = std::make_unique<CommonFramework::Entity>("Camera");
+	auto* camera = cameraEntity_->AddComponent<CommonFramework::CameraComponent>(45.f, 800.f/600.f, 0.1f, 100.f);
+	camera->SetLocalPosition({ 0.f, 0.f, 25.f });
+
+	// Init editor (IMGUI).
+	editorContext_ = std::make_unique<Editor::EditorContext>();
+	editorContext_->Init(window_->GetGLFWWindow());
+	rhi_->InitImGui();
+
+	Rendering::FramebufferSpec spec;
+	spec.width = width;
+	spec.height = height;
+	framebuffer_ = rhi_->CreateFramebuffer(spec);
+
+	// Create viewport panel and register.
+	viewportPanel_ = editorContext_->AddPanel<Editor::ViewportPanel>(framebuffer_.get());
 }
 
 void RiseEngine::Application::InitFileSystem()

@@ -1,4 +1,5 @@
 #include "OpenGLIndexBuffer.hpp"
+#include <glad/glad.h>
 
 using OpenGLIndexBuffer = RiseEngine::Rendering::OpenGLIndexBuffer;
 

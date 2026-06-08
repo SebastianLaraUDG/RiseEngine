@@ -15,6 +15,12 @@ namespace RiseEngine::Rendering::OpenGL
 	public:
 		void Init() override;
 		void Shutdown() override;
+
+		void InitImGui() override;
+		void ShutdownImGui() override;
+		void BeginImGuiFrame() override;
+		void EndImGuiFrame() override;
+
 		void SetClearColor(f32 r, f32 g, f32 b, f32 a) override;
 		void Clear(EClearFlags flags) override;
 		void SetPolygonMode(EPolygonMode mode) override;
@@ -34,7 +40,7 @@ namespace RiseEngine::Rendering::OpenGL
 			EBufferAccess access = EBufferAccess::Draw) override;
 
 		std::unique_ptr<IShader> CreateShader(const std::string& vertPath, const std::string& fragPath) override;
-
+		std::unique_ptr<IFramebuffer> CreateFramebuffer(const FramebufferSpec& spec) override;
 
 	private:
 		// Converts the supplied type to an OpenGL type (like GL_TRIANGLES, etc.).

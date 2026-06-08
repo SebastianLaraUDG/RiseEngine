@@ -18,6 +18,18 @@ namespace RiseEngine
 		class IVertexBuffer;
 		class IVertexArray;
 		class IIndexBuffer;
+		class IFramebuffer;
+	}
+
+	namespace Editor
+	{
+		class EditorContext;
+		class ViewportPanel;
+	}
+
+	namespace CommonFramework
+	{
+		class Entity;
 	}
 
 	enum class RenderingAPI
@@ -53,7 +65,12 @@ namespace RiseEngine
 		std::unique_ptr<Rendering::IVertexBuffer> vbo_;
 		std::unique_ptr<Rendering::IIndexBuffer> ibo_;
 		std::unique_ptr<Rendering::IVertexArray> vao_;
+		std::unique_ptr<Rendering::IFramebuffer> framebuffer_;
 		RenderingAPI currentRenderingAPI_ = RenderingAPI::OpenGL; // TODO: In the future (when I implement other apis after OpenGL, read this from a file and switch in Init().
+
+		Editor::ViewportPanel* viewportPanel_ = nullptr; // Not owned by application, but by editor context.
+		std::unique_ptr<Editor::EditorContext> editorContext_;
+		std::unique_ptr<CommonFramework::Entity> cameraEntity_; // For testing purposes, will be removed later.
 
 		// Time management.
 		std::chrono::steady_clock::time_point lastFrame;

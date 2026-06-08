@@ -104,14 +104,21 @@
     <ClInclude Include="..\pch.h" />
     <ClInclude Include="..\Rendering\include\GLErrorLibrary.hpp" />
     <ClInclude Include="..\Rendering\include\IRHI.hpp" />
+    <ClInclude Include="..\Rendering\include\Primitives\IFramebuffer.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IIndexBuffer.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IShader.hpp" />
+    <ClInclude Include="..\Rendering\include\Primitives\ITexture.hpp" />
+    <ClInclude Include="..\Rendering\include\Primitives\ITexture2D.hpp" />
+    <ClInclude Include="..\Rendering\include\Primitives\ITextureCubemap.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IVertexBuffer.hpp" />
     <ClInclude Include="..\Rendering\include\Primitives\IVertexArray.hpp" />
     <ClInclude Include="..\Rendering\include\RHIDefinitions.hpp" />
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLFramebuffer.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLIndexBuffer.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLRHI.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLShader.hpp" />
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLTexture2D.hpp" />
+    <ClInclude Include="..\Rendering\OpenGL\OpenGLTextureCubemap.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexArray.hpp" />
     <ClInclude Include="..\Rendering\OpenGL\OpenGLVertexBuffer.hpp" />
     <ClInclude Include="..\Rise.hpp" />
@@ -411,6 +418,10 @@
     <ClInclude Include="Core\CoreCommon.hpp" />
     <ClInclude Include="Core\CoreTypes.hpp" />
     <ClInclude Include="Core\FileSystem.hpp" />
+    <ClInclude Include="Editor\EditorContext.hpp" />
+    <ClInclude Include="Editor\EditorSelection.hpp" />
+    <ClInclude Include="Editor\Panels\IPanel.hpp" />
+    <ClInclude Include="Editor\Panels\ViewportPanel.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="RiseEngine.hpp" />
     <ClInclude Include="Window.hpp" />
@@ -426,14 +437,24 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLRHI.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLTexture2D.cpp" />
+    <ClCompile Include="..\Rendering\OpenGL\OpenGLTextureCubemap.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="..\Rendering\OpenGL\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="..\Rendering\src\GLErrorLibrary.cpp" />
+    <ClCompile Include="..\stb_image.cpp" />
     <ClCompile Include="..\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="..\vendor\glm\glm.cppm" />
+    <ClCompile Include="..\vendor\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\vendor\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\vendor\imgui\imgui.cpp" />
+    <ClCompile Include="..\vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\vendor\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\vendor\OpenGL\glad\src\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -444,6 +465,8 @@
     </ClCompile>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Core\FileSystem.cpp" />
+    <ClCompile Include="Editor\EditorContext.cpp" />
+    <ClCompile Include="Editor\Panels\ViewportPanel.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
