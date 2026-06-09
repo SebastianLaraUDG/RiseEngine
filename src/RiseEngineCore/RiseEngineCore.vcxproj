@@ -60,7 +60,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\vendor\;$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;$(SolutionDir)src\vendor\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\vendor\;$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;$(SolutionDir)src\vendor\imgui\;$(SolutionDir)src\vendor\OpenGL\GLFW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -82,7 +82,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\vendor\;$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;$(SolutionDir)src\vendor\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\;$(SolutionDir)src\vendor\;$(SolutionDir)src\vendor\OpenGL\glad\include\;$(ProjectDir)..\;$(SolutionDir)src\vendor\imgui\;$(SolutionDir)src\vendor\OpenGL\GLFW\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
