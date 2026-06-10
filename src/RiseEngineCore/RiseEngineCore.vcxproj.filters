@@ -115,6 +115,9 @@
     <Filter Include="Header Files\Renderer\Primitives">
       <UniqueIdentifier>{b71f65cb-dece-4227-a07c-c22aa5076b74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\OpenGL Shaders\Quad3D Perspective">
+      <UniqueIdentifier>{a662698e-5a56-43e4-9758-d18acb1ee0ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -1626,6 +1629,9 @@
     </None>
     <None Include="..\assets\shaders\Basic2DTriangle\FragmentShader.glsl">
       <Filter>Resource Files\Shaders\OpenGL Shaders\Basic 2D triangle</Filter>
+    </None>
+    <None Include="..\assets\shaders\Quad3D Perspective\Quad3D_VS.glsl">
+      <Filter>Resource Files\Shaders\OpenGL Shaders\Quad3D Perspective</Filter>
     </None>
   </ItemGroup>
 </Project>

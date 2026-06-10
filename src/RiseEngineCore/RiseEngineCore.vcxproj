@@ -473,6 +473,7 @@
   <ItemGroup>
     <None Include="..\assets\shaders\Basic2DTriangle\FragmentShader.glsl" />
     <None Include="..\assets\shaders\Basic2DTriangle\VertexShader.glsl" />
+    <None Include="..\assets\shaders\Quad3D Perspective\Quad3D_VS.glsl" />
     <None Include="..\vendor\glm\detail\func_common.inl" />
     <None Include="..\vendor\glm\detail\func_common_simd.inl" />
     <None Include="..\vendor\glm\detail\func_exponential.inl" />
