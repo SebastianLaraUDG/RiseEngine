@@ -39,7 +39,7 @@ void ViewportPanel::Render() const
 	// Display framebuffer texture as image.
 	uint64 textureID = framebuffer_->GetColorAttachment()->GetId();
 	ImGui::Image(
-		reinterpret_cast<void*>(textureID),
+		textureID, // reinterpret_cast<void*>(textureID),
 		panelSize,
 		ImVec2(0, 1),// UV flip vertical — OpenGL has inverted Y.
 		ImVec2(1, 0)
