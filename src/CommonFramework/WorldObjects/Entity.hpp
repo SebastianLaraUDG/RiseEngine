@@ -3,9 +3,13 @@
 #include <CommonFramework/Components/TransformComponent.hpp>
 #include <unordered_set>
 
+namespace RiseEngine
+{
+	class World;
+}
+
 namespace RiseEngine::CommonFramework
 {
-
 	// Base class for all entities in the world.
 	// Always has a Root Component (TransformComponent)
 	// that defines its position in the world.
@@ -16,6 +20,8 @@ namespace RiseEngine::CommonFramework
 		virtual ~Entity() = default;
 
 		virtual void Update(f32 deltaTime);
+		void Destroy();
+
 		// Tags.
 		inline void AddTag(const std::string& tag) { tags_.insert(tag); }
 		inline void RemoveTag(const std::string& tag) { tags_.erase(tag); }
@@ -58,17 +64,24 @@ namespace RiseEngine::CommonFramework
 		void RemoveComponent(EntityComponent* component);
 
 		// Getters.
-		const std::string& GetName() const { return name_; }
-		TransformComponent* GetRootComponent() const { return rootComponent_; }
-		bool IsActive() const { return bActive_; }
+		inline const std::string& GetName() const { return name_; }
+		inline TransformComponent* GetRootComponent() const { return rootComponent_; }
+		inline bool IsActive() const { return bActive_; }
+		inline bool IsUpdatingComponents() const { return bUpdateComponentsEnabled_; }
 		void SetActive(const bool active) { bActive_ = active; }
+
+		inline World* GetWorld() const { return world_; }
 
 	private:
 		std::string name_;
 		bool bActive_ = true;
-		bool bUpdateComponentsEnabled_ = false;
+		bool bUpdateComponentsEnabled_ = true;
 		TransformComponent* rootComponent_ = nullptr;
 		std::vector<std::unique_ptr<EntityComponent>> components_;
 		std::unordered_set<std::string> tags_;
+
+		friend class RiseEngine::World;
+		World* world_ = nullptr;
+		void SetWorld(World* world) { world_ = world; }
 	};
 }

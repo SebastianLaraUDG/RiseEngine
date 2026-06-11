@@ -32,6 +32,8 @@ namespace RiseEngine
 		class Entity;
 	}
 
+	class World;
+
 	enum class RenderingAPI
 	{
 		OpenGL,
@@ -71,6 +73,7 @@ namespace RiseEngine
 		Editor::ViewportPanel* viewportPanel_ = nullptr; // Not owned by application, but by editor context.
 		std::unique_ptr<Editor::EditorContext> editorContext_;
 		std::unique_ptr<CommonFramework::Entity> cameraEntity_; // For testing purposes, will be removed later.
+		std::unique_ptr<World> world_; // Current world/level.
 	};
 
 }

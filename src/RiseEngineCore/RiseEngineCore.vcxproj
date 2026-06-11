@@ -418,12 +418,14 @@
     <ClInclude Include="Core\CoreCommon.hpp" />
     <ClInclude Include="Core\CoreTypes.hpp" />
     <ClInclude Include="Core\FileSystem.hpp" />
+    <ClInclude Include="Core\Time.hpp" />
     <ClInclude Include="Editor\EditorContext.hpp" />
     <ClInclude Include="Editor\EditorSelection.hpp" />
     <ClInclude Include="Editor\Panels\IPanel.hpp" />
     <ClInclude Include="Editor\Panels\ViewportPanel.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="RiseEngine.hpp" />
+    <ClInclude Include="Runtime\World\World.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -465,9 +467,11 @@
     </ClCompile>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Core\FileSystem.cpp" />
+    <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Editor\EditorContext.cpp" />
     <ClCompile Include="Editor\Panels\ViewportPanel.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Runtime\World\World.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

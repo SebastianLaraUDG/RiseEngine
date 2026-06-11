@@ -118,6 +118,18 @@
     <Filter Include="Resource Files\Shaders\OpenGL Shaders\Quad3D Perspective">
       <UniqueIdentifier>{a662698e-5a56-43e4-9758-d18acb1ee0ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Runtime">
+      <UniqueIdentifier>{b56b51cb-04bd-4bcf-a274-93353288ecb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Runtime\World">
+      <UniqueIdentifier>{57e19868-90c6-47e7-88cb-30f275eabd7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Runtime">
+      <UniqueIdentifier>{aa6315cd-2453-4239-917a-f6531ccb713d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Runtime\World">
+      <UniqueIdentifier>{0a18be06-990b-46f0-a569-86072c84c63c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -1110,6 +1122,12 @@
     <ClInclude Include="Editor\Panels\ViewportPanel.hpp">
       <Filter>Header Files\Core\Editor\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\World\World.hpp">
+      <Filter>Header Files\Core\Runtime\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Time.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputManager.cpp">
@@ -1201,6 +1219,12 @@
     </ClCompile>
     <ClCompile Include="Editor\Panels\ViewportPanel.cpp">
       <Filter>Source Files\Core\Editor\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\World\World.cpp">
+      <Filter>Source Files\Core\Runtime\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Time.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
