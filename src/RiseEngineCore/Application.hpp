@@ -71,10 +71,6 @@ namespace RiseEngine
 		Editor::ViewportPanel* viewportPanel_ = nullptr; // Not owned by application, but by editor context.
 		std::unique_ptr<Editor::EditorContext> editorContext_;
 		std::unique_ptr<CommonFramework::Entity> cameraEntity_; // For testing purposes, will be removed later.
-
-		// Time management.
-		std::chrono::steady_clock::time_point lastFrame;
-		f64 deltaTime_; // Time between current frame and last frame.
 	};
 
 }

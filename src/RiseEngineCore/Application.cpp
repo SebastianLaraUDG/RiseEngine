@@ -16,6 +16,8 @@
 #include <vendor/imgui/imgui.h>
 #include <RiseEngineCore/Editor/EditorContext.hpp>
 
+#include "Core/Time.hpp"
+
 /*
 TODO:
 * Set ESCAPE key to close window.
@@ -28,7 +30,7 @@ Application::Application() : Application(800, 600, "Rise Engine")
 {
 }
 
-Application::Application(int32 windowWidth, int32 windowHeight, const char* title) : deltaTime_(0.0), lastFrame(std::chrono::steady_clock::now())
+Application::Application(int32 windowWidth, int32 windowHeight, const char* title)
 {
 	Init(windowWidth, windowHeight, title);
 }
@@ -57,10 +59,9 @@ void Application::Run()
 void Application::Update()
 {
 	// Calculate delta time.
-	auto currentFrame = std::chrono::steady_clock::now();
-	std::chrono::duration<f64> elapsed = currentFrame - lastFrame;
-	f64 deltaTime = elapsed.count();
-	lastFrame = currentFrame;
+	RiseEngine::Time::Update();
+
+	// TODO WORLD->Update
 
 	/*
 	* TODO: the update() list approach is used for now, but since the elements at the
