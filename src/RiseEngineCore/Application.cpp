@@ -138,7 +138,7 @@ void Application::Init(int32 width, int32 height, const char* title)
 	InitFileSystem();
 
 	shader_ = rhi_->CreateShader(
-		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/VertexShader.glsl").string(),
+		FileSystem::Resolve("engine://assets/shaders/Quad3D Perspective/Quad3D_VS.glsl").string(), // Basic2DTriangle/VertexShader.glsl
 		FileSystem::Resolve("engine://assets/shaders/Basic2DTriangle/FragmentShader.glsl").string()
 	);
 
