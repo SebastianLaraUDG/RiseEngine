@@ -12,6 +12,7 @@ World::World(const std::string& name)
 
 void World::Update(const f32 deltaTime)
 {
+	// TODO: implement double buffer or fixed update.
 	for (auto& entity : entities_)
 	{
 		if (entity->IsActive())

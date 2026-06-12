@@ -62,7 +62,7 @@ void Application::Update()
 	// Calculate delta time.
 	RiseEngine::Time::Update();
 
-	world_->Update(Time::GetDeltaTime());
+	world_->Update(Time::GetDeltaTime()); // TODO: implement double buffer or fixed update. World Update() currently updates every entity in the vector, but that gives advantage to entities at the beginning of the vector.
 
 	/*
 	* TODO: the update() list approach is used for now, but since the elements at the
@@ -198,7 +198,7 @@ void Application::Init(int32 width, int32 height, const char* title)
 	viewportPanel_ = editorContext_->AddPanel<Editor::ViewportPanel>(framebuffer_.get());
 
 	// TODO: place world creation in the right spot. I put it here just to test.
-	world_ = std::make_unique<World>("First world");
+	world_ = std::make_unique<World>("Rise Engine first world.");
 	world_->CreateEntity();
 }
 
