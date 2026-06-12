@@ -11,8 +11,8 @@ namespace RiseEngine
 	public:
 		static void Update();
 
-		static f32 GetDeltaTime() { return static_cast<f32>(s_deltaTime_); }
-		static f64 GetExactDeltaTime() { return s_deltaTime_; }
+		static f32 GetDeltaTime32() { return static_cast<f32>(s_deltaTime_); }
+		static f64 GetDeltaTime() { return s_deltaTime_; }
 		static uint64 GetFrameCount() { return s_frameCount_; }
 		static f64 GetTimeSinceStart();
 
