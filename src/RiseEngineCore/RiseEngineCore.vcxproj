@@ -426,6 +426,7 @@
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="RiseEngine.hpp" />
     <ClInclude Include="Runtime\World\World.hpp" />
+    <ClInclude Include="Runtime\World\WorldManager.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +473,7 @@
     <ClCompile Include="Editor\Panels\ViewportPanel.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Runtime\World\World.cpp" />
+    <ClCompile Include="Runtime\World\WorldManager.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

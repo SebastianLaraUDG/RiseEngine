@@ -18,16 +18,16 @@ namespace RiseEngine
 		using Entity = CommonFramework::Entity;
 	public:
 		explicit World(const std::string& name);
-		~World() = default;
+		~World();
 
 		// TODO: initialize world from file data.
 
 		void Update(const f32 deltaTime);
 
-		Entity* CreateEntity(const std::string& entityName = "Entity");
+		Entity* CreateEntity(const std::string& entityName = "EntityDefaultName");
 		void DestroyEntity(Entity* entity);
 	private:
 		std::string name_;
-		std::vector<std::unique_ptr<Entity>> entities_; // All the entities in this world.
+		std::vector<std::unique_ptr<Entity>> entities_; // All entities in this world.
 	};
 }
